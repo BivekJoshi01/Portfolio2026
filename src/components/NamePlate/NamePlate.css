@@ -1,0 +1,58 @@
+/* Small star dots in the corners */
+.corner-star {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    z-index: 5;
+}
+
+/* Shooting star animations */
+@keyframes shootingStar {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+
+    30% {
+        transform: translate(15px, -10px) scale(1.3);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translate(30px, 10px) scale(0.9);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+}
+
+.animate-shooting-star {
+    animation: shootingStar 4s infinite ease-in-out;
+}
+
+.animate-shooting-star-delayed {
+    animation: shootingStar 5s infinite ease-in-out;
+    animation-delay: 1s;
+}
+
+.animate-shooting-star-slow {
+    animation: shootingStar 6s infinite ease-in-out;
+}
+
+.animate-shooting-star-fast {
+    animation: shootingStar 3s infinite ease-in-out;
+}
+
+/* Subtle background starfield */
+.bg-stars {
+    background: radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+}
