@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const MyDetailInfo = () => {
   return (
-    <div className='border-1 w-100'>MyDetailInfo</div>
-  )
-}
+    <div className="bg-stone-900 w-full min-h-130 rounded-xl text-white">
 
-export default MyDetailInfo
+    </div>
+  );
+};
+
+export default MyDetailInfo;

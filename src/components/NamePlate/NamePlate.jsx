@@ -3,7 +3,7 @@ import "./NamePlate.css";
 
 const NamePlate = () => {
   return (
-    <div className="relative inline-block px-14 py-6 bg-gray-900 border border-gray-600 rounded-xl overflow-hidden group">
+    <div className="relative inline-block px-14 py-2 bg-gray-900 border border-gray-600 rounded-xl overflow-hidden group max-w-fit">
       <h3 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight z-10 relative">
         Bivek Joshi
       </h3>

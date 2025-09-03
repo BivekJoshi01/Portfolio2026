@@ -14,8 +14,10 @@
     "@react-three/fiber": "^9.3.0",
     "@tailwindcss/vite": "^4.1.11",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.542.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "swiper": "^11.2.10",
     "tailwindcss": "^4.1.11",
     "three": "^0.179.1",
     "three-stdlib": "^2.36.0"
