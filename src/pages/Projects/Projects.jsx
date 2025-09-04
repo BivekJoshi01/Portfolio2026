@@ -46,56 +46,61 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-12 px-4 relative">
-      <h2 className="text-3xl font-bold text-center mb-8">🚀 My Projects</h2>
+    <div
+      className="mt-20"
+      style={{ minHeight: "90vh", display: "flex", alignItems: "center" }}
+    >
+      <div className="w-full max-w-6xl mx-auto relative ">
+        <h2 className="text-3xl font-bold text-center mb-6">🚀 My Projects</h2>
+        
+        <div className="flex gap-3 mb-3">
+          <button
+            onClick={() => swiperRef.current.swiper.slidePrev()}
+            className="bg-amber-400 rounded-full p-2 font-bold"
+          >
+            <ChevronLeft size={20} />
+          </button>
 
-      <div className="flex gap-3 mb-3">
-        <button
-          onClick={() => swiperRef.current.swiper.slidePrev()}
-          className="bg-amber-400 rounded-full p-2 font-bold"
+          <button
+            onClick={() => swiperRef.current.swiper.slideNext()}
+            className="bg-amber-400 rounded-full p-2 font-bold"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+        {/* Swiper */}
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation, Pagination, Mousewheel]}
+          spaceBetween={20}
+          slidesPerView={3}
+          // pagination={{ clickable: true }}
+          mousewheel={{ forceToAxis: true }}
+          loop={true}
+          grabCursor={true}
+          className="pb-10"
         >
-          <ChevronLeft size={20} />
-        </button>
-
-        <button
-          onClick={() => swiperRef.current.swiper.slideNext()}
-          className="bg-amber-400 rounded-full p-2 font-bold"
-        >
-          <ChevronRight size={20} />
-        </button>
-      </div>
-      {/* Swiper */}
-      <Swiper
-        ref={swiperRef}
-        modules={[Navigation, Pagination, Mousewheel]}
-        spaceBetween={20}
-        slidesPerView={3}
-        // pagination={{ clickable: true }}
-        mousewheel={{ forceToAxis: true }}
-        loop={true}
-        grabCursor={true}
-        className="pb-10"
-      >
-        {projectCards.map((project, index) => (
-          <SwiperSlide key={index}>
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
-              <img
-                src={project.img}
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 mt-2 text-sm">
-                  {project.description}
-                </p>
+          {projectCards.map((project, index) => (
+            <SwiperSlide key={index}>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className="w-full h-88 object-cover"
+                />
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 mt-2 text-sm">
+                    {project.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };

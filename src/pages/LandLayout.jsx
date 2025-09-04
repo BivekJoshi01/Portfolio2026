@@ -1,9 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import MyProfile from "./MyProfile/MyProfile";
-import AboutMe from "./AboutMe/AboutMe";
-import TechnologyUsed from "./TechnologyUsed/TechnologyUsed";
 import NavAppBar from "../components/NavAppBar/NavAppBar";
-import Projects from "./Projects/Projects";
+import { Outlet } from "react-router-dom";
 
 const LandLayout = () => {
   const scrollContainerRef = useRef(null);
@@ -22,34 +19,8 @@ const LandLayout = () => {
     <div ref={scrollContainerRef} className="w-full h-screen overflow-y-scroll">
       <NavAppBar scrolled={scrolled} />
 
-      <div className="flex flex-col items-center justify-center max-w-6xl mx-auto gap-24 px-4">
-        <div className="w-full">
-          <MyProfile />
-        </div>
-
-            <div
-          style={{
-            display: "flex",
-            minHeight: "100vh",
-            alignItems: "center",
-          }}
-        >
-          <AboutMe />
-        </div>
-
-        <div className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px] flex items-center justify-center">
-          <TechnologyUsed />
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            minHeight: "100vh",
-            alignItems: "center",
-          }}
-        >
-          <Projects />
-        </div>
+      <div className="w-full flex flex-col items-center justify-center">
+        <Outlet />
       </div>
     </div>
   );

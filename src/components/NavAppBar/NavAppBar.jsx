@@ -1,52 +1,71 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const NavAppBar = ({ scrolled }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState("Home");
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About Me", path: "/about-me" },
+    { name: "Projects", path: "/experience" }, // I think your "Projects" is "Experience"
+    { name: "Contact", path: "/contact-me" },
+  ];
+
   return (
-<nav
-  className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 rounded-xl w-[90%] sm:w-[70%] md:w-[60%] px-6 py-3 ${
-    scrolled
-      ? "bg-gray-900/90 backdrop-blur-md shadow-lg"
-      : "bg-transparent"
-  }`}
->
-      <div className="flex items-center justify-between">
+    <nav
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] sm:w-[70%] md:w-[60%] px-6 py-3 rounded-3xl transition-all duration-500
+        ${scrolled ? "bg-gray-900/40 backdrop-blur-xl shadow-xl" : ""}
+      `}
+    >
+      <div className="flex items-center justify-between relative">
+        {/* Floating Blob Behind Logo */}
+        <span className="absolute -left-12 -top-5 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></span>
+
         {/* Logo */}
         <div
-          className={`text-2xl font-bold tracking-wide transition-all duration-500 ${
-            scrolled ? "text-white" : "text-gray-900"
-          }`}
+          className={`text-2xl font-extrabold tracking-wide relative z-10 transition-all duration-500
+            ${scrolled ? "text-white" : "text-gray-900"}
+          `}
         >
           Bivek<span className="text-indigo-500">.</span>
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-10 text-lg font-medium ">
-          {["Home", "About", "Projects", "Contact"].map((item) => (
-            <li
-              key={item}
-              className="relative cursor-pointer transition-all duration-300 hover:text-indigo-400"
-            >
-              {item}
-              {/* Underline animation */}
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-indigo-400 transition-all duration-300 hover:w-full"></span>
+        <ul className="hidden md:flex gap-10 text-lg font-medium relative z-10">
+          {navItems.map(({ name, path }) => (
+            <li key={name}>
+              <NavLink
+                to={path}
+                onClick={() => setActive(name)}
+                className={({ isActive }) =>
+                  `relative cursor-pointer px-4 py-1 rounded-2xl transition-all duration-300 ease-in-out ${
+                    isActive || active === name
+                      ? "text-white bg-indigo-500 shadow-lg scale-105"
+                      : scrolled
+                      ? "text-gray-200 hover:text-indigo-400 hover:scale-105"
+                      : "text-gray-800 hover:text-indigo-400 hover:scale-105"
+                  }`
+                }
+              >
+                {name}
+              </NavLink>
             </li>
           ))}
         </ul>
 
         {/* Desktop Button */}
-        <div className="hidden md:block">
-          <button className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-md">
+        <div className="hidden md:block relative z-10">
+          <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg text-white">
             Hire Me
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden transition-colors duration-300 ${
+          className={`md:hidden relative z-10 transition-colors duration-300 ${
             scrolled ? "text-white" : "text-gray-900"
           }`}
           onClick={toggleMenu}
@@ -55,24 +74,37 @@ const NavAppBar = ({ scrolled }) => {
         </button>
       </div>
 
-      {/* Mobile Dropdown with smooth animation */}
+      {/* Mobile Dropdown */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
-          isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+        className={`md:hidden overflow-hidden transition-all duration-500 mt-4 ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-gray-800/95 backdrop-blur-md rounded-xl px-6 py-4 flex flex-col gap-4">
-          {["Home", "About", "Projects", "Contact"].map((item) => (
-            <li
-              key={item}
-              className="list-none text-lg font-medium text-white cursor-pointer hover:text-indigo-400 transition-all duration-300"
+        <div className="bg-gray-900/70 backdrop-blur-xl border border-white/10 rounded-xl px-6 py-4 flex flex-col gap-4 shadow-lg relative">
+          {navItems.map(({ name, path }) => (
+            <NavLink
+              key={name}
+              to={path}
+              onClick={() => {
+                setActive(name);
+                setIsOpen(false);
+              }}
+              className={({ isActive }) =>
+                `list-none text-lg font-medium cursor-pointer transition-all duration-300 hover:scale-105 ${
+                  isActive || active === name
+                    ? "text-indigo-400"
+                    : "text-gray-200 hover:text-indigo-400"
+                }`
+              }
             >
-              {item}
-            </li>
+              {name}
+            </NavLink>
           ))}
-          <button className="w-full mt-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-md">
-            Hire Me
+          <button className="w-full mt-2 px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-md text-white">
+            Github
           </button>
+          {/* Mobile Background Blob */}
+          <span className="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/20 rounded-full blur-2xl animate-pulse-slow pointer-events-none"></span>
         </div>
       </div>
     </nav>
