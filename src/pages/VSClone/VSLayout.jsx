@@ -5,11 +5,18 @@ import VsNavContent from "./VsNavbar/VsNavContent";
 import VsSideMenuBar from "./VSSideBar/VsSideMenuBar";
 import VsTerminal from "./VsFooter/VsTerminal";
 import VsFooter from "./VsFooter/VsFooter";
+import VSBodyHelper from "./VSBody/VSBodyHelper";
+import MyInfo from "../MyProfile/MyInfo/MyInfo";
+import MyInfoVs from "./VSBody/VsFolder/MyInfoVs";
+import { Outlet } from "react-router-dom";
 
 const VSLayout = ({ children }) => {
   return (
     <div className="w-full h-screen bg-[#1E1E1E] text-white">
-      <div style={{ height: "3%" }} className="border-b border-gray-800 bg-[#252526]">
+      <div
+        style={{ height: "3%" }}
+        className="border-b border-gray-800 bg-[#252526]"
+      >
         <VsNavHead />
       </div>
       <div className="w-full flex" style={{ height: "94%" }}>
@@ -20,23 +27,23 @@ const VSLayout = ({ children }) => {
 
         {/* Secondary Menu / File Explorer */}
         <div className="w-80 border-r border-gray-800 h-full p-2 ">
-          <VsSideMenuBar/>
+          <VsSideMenuBar />
         </div>
 
         {/* Main Area */}
         <div className="flex-1 flex flex-col h-full">
           {/* Navbar / Top header */}
           <div className="h-12 border-b border-gray-800 px-4 flex items-center bg-[#252526]">
-            <VsNavContent/>
+            <VsNavContent />
           </div>
 
           {/* Content + Right Sidebar */}
           <div className="flex flex-1 overflow-hidden">
             {/* Editor / Main content */}
-            <div className="flex-1 overflow-auto p-4">
+            <div className="flex-1 overflow-auto">
               {children || (
-                <div className="flex items-center justify-center h-full text-gray-400">
-                  VS Clone Content Area
+                <div className="flex flex-col h-full text-gray-400">
+                  <Outlet/>
                 </div>
               )}
             </div>
@@ -48,13 +55,13 @@ const VSLayout = ({ children }) => {
           </div>
 
           {/* Footer / Terminal */}
-          <div className="h-32 border-t border-gray-800 p-2 overflow-auto bg-[#252526]">
-            <VsTerminal/>
+          <div className="h-67 border-t border-gray-800 overflow-auto bg-[#252526]">
+            <VsTerminal />
           </div>
         </div>
       </div>
       <div style={{ height: "3%" }} className="border-t border-gray-800">
-        <VsFooter/>
+        <VsFooter />
       </div>
     </div>
   );
