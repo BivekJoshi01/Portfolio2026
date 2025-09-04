@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const NavAppBar = ({ scrolled }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState("");
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navItems = [
-    { name: "Home", path: "/" },
+    // { name: "Home", path: "/" },
     { name: "About Me", path: "/about-me" },
-    { name: "Projects", path: "/experience" }, // I think your "Projects" is "Experience"
+    { name: "Projects", path: "/projects" },
+    { name: "Experience", path: "/experience" },
     { name: "Contact", path: "/contact-me" },
   ];
 
@@ -29,6 +31,10 @@ const NavAppBar = ({ scrolled }) => {
           className={`text-2xl font-extrabold tracking-wide relative z-10 transition-all duration-500
             ${scrolled ? "text-white" : "text-gray-900"}
           `}
+          onClick={() => {
+            navigate(`/`);
+            setActive("");
+          }}
         >
           Bivek<span className="text-indigo-500">.</span>
         </div>
