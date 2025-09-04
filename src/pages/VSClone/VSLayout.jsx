@@ -9,24 +9,24 @@ import VsFooter from "./VsFooter/VsFooter";
 const VSLayout = ({ children }) => {
   return (
     <div className="w-full h-screen bg-[#1E1E1E] text-white">
-      <div style={{ height: "3%" }} className="border-b border-gray-800">
+      <div style={{ height: "3%" }} className="border-b border-gray-800 bg-[#252526]">
         <VsNavHead />
       </div>
       <div className="w-full flex" style={{ height: "94%" }}>
         {/* Left Sidebar */}
-        <div className="w-14 border-r border-gray-800 h-full">
+        <div className="w-14 border-r border-gray-800 h-full bg-[#252526]">
           <VsSideShowBar />
         </div>
 
         {/* Secondary Menu / File Explorer */}
-        <div className="w-80 border-r border-gray-800 h-full p-2">
+        <div className="w-80 border-r border-gray-800 h-full p-2 ">
           <VsSideMenuBar/>
         </div>
 
         {/* Main Area */}
         <div className="flex-1 flex flex-col h-full">
           {/* Navbar / Top header */}
-          <div className="h-12 border-b border-gray-800 px-4 flex items-center">
+          <div className="h-12 border-b border-gray-800 px-4 flex items-center bg-[#252526]">
             <VsNavContent/>
           </div>
 
