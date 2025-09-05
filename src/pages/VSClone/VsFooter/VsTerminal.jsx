@@ -53,11 +53,9 @@ const VsTerminal = () => {
       case "help":
         return [
           "Available commands:",
-          " about    → Learn about me",
-          " skills   → See my tech stack",
-          " contact  → Get my contact info",
           " code .   → Open VS Code profile",
           " clear    → Clear the terminal",
+          " npm start    → Run my portfolio",
         ];
       case "about":
         return [
