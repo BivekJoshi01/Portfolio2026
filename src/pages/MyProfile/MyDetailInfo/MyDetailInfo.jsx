@@ -2,16 +2,51 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MyDetailInfo = () => {
-  const [lines, setLines] = useState([
-    "Welcome to Bivek Joshi's interactive terminal 🚀",
-    "Type 'help' to see available commands.",
-  ]);
+  const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
-  const bottomRef = useRef(null);
+  const didMount = useRef(false);
+
   const navigate = useNavigate();
 
-  // Handle commands
+  const initialLines = [
+    "Welcome to Bivek Joshi's interactive terminal 🚀",
+    "Type 'help' to see available commands.",
+  ];
+
+  const typeLine = (line, delay = 20) => {
+    return new Promise((resolve) => {
+      let i = 0;
+      setLines((prev) => [...prev, ""]);
+      const interval = setInterval(() => {
+        setLines((prev) => {
+          const newLines = [...prev];
+          newLines[newLines.length - 1] = line.slice(0, i + 1);
+          return newLines;
+        });
+        i++;
+        if (i >= line.length) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, delay);
+    });
+  };
+
+  const typeLinesSequentially = async (linesArray) => {
+    for (let line of linesArray) {
+      await typeLine(line);
+    }
+  };
+
+  useEffect(() => {
+    if (didMount.current) return;
+    didMount.current = true;
+
+    setLines([]);
+    typeLinesSequentially(initialLines);
+  }, []);
+
   const handleCommand = (command) => {
     switch (command.toLowerCase()) {
       case "help":
@@ -59,28 +94,27 @@ const MyDetailInfo = () => {
     }
   };
 
-  // Handle Enter
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (!input.trim()) return;
 
-      const userLine = `legalRemit@LegalRemitPC:~$ ${input}`;
+      const userLine = `frontendDeveloper@BivekJoshiPC:~/portfolio2026$ ${input}`;
+      setLines((prev) => [...prev, userLine]);
       const output = handleCommand(input.trim());
+      setInput("");
 
-      // Add the typed command + output to terminal
-      setLines((prev) => [...prev, userLine, ...output]);
-
-      setInput(""); // reset for next prompt
+      for (let line of output) {
+        await typeLine(line);
+      }
     }
   };
 
   return (
     <div
       className="bg-[#1e1e1e] text-gray-200 font-mono text-sm rounded-md overflow-hidden h-104 flex flex-col cursor-text"
-      onClick={() => inputRef.current?.focus()} // click anywhere to focus
+      onClick={() => inputRef.current?.focus()}
     >
-      {/* Terminal Header */}
       <div className="flex items-center justify-between bg-[#2d2d2d] px-3 py-1 border-b border-gray-700">
         <div className="flex items-center space-x-2">
           <span className="w-3 h-3 rounded-full bg-red-500"></span>
@@ -96,7 +130,6 @@ const MyDetailInfo = () => {
         <div className="text-gray-400">+</div>
       </div>
 
-      {/* Terminal Body */}
       <div className="flex-1 p-2 overflow-y-auto">
         {lines.map((line, i) => (
           <div key={i} className="whitespace-pre-wrap">
@@ -104,7 +137,6 @@ const MyDetailInfo = () => {
           </div>
         ))}
 
-        {/* Active input prompt (always last line) */}
         <div className="flex items-center">
           <span className="text-green-400">
             frontendDeveloper@BivekJoshiPC:~/portfolio2026$
@@ -119,8 +151,6 @@ const MyDetailInfo = () => {
             autoFocus
           />
         </div>
-
-        <div ref={bottomRef}></div>
       </div>
     </div>
   );
