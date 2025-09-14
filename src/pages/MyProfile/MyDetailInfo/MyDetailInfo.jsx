@@ -11,6 +11,7 @@ const MyDetailInfo = () => {
 
   const initialLines = [
     "Welcome to Bivek Joshi's interactive terminal 🚀",
+    "Frontend Developer",
     "Type 'help' to see available commands.",
   ];
 

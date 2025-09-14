@@ -13,16 +13,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(99, 102, 241, 0.2) 10%,
-    rgba(99, 102, 241, 1) 15%,
-    rgba(139, 92, 246, 1) 50%,
-    rgba(217, 70, 239, 1) 85%,
-    rgba(217, 70, 239, 0.2) 95%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(99, 102, 241, 0.2) 10%,
+      rgba(99, 102, 241, 1) 15%,
+      rgba(139, 92, 246, 1) 50%,
+      rgba(217, 70, 239, 1) 85%,
+      rgba(217, 70, 239, 0.2) 95%,
+      transparent 100%);
   transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   mask-image: linear-gradient(to bottom, black 0%, black 98%, transparent 100%);
 }
@@ -50,5 +48,18 @@
         0 0 0 8px rgba(59, 130, 246, 0.1),
         0 0 20px rgba(59, 130, 246, 0.5);
     }
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    padding-left: 0;
+  }
+
+  .timeline-line {
+    left: 0.5rem;
+
   }
 }

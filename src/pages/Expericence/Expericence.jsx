@@ -9,46 +9,45 @@ const Experience = () => {
   const itemRefs = useRef([]);
   const [activeIndices, setActiveIndices] = useState([]);
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = Number(entry.target.getAttribute("data-index"));
-        if (entry.isIntersecting) {
-          setActiveIndices((prev) => [...new Set([...prev, index])]);
-        } else {
-          setActiveIndices((prev) => prev.filter((i) => i !== index));
-        }
-      });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-index"));
+          if (entry.isIntersecting) {
+            setActiveIndices((prev) => [...new Set([...prev, index])]);
+          } else {
+            setActiveIndices((prev) => prev.filter((i) => i !== index));
+          }
+        });
 
-      if (progressRef.current && itemRefs.current.length > 0) {
-        const firstItemTop = itemRefs.current[0].offsetTop;
-        const dotOffset = -32; // adjust this to align with your dot
+        if (progressRef.current && itemRefs.current.length > 0) {
+          const firstItemTop = itemRefs.current[0].offsetTop;
+          const dotOffset = -32; // adjust this to align with your dot
 
-        if (activeIndices.length > 0) {
-          const lastActiveIndex = Math.max(...activeIndices);
-          const lastActiveItem = itemRefs.current[lastActiveIndex];
-          const lastItemMiddle =
-            lastActiveItem.offsetTop + lastActiveItem.offsetHeight / 2;
-          const progressHeight = lastItemMiddle - firstItemTop + dotOffset;
-          progressRef.current.style.height = `${progressHeight}px`;
-        } else {
-          progressRef.current.style.height = `0px`;
+          if (activeIndices.length > 0) {
+            const lastActiveIndex = Math.max(...activeIndices);
+            const lastActiveItem = itemRefs.current[lastActiveIndex];
+            const lastItemMiddle =
+              lastActiveItem.offsetTop + lastActiveItem.offsetHeight / 2;
+            const progressHeight = lastItemMiddle - firstItemTop + dotOffset;
+            progressRef.current.style.height = `${progressHeight}px`;
+          } else {
+            progressRef.current.style.height = `0px`;
+          }
         }
+      },
+      {
+        threshold: 0.7,
       }
-    },
-    {
-      threshold: 0.7,
-    }
-  );
+    );
 
-  itemRefs.current.forEach((el) => el && observer.observe(el));
+    itemRefs.current.forEach((el) => el && observer.observe(el));
 
-  return () => {
-    itemRefs.current.forEach((el) => el && observer.unobserve(el));
-  };
-}, [activeIndices]);
-
+    return () => {
+      itemRefs.current.forEach((el) => el && observer.unobserve(el));
+    };
+  }, [activeIndices]);
 
   return (
     <div
@@ -93,17 +92,16 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </section>
     </div>
   );
