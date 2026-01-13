@@ -9,10 +9,11 @@ import VSBodyHelper from "./VSBody/VSBodyHelper";
 import MyInfo from "../MyProfile/MyInfo/MyInfo";
 import MyInfoVs from "./VSBody/VsFolder/MyInfoVs";
 import { Outlet } from "react-router-dom";
+import "./VSLayout.css";
 
 const VSLayout = ({ children }) => {
   return (
-    <div className="w-full h-screen bg-[#1E1E1E] text-white">
+    <div className="w-full h-screen text-white">
       <div
         style={{ height: "3%" }}
         className="border-b border-gray-800 bg-[#252526]"
@@ -43,14 +44,17 @@ const VSLayout = ({ children }) => {
             <div className="flex-1 overflow-auto">
               {children || (
                 <div className="flex flex-col h-full text-gray-400">
-                  <Outlet/>
+                  <Outlet />
                 </div>
               )}
             </div>
 
             {/* Right Sidebar / Info panel */}
-            <div className="w-50 border-l border-gray-800 p-2 overflow-auto">
-              Right Panel
+            <div
+              className="border-l border-gray-800 compact-panel"
+              style={{ width: "260px" }} // like VSCode side panel
+            >
+              <Outlet />
             </div>
           </div>
 

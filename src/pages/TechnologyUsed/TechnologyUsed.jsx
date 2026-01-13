@@ -20,7 +20,7 @@ import MongoDB from "../../assets/Icons/MongoDB.svg";
 
 const TechnologyUsed = () => {
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div>
       <Canvas camera={{ position: [0, 0, 15], fov: 40 }}>
         <ambientLight intensity={1} />
         <pointLight position={[10, 10, 10]} intensity={2} />
@@ -42,18 +42,78 @@ const Sphere = () => {
   const techItems = [
     { name: "Figma", icon: Figma, color: "#F24E1E", isImage: true, scale: 0.8 },
     { name: "Git", icon: Git, color: "#F05032", isImage: true, scale: 0.8 },
-    { name: "Git Hub", icon: GitHub, color: "#181717", isImage: true, scale: 0.8 },
-    { name: "Git Lab", icon: GitLab, color: "#FC6D26", isImage: true, scale: 0.8 },
+    {
+      name: "Git Hub",
+      icon: GitHub,
+      color: "#181717",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "Git Lab",
+      icon: GitLab,
+      color: "#FC6D26",
+      isImage: true,
+      scale: 0.8,
+    },
     { name: "HTML", icon: Html, color: "#E34F26", isImage: true, scale: 0.8 },
     { name: "PHP", icon: Php, color: "#777BB4", isImage: true, scale: 0.8 },
-    { name: "React.Js", icon: ReactJs, color: "#61DAFB", isImage: true, scale: 0.8 },
-    { name: "Typescript", icon: TS, color: "#3178C6", isImage: true, scale: 0.8 },
-    { name: "Three.Js", icon: ThreeJs, color: "#FFFFFF", isImage: true, scale: 0.8 },
-    { name: "TailwindCss", icon: Tailwind, color: "#06B6D4", isImage: true, scale: 0.8 },
-    { name: "StoryBook", icon: StoryBook, color: "#FF4785", isImage: true, scale: 0.8 },
-    { name: "Material UI", icon: MUI, color: "#007FFF", isImage: true, scale: 0.8 },
-    { name: "Node.Js", icon: NodeJs, color: "#339933", isImage: true, scale: 0.8 },
-    { name: "MongoDB", icon: MongoDB, color: "#47A248", isImage: true, scale: 0.8 },
+    {
+      name: "React.Js",
+      icon: ReactJs,
+      color: "#61DAFB",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "Typescript",
+      icon: TS,
+      color: "#3178C6",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "Three.Js",
+      icon: ThreeJs,
+      color: "#FFFFFF",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "TailwindCss",
+      icon: Tailwind,
+      color: "#06B6D4",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "StoryBook",
+      icon: StoryBook,
+      color: "#FF4785",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "Material UI",
+      icon: MUI,
+      color: "#007FFF",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "Node.Js",
+      icon: NodeJs,
+      color: "#339933",
+      isImage: true,
+      scale: 0.8,
+    },
+    {
+      name: "MongoDB",
+      icon: MongoDB,
+      color: "#47A248",
+      isImage: true,
+      scale: 0.8,
+    },
   ];
 
   const positions = useMemo(() => {

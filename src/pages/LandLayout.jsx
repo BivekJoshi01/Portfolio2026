@@ -16,10 +16,16 @@ const LandLayout = () => {
   }, []);
 
   return (
-    <div ref={scrollContainerRef} className="w-full h-screen overflow-y-scroll">
-      <NavAppBar scrolled={scrolled} />
-
-      <div className="w-full flex flex-col items-center justify-center">
+    <div
+      ref={scrollContainerRef}
+      className="w-full h-screen max-w-7xl px-2 overflow-y-scroll scrollbar-hide"
+    >
+      <div style={{ width: "100%" }}>
+        {/* <div className="bg-amber-500 fixed"> */}
+          <NavAppBar scrolled={scrolled} />
+        {/* </div> */}
+      </div>
+      <div className="">
         <Outlet />
       </div>
     </div>

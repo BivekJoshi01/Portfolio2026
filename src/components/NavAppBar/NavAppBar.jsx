@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import BivekJoshi from "../../assets/BivekJoshi.svg";
 
 const NavAppBar = ({ scrolled }) => {
   const navigate = useNavigate();
@@ -17,26 +18,20 @@ const NavAppBar = ({ scrolled }) => {
   ];
 
   return (
-    <nav
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] sm:w-[70%] md:w-[60%] px-6 py-3 rounded-3xl transition-all duration-500
-        ${scrolled ? "bg-gray-900/40 backdrop-blur-xl shadow-xl" : ""}
-      `}
-    >
+    <div>
       <div className="flex items-center justify-between relative">
         {/* Floating Blob Behind Logo */}
         <span className="absolute -left-12 -top-5 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></span>
 
         {/* Logo */}
         <div
-          className={`text-2xl font-extrabold tracking-wide relative z-10 transition-all duration-500
-            ${scrolled ? "text-white" : "text-gray-900"}
-          `}
+          style={{ width: "200px" }}
           onClick={() => {
             navigate(`/`);
             setActive("");
           }}
         >
-          Bivek<span className="text-indigo-500">.</span>
+          <img src={BivekJoshi} style={{ width: "100%", height: "100%" }} />
         </div>
 
         {/* Desktop Menu */}
@@ -113,7 +108,7 @@ const NavAppBar = ({ scrolled }) => {
           <span className="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/20 rounded-full blur-2xl animate-pulse-slow pointer-events-none"></span>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
