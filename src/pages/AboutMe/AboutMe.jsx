@@ -2,8 +2,8 @@ import React from "react";
 
 const AboutMe = () => {
   return (
-    <section className="min-h-[90vh]">
-      <div className="flex items-center">
+    <section className="">
+      <div className="flex items-center gap-10">
         {/* Profile Image */}
         <div className="flex justify-center">
           <img

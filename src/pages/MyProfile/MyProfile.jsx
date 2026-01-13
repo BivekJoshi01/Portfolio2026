@@ -4,9 +4,7 @@ import MyDetailInfo from "./MyDetailInfo/MyDetailInfo";
 
 const MyProfile = () => {
   return (
-    <div
-      style={{ display: "flex", alignItems: "center" ,minHeight:"90vh",gap:'2rem'}}
-    >
+    <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
       <div style={{ flex: 1, minWidth: 0 }}>
         <MyInfo />
       </div>

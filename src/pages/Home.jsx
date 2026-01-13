@@ -8,21 +8,58 @@ const Home = () => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        scrollSnapType: "y mandatory",
+        height: "100vh",
       }}
+      className="overflow-y-scroll scrollbar-hide"
     >
-      <div className="min-h-lvh">
+      <section
+        style={{
+          minHeight: "100vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <MyProfile />
-      </div>
-      <div className="min-h-lvh">
-        <AboutMe />
-      </div>
+      </section>
 
-      <div className="min-h-lvh">
+      <section
+        style={{
+          minHeight: "100vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <AboutMe />
+      </section>
+
+      <section
+        style={{
+          minHeight: "100vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <TechnologyUsed />
-      </div>
-      <Projects />
+      </section>
+
+      <section
+        style={{
+          minHeight: "100vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Projects />
+      </section>
     </div>
   );
 };
