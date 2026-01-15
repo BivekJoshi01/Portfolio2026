@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import BivekJoshi from "../../assets/BivekJoshi.svg";
 
-const NavAppBar = ({ scrolled }) => {
+const NavAppBar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("");
@@ -45,8 +45,6 @@ const NavAppBar = ({ scrolled }) => {
                   `relative cursor-pointer px-4 py-1 rounded-2xl transition-all duration-300 ease-in-out ${
                     isActive || active === name
                       ? "text-white bg-indigo-500 shadow-lg scale-105"
-                      : scrolled
-                      ? "text-gray-200 hover:text-indigo-400 hover:scale-105"
                       : "text-gray-800 hover:text-indigo-400 hover:scale-105"
                   }`
                 }
@@ -66,9 +64,7 @@ const NavAppBar = ({ scrolled }) => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden relative z-10 transition-colors duration-300 ${
-            scrolled ? "text-white" : "text-gray-900"
-          }`}
+          className={`md:hidden relative z-10 transition-colors duration-300`}
           onClick={toggleMenu}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}

@@ -28,7 +28,7 @@ const MyInfo = () => {
         animate="animate"
         className="absolute top-0 left-10 z-10 bg-amber-200 backdrop-blur-md border border-violet-900/6 px-4 py-1.5 rounded-full text-xs tracking-widest uppercase"
       >
-        Welcome to my universe 🌠
+        Welcome to my showcase
       </motion.div>
 
       {/* CV Button - Floating Randomly Middle Right */}

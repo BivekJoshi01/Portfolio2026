@@ -9,13 +9,13 @@ const Home = () => {
     <div
       style={{
         scrollSnapType: "y mandatory",
-        height: "100vh",
+        height: "99vh",
       }}
       className="overflow-y-scroll scrollbar-hide"
     >
       <section
         style={{
-          minHeight: "100vh",
+          minHeight: "99vh",
           scrollSnapAlign: "start",
           display: "flex",
           alignItems: "center",
@@ -27,7 +27,7 @@ const Home = () => {
 
       <section
         style={{
-          minHeight: "100vh",
+          minHeight: "99vh",
           scrollSnapAlign: "start",
           display: "flex",
           alignItems: "center",
@@ -39,7 +39,7 @@ const Home = () => {
 
       <section
         style={{
-          minHeight: "100vh",
+          minHeight: "99vh",
           scrollSnapAlign: "start",
           display: "flex",
           alignItems: "center",
@@ -51,11 +51,11 @@ const Home = () => {
 
       <section
         style={{
-          minHeight: "100vh",
+          minHeight: "99vh",
           scrollSnapAlign: "start",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          // display: "flex",
+          // alignItems: "center",
+          // justifyContent: "center",
         }}
       >
         <Projects />

@@ -45,12 +45,12 @@ const NamePlate = () => {
       >
         {/* Outer Neon Aura */}
         <div
-          className={`absolute -inset-2 bg-white/5 blur-2xl rounded-2xl transition-opacity duration-1000 ${
+          className={`absolute -inset-2 bg-white/5 blur-2xl rounded-xl transition-opacity duration-1000 ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
         />
 
-        <div className="relative pl-2 pr-16 py-2 bg-[#050505] rounded-2xl overflow-hidden border border-white/10 shadow-2xl min-w-[320px] flex justify-center items-center w-fit">
+        <div className="relative pl-2 pr-16 py-2 bg-[#050505] rounded-xl overflow-hidden border border-white/10 shadow-2xl min-w-[320px] flex justify-center items-center w-fit">
           {/* --- DEEP SPACE & SHOOTING STARS --- */}
           <div className="absolute inset-0 z-0">
             {stars.map((star) => (
