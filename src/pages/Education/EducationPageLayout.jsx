@@ -1,150 +1,123 @@
 import React from "react";
-// Optional: npm install framer-motion for smooth animations
-import { motion } from "framer-motion";
 import TechnologyUsed from "../TechnologyUsed/TechnologyUsed";
-
-const education = [
-  {
-    degree: "Bachelor of Information Management",
-    school: "Tribhuvan University",
-    year: "2020 — 2024",
-    desc: "Focused on software engineering, full-stack development, and system design.",
-    featured: true,
-    logo: "https://upload.wikimedia.org/wikipedia/en/5/50/Tribhuvan_University_Logo.png",
-  },
-  {
-    degree: "Higher Secondary (+2 Science)",
-    school: "Moonlight Secondary School",
-    year: "2018 — 2020",
-    desc: "Specialized in Physics and Mathematics with an elective in Computer Science.",
-  },
-  {
-    degree: "Secondary School (SEE)",
-    school: "Pragati Adarsha English School",
-    year: "2016 — 2018",
-    desc: "Awarded for excellence in Mathematics and Logical Reasoning.",
-  },
-];
-
-const strengths = [
-  "Full-Stack Web Development",
-  "UI/UX Engineering",
-  "React & Modern Frontend",
-  "API & Database Design",
-  "Clean Code & Architecture",
-];
+import { EducationList } from "./EducationData";
+import Strength from "./Strength";
 
 const EducationPageLayout = () => {
-  const featured = education.find((e) => e.featured);
-  const rest = education.filter((e) => !e.featured);
+  const featured = EducationList?.find((e) => e.featured);
+  const rest = EducationList?.filter((e) => !e.featured);
 
   return (
-    <section>
-      <div className="grid lg:grid-cols-12 gap-10">
-        {/* LEFT COLUMN — Main Content */}
-        <div className="lg:col-span-8 space-y-10">
-          {/* Header Section */}
+    <section className="w-full py-10">
+      <div className="grid lg:grid-cols-12 gap-12 items-start">
+        {/* LEFT SIDE — Education Narrative */}
+        <div className="lg:col-span-8 space-y-12">
+          {/* Header */}
           <header className="space-y-4">
-            <h1 className="text-6xl font-black tracking-tight text-slate-900">
-              Academic <span className="text-indigo-600">Pedigree</span>
-            </h1>
+            <h2 className="text-6xl font-black tracking-tight leading-tight text-slate-900">
+              Academic{" "}
+              <span className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+                Pedigree
+              </span>
+            </h2>
             <p className="text-xl text-slate-500 max-w-2xl leading-relaxed">
-              A chronological look at my formal training and the foundation of
-              my technical expertise.
+              A chronological journey through the institutions that shaped my
+              analytical thinking and technical foundation.
             </p>
           </header>
 
-          {/* Featured Education Card */}
-          <div className="group relative">
-            {/* Background Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[2rem] blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+          {/* Featured Education Card — Premium Look */}
+          <div className="relative group overflow-hidden rounded-[2.5rem] bg-white border border-slate-100 p-1 bg-gradient-to-br from-slate-50 to-white shadow-2xl shadow-slate-200/60">
+            {/* Subtle Accent Glow */}
+            <div className="absolute -right-20 -top-20 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl group-hover:bg-indigo-200/50 transition-colors duration-700" />
 
-            <div className="relative bg-white border border-slate-100 rounded-[2rem] p-8 md:p-12 shadow-xl shadow-slate-200/50">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-                <div className="flex items-center gap-6">
-                  <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                    <img
-                      src={featured.logo}
-                      alt="Logo"
-                      className="w-16 h-16 object-contain"
-                    />
-                  </div>
-                  <div>
-                    <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider rounded-full">
+            <div className="relative p-8 md:p-6">
+              <div className="flex flex-col md:flex-row md:items-center gap-8">
+                <div className="flex-shrink-0 p-4 bg-white rounded-2xl shadow-inner border border-slate-50">
+                  <img
+                    src={featured.logo}
+                    alt={featured.school}
+                    className="w-20 h-20 object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+                      Latest
+                    </span>
+                    <span className="text-indigo-600 font-semibold tracking-wide">
                       {featured.year}
                     </span>
-                    <h2 className="text-3xl font-bold text-slate-900 mt-2">
-                      {featured.degree}
-                    </h2>
-                    <p className="text-lg text-slate-500 font-medium">
-                      {featured.school}
-                    </p>
                   </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+                    {featured.degree}
+                  </h2>
+                  <p className="text-xl text-slate-500 font-medium">
+                    {featured.school}
+                  </p>
                 </div>
               </div>
 
-              <p className="text-slate-600 text-lg leading-relaxed border-l-4 border-indigo-100 pl-6">
-                {featured.desc}
-              </p>
+              <div className="mt-10 grid md:grid-cols-1 gap-6">
+                <p className="text-slate-600 text-lg leading-relaxed border-l-4 border-indigo-500 pl-8 italic">
+                  "{featured.desc}"
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Previous Education Timeline */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {rest.map((edu, i) => (
+          {/* Secondary Education — Bento Style Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {rest?.map((edu, i) => (
               <div
                 key={i}
-                className="group p-8 rounded-3xl bg-white border border-slate-200 hover:border-indigo-300 transition-all duration-300 shadow-sm hover:shadow-lg"
+                className="group relative bg-white border border-slate-200/60 rounded-3xl p-5 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-500 flex flex-col justify-between overflow-hidden"
               >
-                <div className="flex flex-col h-full">
-                  <span className="text-indigo-500 font-bold text-sm tracking-widest">
+                {/* Background Pattern */}
+                <div className="absolute top-0 right-0 p-4 opacity-[0.09] group-hover:opacity-[0.2] transition-opacity">
+                  <img
+                    src={edu?.logo}
+                    alt=""
+                    className="w-32 h-32 object-contain"
+                  />
+                </div>
+
+                <div className="relative z-10">
+                  <span className="inline-block px-3 py-1 rounded-lg bg-slate-100 text-slate-500 text-xs font-bold mb-4">
                     {edu.year}
                   </span>
-                  <h3 className="text-xl font-bold text-slate-800 mt-2 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-2xl font-bold text-slate-800 leading-tight group-hover:text-indigo-600 transition-colors">
                     {edu.degree}
                   </h3>
-                  <p className="text-slate-500 text-sm font-medium mb-4">
+                  <p className="text-slate-500 font-medium mt-1 mb-6">
                     {edu.school}
                   </p>
-                  <p className="text-slate-600 leading-relaxed mt-auto">
+                  <p className="text-slate-600 leading-relaxed text-sm">
                     {edu.desc}
                   </p>
+                </div>
+
+                {/* Small Logo bottom-right */}
+                <div className="mt-8 self-end absolute right-5 bottom-5">
+                  <img
+                    src={edu?.logo}
+                    alt={edu?.school}
+                    className="w-12 h-12 object-contain"
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT COLUMN — Sticky Sidebar */}
-        <div className="lg:col-span-4">
-          <div className="space-y-4">
-            <div className="w-full h-[280px]">
-              <TechnologyUsed />
-            </div>
-            {/* Strength Card */}
-            <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white overflow-hidden relative shadow-2xl">
-              {/* Decorative Circle */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        {/* RIGHT SIDE — Utility Sidebar */}
+        <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-10">
+          <div className="w-full h-[320px] rounded-2xl overflow-hidden">
+            <TechnologyUsed />
+          </div>
 
-              <h3 className="text-2xl font-bold mb-8">Core Competencies</h3>
-              <ul className="space-y-5">
-                {strengths.map((skill, i) => (
-                  <li key={i} className="flex items-center gap-4 group">
-                    <div className="w-8 h-[2px] bg-indigo-500 group-hover:w-12 transition-all"></div>
-                    <span className="text-slate-300 group-hover:text-white transition-colors">
-                      {skill}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-12 pt-8 border-t border-slate-800">
-                <p className="text-slate-400 text-sm italic">
-                  "The beautiful thing about learning is that nobody can take it
-                  away from you."
-                </p>
-              </div>
-            </div>
+          <div className="bg-gradient-to-tr from-indigo-400 via-amber-100 to-purple-800/50 rounded-[2rem] shadow-lg">
+            <Strength />
           </div>
         </div>
       </div>
