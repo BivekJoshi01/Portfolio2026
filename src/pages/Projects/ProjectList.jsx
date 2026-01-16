@@ -18,6 +18,7 @@ import YejusPawLogo from "../../assets/Office/CompanyLogo/YejusPawLogo.png";
 export const ProjectList = [
   {
     title: "Legal Remit",
+    info: "Remittance Service Provider",
     description: "This is the first project card description.",
     img: LegalLand,
     redirect_url: "https://legalremit.com/",
@@ -25,13 +26,15 @@ export const ProjectList = [
   },
   {
     title: "HRMS",
+    info: "Human Resource Management System",
     description: "This is the second project card description.",
     img: HRMSLand,
-    redirect_url: "",
+    redirect_url: "https://dghub.io/",
     companyLogo: DGLogo,
   },
   {
     title: "Clients Portal",
+    info: "",
     description: "Portfolio Management System",
     img: PMSLand,
     redirect_url: "",
@@ -39,6 +42,7 @@ export const ProjectList = [
   },
   {
     title: "KYC System",
+    info: "",
     description: "This is the fourth project card description.",
     img: KYCLand,
     redirect_url: "",
@@ -46,6 +50,7 @@ export const ProjectList = [
   },
   {
     title: "Bizarre Cafe",
+    info: "",
     description: "This is the fifth project card description.",
     img: CafeBizarre,
     redirect_url: "https://cafebizarre.com.np/",
@@ -53,6 +58,7 @@ export const ProjectList = [
   },
   {
     title: "Render Education Consultancy",
+    info: "",
     description: "This is the fifth project card description.",
     img: RenderLand,
     redirect_url: "https://render.edu.np/?i=1",
@@ -60,6 +66,7 @@ export const ProjectList = [
   },
   {
     title: "Evolve Pharma",
+    info: "",
     description: "Pet Care and Adoption E-commerce",
     img: EvolvePharmaLand,
     redirect_url: "https://evolvepharmanepal.com/",
@@ -67,6 +74,7 @@ export const ProjectList = [
   },
   {
     title: "Yejus Paw",
+    info: "",
     description: "Pet Care and Adoption E-commerce",
     img: YejusPawLand,
     redirect_url: "https://yejus-paw.onrender.com/",

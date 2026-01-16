@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import { ProjectList } from "./ProjectList";
 import ProjectCard from "./ProjectCard";
 import { AnimatePresence, motion } from "framer-motion";
+import TypeWriter from "../../components/TypeWriter/TypeWriter";
 
 const Projects = () => {
   const swiperRef = useRef(null);
@@ -73,24 +74,39 @@ const Projects = () => {
         </Swiper>
         <AnimatePresence>
           {hoveredProject && (
-            <motion.div
-              key={hoveredProject.title} // important for smooth switching
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{
-                duration: 0.4,
-                ease: "easeOut",
-                delay: 0.15,
-              }}
-              className="absolute top-0 right-0 h-[60px] min-w-[150px] w-[100px]"
+            <div
+              className="absolute top-0 right-0 flex flex-col items-end gap-2"
+              key={hoveredProject.title}
             >
-              <img
-                src={hoveredProject.companyLogo}
-                alt={hoveredProject.title}
-                className="w-full h-full object-contain"
-              />
-            </motion.div>
+              <motion.div
+                // important for smooth switching
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
+                  delay: 0.15,
+                }}
+              >
+                <div className="h-[60px] min-w-[150px] w-[100px]">
+                  <img
+                    src={hoveredProject.companyLogo}
+                    alt={hoveredProject.title}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </motion.div>
+              <div className="relative bg-amber-300 border border-white/5  px-4 py-0.4 rounded-xl tracking-tight text-violet-500">
+                <TypeWriter
+                  text={[hoveredProject?.description]}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor={true}
+                  textColors={"blue"}
+                />
+              </div>
+            </div>
           )}
         </AnimatePresence>
       </div>

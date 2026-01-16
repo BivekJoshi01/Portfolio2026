@@ -48,8 +48,8 @@ const ProjectCard = ({ project, onHover, onLeave }) => {
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="text-xl font-semibold text-gray-800">{project.title}</h3>
-        <p className="text-gray-600 mt-2 text-sm">{project.description}</p>
+        <h3 className="text-xl font-semibold text-gray-800">{project?.title}</h3>
+        <p className="text-gray-600 mt-2 text-sm">{project?.info}</p>
       </div>
     </div>
   );
