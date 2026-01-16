@@ -20,7 +20,7 @@ import MongoDB from "../../assets/Icons/MongoDB.svg";
 
 const TechnologyUsed = () => {
   return (
-    <div>
+    <div className="w-full h-full">
       <Canvas camera={{ position: [0, 0, 15], fov: 40 }}>
         <ambientLight intensity={1} />
         <pointLight position={[10, 10, 10]} intensity={2} />
@@ -206,7 +206,7 @@ const Sphere = () => {
           <Line
             key={index}
             points={points}
-            color="#61dafb"
+            color="#3f0101"
             transparent
             opacity={0.4}
             depthTest={true}

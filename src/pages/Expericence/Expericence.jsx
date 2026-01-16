@@ -51,7 +51,7 @@ const Experience = () => {
 
   return (
     <div
-      className="mt-50"
+      className="mt-50 pl-15 mb-50"
       style={{ minHeight: "90vh", display: "flex", alignItems: "center" }}
     >
       <section className="experience-section" ref={sectionRef} id="experience">
@@ -60,9 +60,10 @@ const Experience = () => {
             My Journey as a Frontend Developer
           </div>
           <div>
-            I started my journey at Content Factory and spent 1 years building
-            Hotels Nepal, Vacancy Nepal, Lalpurja Nepal. Here's a timeline of my
-            journey.
+            I started my journey at Fintech Industry and spent 1 years building
+            strong skills in designing scalable applications, handling complex
+            business logic, and delivering secure, user-centric solutions.
+            Here's a timeline of my journey.
           </div>
 
           <div className="relative pl-8 md:pl-12 mt-20">
@@ -92,16 +93,6 @@ const Experience = () => {
             </div>
           </div>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </section>
     </div>
   );
