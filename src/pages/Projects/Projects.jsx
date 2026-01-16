@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Mousewheel } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,37 +6,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ProjectList } from "./ProjectList";
+import ProjectCard from "./ProjectCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Projects = () => {
   const swiperRef = useRef(null);
-
-  const projectCards = [
-    {
-      title: "Project One",
-      description: "This is the first project card description.",
-      img: "https://via.placeholder.com/400x250",
-    },
-    {
-      title: "Project Two",
-      description: "This is the second project card description.",
-      img: "https://via.placeholder.com/400x250",
-    },
-    {
-      title: "Project Three",
-      description: "This is the third project card description.",
-      img: "https://via.placeholder.com/400x250",
-    },
-    {
-      title: "Project Four",
-      description: "This is the fourth project card description.",
-      img: "https://via.placeholder.com/400x250",
-    },
-    {
-      title: "Project Five",
-      description: "This is the fifth project card description.",
-      img: "https://via.placeholder.com/400x250",
-    },
-  ];
+  const [hoveredProject, setHoveredProject] = useState(null);
 
   useEffect(() => {
     if (swiperRef.current) {
@@ -46,23 +22,29 @@ const Projects = () => {
   }, []);
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "center" }}
-    >
+    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
       <div className="w-full mx-auto relative ">
-        <h2 className="text-3xl font-bold text-center mb-6">🚀 My Projects</h2>
-        
+        <h2 className="text-5xl font-extrabold leading-tight mb-6">
+          My{" "}
+          <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Projects
+          </span>
+        </h2>
+        <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
+          Each Projects is a unique piece of development.
+        </p>
+
         <div className="flex gap-3 mb-3">
           <button
             onClick={() => swiperRef.current.swiper.slidePrev()}
-            className="bg-amber-400 rounded-full p-2 font-bold"
+            className="bg-indigo-300 rounded-full p-1 font-bold"
           >
             <ChevronLeft size={20} />
           </button>
 
           <button
             onClick={() => swiperRef.current.swiper.slideNext()}
-            className="bg-amber-400 rounded-full p-2 font-bold"
+            className="bg-indigo-300 rounded-full p-1 font-bold"
           >
             <ChevronRight size={20} />
           </button>
@@ -79,26 +61,38 @@ const Projects = () => {
           grabCursor={true}
           className="pb-10"
         >
-          {projectCards.map((project, index) => (
+          {ProjectList?.map((project, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full h-88 object-cover"
-                />
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mt-2 text-sm">
-                    {project.description}
-                  </p>
-                </div>
-              </div>
+              <ProjectCard
+                project={project}
+                onHover={() => setHoveredProject(project)}
+                onLeave={() => setHoveredProject(null)}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
+        <AnimatePresence>
+          {hoveredProject && (
+            <motion.div
+              key={hoveredProject.title} // important for smooth switching
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+                delay: 0.15,
+              }}
+              className="absolute top-0 right-0 h-[60px] min-w-[150px] w-[100px]"
+            >
+              <img
+                src={hoveredProject.companyLogo}
+                alt={hoveredProject.title}
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

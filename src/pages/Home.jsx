@@ -48,16 +48,16 @@ const Home = () => {
         }}
       >
         {/* <TechnologyUsed /> */}
-        <EducationPageLayout/>
+        <EducationPageLayout />
       </section>
 
       <section
         style={{
           minHeight: "99vh",
           scrollSnapAlign: "start",
-          // display: "flex",
-          // alignItems: "center",
-          // justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Projects />
