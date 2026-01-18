@@ -15,7 +15,7 @@ const ProjectCard = ({ project, onHover, onLeave }) => {
       onMouseLeave={onLeave}
     >
       {/* Image wrapper */}
-      <div className="relative h-80 overflow-hidden">
+      <div className="relative h-60 sm:h-72 md:h-80 overflow-hidden">
         <img
           src={project.img}
           alt={project.title}
@@ -29,27 +29,32 @@ const ProjectCard = ({ project, onHover, onLeave }) => {
           <button
             onClick={openProject}
             className="
-            absolute bottom-4 right-4
-            flex items-center gap-2
-            bg-amber-300 text-violet-700
-            px-4 py-2 rounded-2xl
-            font-semibold text-sm
-            shadow-md
-            hover:bg-amber-400
-            hover:scale-105
-            transition-all duration-300
-          "
+              absolute bottom-3 right-3
+              flex items-center gap-1.5
+              bg-amber-300 text-violet-700
+              px-3 py-1.5 sm:px-4 sm:py-2
+              rounded-2xl
+              font-semibold text-xs sm:text-sm
+              shadow-md
+              hover:bg-amber-400
+              hover:scale-105
+              transition-all duration-300
+            "
           >
             View
-            <FiExternalLink className="text-base" />
+            <FiExternalLink className="text-sm sm:text-base" />
           </button>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="text-xl font-semibold text-gray-800">{project?.title}</h3>
-        <p className="text-gray-600 mt-2 text-sm">{project?.info}</p>
+      <div className="p-4 sm:p-5">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+          {project?.title}
+        </h3>
+        <p className="text-gray-600 mt-1 sm:mt-2 text-xs sm:text-sm">
+          {project?.info}
+        </p>
       </div>
     </div>
   );

@@ -16,47 +16,50 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
 
   useEffect(() => {
-    if (swiperRef.current) {
-      // Ensure swiper updates on mount
-      swiperRef.current.swiper.update();
-    }
+    if (swiperRef.current) swiperRef.current.swiper.update();
   }, []);
 
   return (
-    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-      <div className="w-full mx-auto relative ">
-        <h2 className="text-5xl font-extrabold leading-tight mb-6">
+    <div className="w-full flex justify-center px-4 sm:px-6">
+      <div className="w-full max-w-7xl relative">
+        {/* Header */}
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4 sm:mb-6">
           My{" "}
           <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Projects
           </span>
         </h2>
-        <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
-          Each Projects is a unique piece of development.
+        <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-xl">
+          Each Project is a unique piece of development.
         </p>
 
-        <div className="flex gap-3 mb-3">
+        {/* Navigation */}
+        <div className="flex gap-2 sm:gap-3 mb-3">
           <button
             onClick={() => swiperRef.current.swiper.slidePrev()}
-            className="bg-indigo-300 rounded-full p-1 font-bold"
+            className="bg-indigo-300 rounded-full p-1 sm:p-2 font-bold"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={16} sm={20} />
           </button>
-
           <button
             onClick={() => swiperRef.current.swiper.slideNext()}
-            className="bg-indigo-300 rounded-full p-1 font-bold"
+            className="bg-indigo-300 rounded-full p-1 sm:p-2 font-bold"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={16} sm={20} />
           </button>
         </div>
+
         {/* Swiper */}
         <Swiper
           ref={swiperRef}
           modules={[Navigation, Pagination, Mousewheel]}
-          spaceBetween={20}
-          slidesPerView={3}
-          // pagination={{ clickable: true }}
+          spaceBetween={15}
+          slidesPerView={1} // default mobile
+          breakpoints={{
+            640: { slidesPerView: 1, spaceBetween: 20 }, // sm
+            768: { slidesPerView: 2, spaceBetween: 20 }, // md
+            1024: { slidesPerView: 3, spaceBetween: 20 }, // lg
+          }}
           mousewheel={{ forceToAxis: true }}
           loop={true}
           grabCursor={true}
@@ -72,24 +75,21 @@ const Projects = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Hover/Description */}
         <AnimatePresence>
           {hoveredProject && (
             <div
-              className="absolute top-0 right-0 flex flex-col items-end gap-2"
+              className="absolute top-0 right-0 flex flex-col items-end gap-2 hidden sm:flex"
               key={hoveredProject.title}
             >
               <motion.div
-                // important for smooth switching
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                transition={{
-                  duration: 0.4,
-                  ease: "easeOut",
-                  delay: 0.15,
-                }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
               >
-                <div className="h-[60px] min-w-[150px] w-[100px]">
+                <div className="h-[50px] sm:h-[60px] min-w-[100px] sm:min-w-[150px] w-[100px]">
                   <img
                     src={hoveredProject.companyLogo}
                     alt={hoveredProject.title}
@@ -97,7 +97,8 @@ const Projects = () => {
                   />
                 </div>
               </motion.div>
-              <div className="relative bg-amber-300 border border-white/5  px-4 py-0.4 rounded-xl tracking-tight text-violet-500">
+
+              <div className="relative bg-amber-300 border border-white/5 px-2 sm:px-4 py-0.5 sm:py-1 rounded-xl tracking-tight text-violet-500 text-xs sm:text-sm">
                 <TypeWriter
                   text={[hoveredProject?.description]}
                   typingSpeed={75}

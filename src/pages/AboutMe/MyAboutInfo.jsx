@@ -4,15 +4,30 @@ import { motion, useMotionValue, animate } from "framer-motion";
 // Main Component
 const MyAboutInfo = () => {
   return (
-    <div>
-      <h2 className="text-5xl font-extrabold leading-tight mb-6">
+    <div className="w-full">
+      {/* Heading */}
+      <h2
+        className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+          mb-5 md:mb-6
+        "
+      >
         About{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           Me
         </span>
       </h2>
 
-      <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
+      {/* Intro */}
+      <p
+        className="
+          text-base sm:text-lg
+          text-gray-600 leading-relaxed
+          mb-6 md:mb-8
+          max-w-xl
+        "
+      >
         Hi, I'm{" "}
         <span className="font-semibold text-indigo-600">
           Bivek Prasad Joshi
@@ -22,13 +37,20 @@ const MyAboutInfo = () => {
         high-performance user interfaces.
       </p>
 
-      <p className="mb-8">
+      {/* Quote */}
+      <p className="mb-6 md:mb-8 text-sm sm:text-base text-gray-700">
         “I care deeply about clean code, smooth UX, and products people love
         using.”
       </p>
 
       {/* Skill Pills */}
-      <div className="flex flex-wrap gap-4 mb-10">
+      <div
+        className="
+          flex flex-wrap
+          gap-2 sm:gap-3 md:gap-4
+          mb-8 md:mb-10
+        "
+      >
         {[
           "React",
           "Tailwind CSS",
@@ -39,7 +61,16 @@ const MyAboutInfo = () => {
         ].map((skill) => (
           <span
             key={skill}
-            className="px-5 py-2 rounded-full bg-white/80 backdrop-blur shadow border text-sm font-medium text-indigo-600 hover:scale-105 transition"
+            className="
+              px-4 sm:px-5
+              py-1.5 sm:py-2
+              rounded-full
+              bg-white/80 backdrop-blur
+              shadow border
+              text-xs sm:text-sm
+              font-medium text-indigo-600
+              hover:scale-105 transition
+            "
           >
             {skill}
           </span>
@@ -47,7 +78,20 @@ const MyAboutInfo = () => {
       </div>
 
       {/* Stats Strip */}
-      <div className="flex gap-8 mb-12 bg-white/60 backdrop-blur rounded-2xl px-8 py-5 shadow max-w-lg">
+      <div
+        className="
+          flex flex-col sm:flex-row
+          items-center sm:items-stretch
+          gap-4 sm:gap-6 md:gap-8
+          mb-10 md:mb-12
+          bg-white/60 backdrop-blur
+          rounded-2xl
+          px-6 sm:px-8
+          py-5
+          shadow
+          max-w-lg
+        "
+      >
         <Stat value={3} suffix="+" label="Years Experience" />
         <Divider />
         <Stat value={10} suffix="+" label="Projects" />
@@ -56,17 +100,43 @@ const MyAboutInfo = () => {
       </div>
 
       {/* CTA Buttons */}
-      <div className="flex gap-4">
+      <div
+        className="
+          flex flex-col sm:flex-row
+          gap-3 sm:gap-4
+        "
+      >
         <a
           href="#projects"
-          className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:scale-105 transition-transform"
+          className="
+            px-7 sm:px-8
+            py-3.5 sm:py-4
+            text-sm sm:text-base
+            bg-gradient-to-r from-indigo-600 to-purple-600
+            text-white
+            rounded-xl
+            shadow-lg
+            hover:scale-105
+            transition-transform
+            text-center
+          "
         >
           View My Work →
         </a>
 
         <a
           href="#contact"
-          className="px-8 py-4 border-2 border-indigo-600 text-indigo-600 rounded-xl hover:bg-indigo-600 hover:text-white transition"
+          className="
+            px-7 sm:px-8
+            py-3.5 sm:py-4
+            text-sm sm:text-base
+            border-2 border-indigo-600
+            text-indigo-600
+            rounded-xl
+            hover:bg-indigo-600 hover:text-white
+            transition
+            text-center
+          "
         >
           Contact Me
         </a>
@@ -86,7 +156,6 @@ const Stat = ({ value, suffix = "", label, isLarge = false }) => {
       ease: "easeOut",
       onUpdate: (latest) => {
         if (isLarge) {
-          // For large numbers, format like 10K
           const formatted =
             latest >= 1000
               ? `${Math.floor(latest / 1000)}K`
@@ -102,16 +171,18 @@ const Stat = ({ value, suffix = "", label, isLarge = false }) => {
   }, [count, value, isLarge]);
 
   return (
-    <div className="text-center">
-      <motion.div className="text-2xl font-bold text-indigo-600">
+    <div className="text-center min-w-[120px]">
+      <motion.div className="text-xl sm:text-2xl font-bold text-indigo-600">
         {display} {suffix}
       </motion.div>
-      <div className="text-sm text-gray-600">{label}</div>
+      <div className="text-xs sm:text-sm text-gray-600">{label}</div>
     </div>
   );
 };
 
 // Divider Component
-const Divider = () => <div className="w-px bg-gray-300/50" />;
+const Divider = () => (
+  <div className="hidden sm:block w-px bg-gray-300/50" />
+);
 
 export default MyAboutInfo;

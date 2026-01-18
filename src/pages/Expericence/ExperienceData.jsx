@@ -2,6 +2,10 @@ import Digi from "../../assets/Office/Digi.png";
 import DigiNaxal from "../../assets/Office/DigiNaxal.png";
 import Shankerdev from "../../assets/Office/Shankerdev.png";
 import LegalRemit1 from "../../assets/Office/LegalRemit1.png";
+import LRLogo from "../../assets/Office/CompanyLogo/LRLogo.svg";
+import DGLogo from "../../assets/Office/CompanyLogo/DGLogo.png";
+import TU from "../../assets/education/TU.png";
+
 
 export const experiences = [
   {
@@ -19,6 +23,7 @@ export const experiences = [
       "Fly Lumbini (Flight Ticketing)",
     ],
     icon: "L",
+    companyLogo: LRLogo,
   },
   {
     role: "Frontend Intern > Associate Jr",
@@ -36,6 +41,7 @@ export const experiences = [
       "KYC System",
     ],
     icon: "D",
+    companyLogo: DGLogo,
   },
   {
     role: "Campus Summer Project",
@@ -51,5 +57,6 @@ export const experiences = [
       "Pet Care and Adoption E-commerce",
     ],
     icon: "S",
+    companyLogo: TU,
   },
 ];

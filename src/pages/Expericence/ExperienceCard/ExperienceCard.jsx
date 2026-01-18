@@ -12,6 +12,13 @@ const ExperienceCard = ({ exp }) => {
       <div className="timeline-duration">
         <span className="text-lg">{exp?.startDate}</span> {" - "}
         <span className="text-lg">{exp?.endDate}</span>
+        <div className="w-[50px] h-[50px] mt-2">
+          <img
+            src={exp?.companyLogo}
+            alt={exp?.company}
+            className="w-full h-full"
+          />
+        </div>
       </div>
       <div style={{ display: "flex", gap: "1rem" }}>
         <div className="timeline-image" data-alt={`${exp?.role} illustration`}>

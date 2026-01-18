@@ -1,7 +1,6 @@
 import React from "react";
 import MyProfile from "./MyProfile/MyProfile";
 import AboutMe from "./AboutMe/AboutMe";
-import TechnologyUsed from "./TechnologyUsed/TechnologyUsed";
 import Projects from "./Projects/Projects";
 import EducationPageLayout from "./Education/EducationPageLayout";
 
@@ -47,7 +46,6 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        {/* <TechnologyUsed /> */}
         <EducationPageLayout />
       </section>
 

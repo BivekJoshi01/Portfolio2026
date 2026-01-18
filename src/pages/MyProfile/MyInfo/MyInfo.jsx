@@ -56,7 +56,7 @@ const MyInfo = () => {
           scale: 1.1,
           boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
         }}
-        className="absolute left-0 md:left-70 bottom-40 z-20 bg-blue-500/10 border border-blue-500/40 text-blue-500 px-6 py-2 rounded-full text-sm font-bold backdrop-blur-sm cursor-pointer shadow-lg"
+        className="absolute left-0 md:left-70 bottom-50 z-20 bg-blue-500/10 border border-blue-500/40 text-blue-500 px-6 py-2 rounded-full text-sm font-bold backdrop-blur-sm cursor-pointer shadow-lg"
       >
         LinkedIn Profile
       </motion.a>
