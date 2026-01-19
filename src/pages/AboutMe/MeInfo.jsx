@@ -7,11 +7,23 @@ import {
 } from "react-icons/fa";
 
 export const socials = [
-  { name: "facebook", icon: <FaFacebookF />, link: "https://facebook.com" },
-  { name: "instagram", icon: <FaInstagram />, link: "https://instagram.com" },
-  { name: "linkedin", icon: <FaLinkedinIn />, link: "https://linkedin.com" },
-  { name: "github", icon: <FaGithub />, link: "https://github.com" },
-  { name: "twitter", icon: <FaTwitter />, link: "https://twitter.com" },
+  {
+    name: "facebook",
+    icon: <FaFacebookF />,
+    link: "https://www.facebook.com/bivek.joshi.56",
+  },
+  {
+    name: "instagram",
+    icon: <FaInstagram />,
+    link: "https://www.instagram.com/bivek.joshi.56/",
+  },
+  {
+    name: "linkedin",
+    icon: <FaLinkedinIn />,
+    link: "https://www.linkedin.com/in/bivek-joshi-68b02b239/",
+  },
+  { name: "github", icon: <FaGithub />, link: "https://github.com/BivekJoshi" },
+  { name: "twitter", icon: <FaTwitter />, link: "https://x.com/Bvkjosi03Joshi" },
 ].slice(0, 5);
 
 export const socialColors = {

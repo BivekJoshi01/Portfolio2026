@@ -15,26 +15,29 @@ const NavAppBar = () => {
   ];
 
   return (
-    <nav className="relative w-full px-6 py-6 flex items-center justify-between z-40">
+    <nav className="relative w-full flex items-center justify-between z-40">
       {/* Background Decorative Glow (Desktop Only) */}
       <div className="hidden md:block absolute -left-20 -top-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Logo */}
       <div
         className="cursor-pointer z-50 transition-transform active:scale-95"
-        onClick={() => { navigate(`/`); setIsOpen(false); }}
+        onClick={() => {
+          navigate(`/`);
+          setIsOpen(false);
+        }}
       >
         <img src={BivekJoshi} className="w-32 sm:w-44" alt="Logo" />
       </div>
 
       {/* DESKTOP MENU: Modern Glassmorphism Pill */}
-      <ul className="hidden md:flex items-center p-1.5 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+      <ul className="hidden md:flex items-center p-1.5 bg-violet-300/40 backdrop-blur-sm border border-white/60 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
         {navItems.map(({ name, path }) => (
           <li key={name}>
             <NavLink
               to={path}
               className={({ isActive }) =>
-                `px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
+                `px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
                   isActive
                     ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
                     : "text-gray-600 hover:text-indigo-600 hover:bg-white/50"
@@ -49,7 +52,7 @@ const NavAppBar = () => {
 
       {/* DESKTOP HIRE BUTTON */}
       <div className="hidden md:block">
-        <button className="px-8 py-3 bg-gray-900 text-white rounded-full font-bold hover:bg-indigo-600 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 active:scale-95">
+        <button className="px-8 py-2 bg-gray-900 text-white rounded-full font-bold hover:bg-indigo-600 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 active:scale-95">
           Hire Me
         </button>
       </div>
@@ -57,7 +60,7 @@ const NavAppBar = () => {
       {/* MOBILE ONLY: Edge-Stuck Menu Handle */}
       {/* md:hidden ensures this never shows on desktop */}
       {!isOpen && (
-        <div 
+        <div
           onClick={() => setIsOpen(true)}
           className="md:hidden fixed right-0 top-1/2 -translate-y-1/2 z-[60] flex items-center group cursor-pointer"
         >
