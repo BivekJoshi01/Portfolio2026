@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import TypeWriter from "../../../components/TypeWriter/TypeWriter";
 import NamePlate from "../../../components/NamePlate/NamePlate";
+import { useTranslation } from "react-i18next";
 
 const MyInfo = () => {
+  const { t } = useTranslation();
   // Variations for unique floating patterns
   const floatVariant = (xRange, yRange, duration) => ({
     animate: {
@@ -28,7 +30,7 @@ const MyInfo = () => {
         animate="animate"
         className="absolute top-0 left-10 z-10 bg-amber-200 backdrop-blur-md border border-violet-900/6 px-4 py-1.5 rounded-full text-xs tracking-widest uppercase"
       >
-        Welcome to my showcase
+        {t("greeting")}
       </motion.div>
 
       {/* CV Button - Floating Randomly Middle Right */}
