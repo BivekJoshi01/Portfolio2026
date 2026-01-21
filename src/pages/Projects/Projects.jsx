@@ -80,7 +80,7 @@ const Projects = () => {
         <AnimatePresence>
           {hoveredProject && (
             <div
-              className="absolute top-0 right-0 flex flex-col items-end gap-2 hidden sm:flex"
+              className="absolute top-0 right-0"
               key={hoveredProject.title}
             >
               <motion.div

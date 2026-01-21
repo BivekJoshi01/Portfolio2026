@@ -125,7 +125,7 @@ const MyAboutInfo = () => {
         </a>
 
         <a
-          href="#contact"
+          href="#contact-me"
           className="
             px-7 sm:px-8
             py-3.5 sm:py-4

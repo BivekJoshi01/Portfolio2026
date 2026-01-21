@@ -52,7 +52,10 @@ const NavAppBar = () => {
 
       {/* DESKTOP HIRE BUTTON */}
       <div className="hidden md:block">
-        <button className="px-8 py-2 bg-gray-900 text-white rounded-full font-bold hover:bg-indigo-600 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 active:scale-95">
+        <button
+          className="px-8 py-2 bg-gray-900 text-white rounded-full font-bold hover:bg-indigo-600 hover:shadow-xl hover:shadow-indigo-100 transition-all duration-300 active:scale-95"
+          onClick={() => navigate("/contact-me")}
+        >
           Hire Me
         </button>
       </div>
@@ -122,7 +125,10 @@ const NavAppBar = () => {
 
           {/* Bottom Call to Action */}
           <div className="mt-auto p-8 border-t border-gray-50">
-            <button className="w-full py-5 bg-gray-900 text-white rounded-2xl font-black text-lg shadow-2xl active:scale-95 transition-all">
+            <button
+              className="w-full py-5 bg-gray-900 text-white rounded-2xl font-black text-lg shadow-2xl active:scale-95 transition-all"
+              onClick={() => navigate("/contact-me")}
+            >
               HIRE ME
             </button>
           </div>
