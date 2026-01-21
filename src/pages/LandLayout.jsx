@@ -76,7 +76,7 @@ const LandLayout = () => {
       </div>
 
       {/* Page Content */}
-      <div className="min-h-screen">
+      <div className="min-h-screen flex items-center">
         <Outlet />
       </div>
     </div>

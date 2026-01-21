@@ -6,27 +6,25 @@ import ContactCard from "./ContactCard";
 import "./ContactMeMap.css";
 
 const Wrapper = styled.div`
-  width: 100%;
-  // height:400px;
-  // background:red;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 50 / 50 */
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping on smaller screens */
   align-items: center;
-  background:white
-
+  background: white;
 `;
 
 const Left = styled.div`
+  flex: 1 1 400px; /* grow, shrink, min width */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  min-width: 300px;
 `;
 
 const Right = styled.div`
+  flex: 1 1 400px; /* grow, shrink, min width */
   width: 100%;
-  height: 100%;
-  padding: 1rem;
+  height: 500px; /* fixed height for canvas/map */
+  min-width: 300px;
 `;
 
 const ContactMe = () => {
