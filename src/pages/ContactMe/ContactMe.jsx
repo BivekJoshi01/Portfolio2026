@@ -7,13 +7,15 @@ import "./ContactMeMap.css";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-wrap: wrap; /* allow wrapping on smaller screens */
+  flex-wrap: wrap;
   align-items: center;
   background: white;
+  border-radius: 16px;
+  overflow: hidden;
 `;
 
 const Left = styled.div`
-  flex: 1 1 400px; /* grow, shrink, min width */
+  flex: 1 1 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,9 +23,9 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  flex: 1 1 400px; /* grow, shrink, min width */
+  flex: 1 1 400px;
   width: 100%;
-  height: 500px; /* fixed height for canvas/map */
+  height: 450px;
   min-width: 300px;
 `;
 

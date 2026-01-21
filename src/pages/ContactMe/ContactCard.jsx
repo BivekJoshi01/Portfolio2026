@@ -3,7 +3,7 @@ import Satellite from "../../assets/textures/Satellight.png";
 
 const ContactCard = () => {
   return (
-    <div className="w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+    <div className="w-full overflow-hidden flex flex-col md:flex-row">
       {/* Left Side: Visual/Branding Section */}
       <div className="md:w-1/3 bg-indigo-600 p-8 text-white flex flex-col justify-between items-center text-center">
         <div>
@@ -29,7 +29,7 @@ const ContactCard = () => {
       </div>
 
       {/* Right Side: The Form */}
-      <div className="md:w-2/3 p-8 lg:p-12 bg-white">
+      <div className="md:w-2/3 p-8">
         <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Name */}
