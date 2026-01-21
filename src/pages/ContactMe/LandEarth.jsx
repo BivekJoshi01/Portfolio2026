@@ -4,41 +4,40 @@ import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
 
 import EarthCloudsMap from "../../assets/textures/8k_earth_clouds.jpg";
-import EarthDayMap from "../../assets/textures/8k_earth_daymap.jpg";
+import EarthDayMap from "../../assets/textures/8k_earth_daymap.png";
 import EarthNormalMap from "../../assets/textures/8k_earth_normal_map.jpg";
 import EarthSpecularMap from "../../assets/textures/8k_earth_specular_map.jpg";
-import Moon from "../../assets/textures/Moon.png";
 
 import { TextureLoader } from "three";
 
-const LandEarth = () => {
+const LandEarth = ({ setOpenMap }) => {
+  const [isZooming, setIsZooming] = useState(false);
+  const zoomTargetScale = 2.2; // how big earth gets
+  const zoomSpeed = 0.01;
+
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
     TextureLoader,
-    [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
+    [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap],
   );
-  const [moon] = useLoader(TextureLoader, [Moon]);
 
   const earthRef = useRef(null);
   const cloudsRef = useRef(null);
-  const smallSphereRef = useRef(null);
   const controlsRef = useRef(null);
 
   const [earthScale, setEarthScale] = useState(0.1);
   const [cloudsScale, setCloudsScale] = useState(0.1);
 
-  const targetPosition = [-1.6, 0, 4.3];
+  const targetPosition = [0, 0, 3];
 
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime();
-
+  useFrame(({}) => {
     if (earthRef.current && cloudsRef.current) {
       earthRef.current.position.lerp(
         new THREE.Vector3(...targetPosition),
-        0.05
+        0.05,
       );
       cloudsRef.current.position.lerp(
         new THREE.Vector3(...targetPosition),
-        0.05
+        0.05,
       );
     }
 
@@ -55,22 +54,45 @@ const LandEarth = () => {
       if (cloudsScale < 1) setCloudsScale((prev) => Math.min(prev + 0.01, 1));
       cloudsRef.current.rotation.y += 0.0025;
     }
+  });
 
-    // Orbiting small sphere
-    if (smallSphereRef.current && earthRef.current) {
-      const radius = 2;
-      const speed = 0.5;
-      const rotationSpeed = 0.2;
+  useFrame(() => {
+    if (!earthRef.current || !cloudsRef.current) return;
 
-      smallSphereRef.current.position.x =
-        earthRef.current.position.x + radius * Math.cos(elapsedTime * speed);
-      smallSphereRef.current.position.z =
-        earthRef.current.position.z + radius * Math.sin(elapsedTime * speed);
-      smallSphereRef.current.position.y =
-        earthRef.current.position.y + Math.sin(elapsedTime * 0.5);
+    // Move to target position
+    earthRef.current.position.lerp(new THREE.Vector3(...targetPosition), 0.05);
+    cloudsRef.current.position.lerp(new THREE.Vector3(...targetPosition), 0.05);
 
-      smallSphereRef.current.rotation.y += rotationSpeed * 0.01; // slower rotation
+    // Initial grow animation
+    if (!isZooming && earthScale < 1) {
+      setEarthScale((prev) => Math.min(prev + 0.01, 1));
+      setCloudsScale((prev) => Math.min(prev + 0.01, 1));
     }
+
+    // Zoom-in animation after click
+    if (isZooming) {
+      setEarthScale((prev) => {
+        const next = Math.min(prev + zoomSpeed, zoomTargetScale);
+
+        // When zoom finishes → open map after delay
+        if (next >= zoomTargetScale) {
+          setTimeout(() => {
+            setOpenMap(true);
+          }, 1);
+        }
+
+        return next;
+      });
+
+      setCloudsScale((prev) => Math.min(prev + zoomSpeed, zoomTargetScale));
+    }
+
+    // Auto rotation only when not zooming
+    if (!isZooming && !controlsRef.current?.userIsDragging) {
+      earthRef.current.rotation.y += 0.002;
+    }
+
+    cloudsRef.current.rotation.y += 0.0025;
   });
 
   return (
@@ -91,7 +113,14 @@ const LandEarth = () => {
       </mesh>
 
       {/* Earth */}
-      <mesh ref={earthRef} scale={[earthScale, earthScale, earthScale]}>
+      <mesh
+        ref={earthRef}
+        scale={[earthScale, earthScale, earthScale]}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsZooming(true); // start zoom animation
+        }}
+      >
         <sphereGeometry args={[1.19, 32, 32]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
@@ -102,12 +131,15 @@ const LandEarth = () => {
         />
       </mesh>
 
-      {/* Moon / small sphere */}
-      <mesh ref={smallSphereRef} scale={[0.6, 0.6, 0.6]}>
-        <sphereGeometry args={[0.2, 16, 16]} />
-        <meshStandardMaterial map={moon} />
-      </mesh>
-
+      <OrbitControls
+        enableRotate={true}
+        enableZoom={false}
+        enablePan={false}
+        enableDamping
+        dampingFactor={0.08}
+        rotateSpeed={0.5}
+        target={[0, 0, 3]}
+      />
     </>
   );
 };

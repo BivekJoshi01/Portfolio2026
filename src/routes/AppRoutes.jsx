@@ -12,6 +12,7 @@ import MyEducationVs from "../pages/VSClone/VSBody/VsFolder/MyEducationVs";
 import MyProjects from "../pages/VSClone/VSBody/VsFolder/MyProjects";
 import MyExperience from "../pages/VSClone/VSBody/VsFolder/MyExperience";
 import MyContactsVs from "../pages/VSClone/VSBody/VsFolder/MyContactsVs";
+import MyCV from "../pages/MyCV";
 // import Experience from "../pages/Experience/Experience";
 // import AboutMe from "../pages/AboutMe/AboutMe";
 // import Education from "../pages/Education/Education";
@@ -21,6 +22,8 @@ const AppRoutes = () => {
   return (
     <HashRouter>
       <Routes>
+        <Route path="cv.pdf" element={<MyCV />} />
+
         <Route path="/" element={<LandLayout />}>
           <Route index element={<Home />} />
           <Route path="about-me" element={<AboutMe />} />
@@ -34,7 +37,7 @@ const AppRoutes = () => {
           <Route index element={<MyInfoVs />} />
           <Route path="my-infovs" element={<MyInfoVs />} />
           <Route path="my-educationvs" element={<MyEducationVs />} />
-          <Route path="my-projectsvs" element={<MyProjects/>} />
+          <Route path="my-projectsvs" element={<MyProjects />} />
           <Route path="my-experiencevs" element={<MyExperience />} />
           <Route path="my-contactvs" element={<MyContactsVs />} />
         </Route>

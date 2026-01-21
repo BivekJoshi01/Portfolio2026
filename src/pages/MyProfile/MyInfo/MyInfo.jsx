@@ -33,7 +33,7 @@ const MyInfo = () => {
 
       {/* CV Button - Floating Randomly Middle Right */}
       <motion.a
-        href="/cv.pdf"
+        href="/#/cv.pdf"
         target="_blank"
         variants={floatVariant([0, -20], [0, 40], 4)}
         animate="animate"
@@ -48,7 +48,7 @@ const MyInfo = () => {
 
       {/* LinkedIn - Floating Bottom Left */}
       <motion.a
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/in/bivek-joshi-68b02b239/"
         target="_blank"
         variants={floatVariant([0, 30], [0, -25], 5)}
         animate="animate"

@@ -67,7 +67,7 @@ const LandLayout = () => {
                 mass: 0.8,
               }}
               // className="bg-amber-300/80 p-1 mt-1 rounded-xl shadow-xl"
-              className="p-1 mt-1"
+              className="p-1"
             >
               <NavAppBar />
             </motion.div>

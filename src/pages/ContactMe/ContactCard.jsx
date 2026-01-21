@@ -3,103 +3,92 @@ import Satellite from "../../assets/textures/Satellight.png";
 
 const ContactCard = () => {
   return (
-    <div className="flex items-center justify-center">
-      <div className="relative bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row max-w-5xl w-900">
-        {/* Contact Form */}
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-            Contact Me
-          </h2>
-          <form className="space-y-4">
+    <div className="w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+      {/* Left Side: Visual/Branding Section */}
+      <div className="md:w-1/3 bg-indigo-600 p-8 text-white flex flex-col justify-between items-center text-center">
+        <div>
+          <h3 className="text-3xl font-bold mb-2">Let's Talk</h3>
+          <p className="text-indigo-100 text-sm">
+            Have a project in mind? Reach out and let's build something amazing
+            together.
+          </p>
+        </div>
+
+        {/* Using your Satellite asset here */}
+        <div className="my-8 transform hover:scale-105 transition-transform duration-500">
+          <img
+            src={Satellite}
+            alt="Satellite"
+            className="w-48 h-48 object-contain drop-shadow-2xl"
+          />
+        </div>
+
+        <div className="space-y-2 text-xs text-indigo-200">
+          <p>Ready for liftoff? 🚀</p>
+        </div>
+      </div>
+
+      {/* Right Side: The Form */}
+      <div className="md:w-2/3 p-8 lg:p-12 bg-white">
+        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Name
+            <div className="space-y-1">
+              <label className="text-sm font-semibold text-gray-600 ml-1">
+                Full Name
               </label>
               <input
                 type="text"
-                placeholder="Your name"
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                placeholder="Your Name"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
               />
             </div>
 
             {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Email
+            <div className="space-y-1">
+              <label className="text-sm font-semibold text-gray-600 ml-1">
+                Email Address
               </label>
               <input
                 type="email"
-                placeholder="you@example.com"
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                placeholder="email@gmail.com"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
               />
             </div>
+          </div>
 
-            {/* Message */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Message
-              </label>
-              <textarea
-                rows="4"
-                placeholder="Write your message..."
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-              ></textarea>
-            </div>
+          {/* Subject (Optional addition for standard UI) */}
+          <div className="space-y-1">
+            <label className="text-sm font-semibold text-gray-600 ml-1">
+              Subject
+            </label>
+            <input
+              type="text"
+              placeholder="How can I help?"
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
+            />
+          </div>
 
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full bg-indigo-500 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-indigo-600 transition"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
+          {/* Message */}
+          <div className="space-y-1">
+            <label className="text-sm font-semibold text-gray-600 ml-1">
+              Message
+            </label>
+            <textarea
+              rows="4"
+              placeholder="Tell me about your project..."
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all resize-none"
+            ></textarea>
+          </div>
 
-        {/* Right Side (Map + Satellite overlay) */}
-        <div className="w-full md:w-1/2 h-80 md:h-auto">
-          <iframe
-            title="Google Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.124394665182!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1909f76f4e51%3A0xf14b6f4b2e2d2d7!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 90,
-          right: 290,
-          animation: "float 4s ease-in-out infinite",
-        }}
-      >
-        <img
-          src={Satellite}
-          alt="Satellite"
-          className="w-96 h-86 object-contain z-10 drop-shadow-2xl"
-        />
-
-        <style>
-          {`
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-12px); }
-            }
-        `}
-        </style>
-      </div>
-      <div className="absolute top-[180px] left-[720px] bg-orange-500/80 backdrop-blur-sm px-4 py-2 rounded-lg text-white font-semibold shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-        9865466989
-      </div>
-
-      <div className="absolute top-[230px] left-[750px] bg-orange-500/80 backdrop-blur-sm px-4 py-2 rounded-lg text-white font-semibold shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-        bvkjosi03@gmail.com
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-indigo-200 transform hover:-translate-y-0.5 transition-all active:scale-95"
+          >
+            Send Message
+          </button>
+        </form>
       </div>
     </div>
   );

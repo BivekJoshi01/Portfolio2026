@@ -1,33 +1,65 @@
-import React from "react";
-import LandEarth from "./LandEarth";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
+import LandEarth from "./LandEarth";
 import ContactCard from "./ContactCard";
+import "./ContactMeMap.css";
+
+const Wrapper = styled.div`
+  width: 100%;
+  // height:400px;
+  // background:red;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50 / 50 */
+  align-items: center;
+  background:white
+
+`;
+
+const Left = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+`;
+
+const Right = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+`;
 
 const ContactMe = () => {
-  const FullScreenCanvas = styled.div`
-    width: 100%;
-    height: 100vh;
-    background:#00040C
-  `;
-  const Overlay = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `;
-
+  const [openMap, setOpenMap] = useState(false);
   return (
-    <FullScreenCanvas>
-      <Canvas>
-        <LandEarth />
-      </Canvas>
-      <Overlay><ContactCard/></Overlay>
-    </FullScreenCanvas>
+    <Wrapper>
+      {/* LEFT — Contact */}
+      <Left>
+        <ContactCard />
+      </Left>
+
+      {/* RIGHT — Earth */}
+      <Right>
+        {openMap ? (
+          <div className="w-full h-full">
+            <iframe
+              title="Google Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.124394665182!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1909f76f4e51%3A0xf14b6f4b2e2d2d7!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        ) : (
+          <Canvas>
+            <LandEarth setOpenMap={setOpenMap} />
+          </Canvas>
+        )}
+      </Right>
+    </Wrapper>
   );
 };
 
