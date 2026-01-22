@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import NavAppBar from "../components/NavAppBar/NavAppBar";
 import { Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import Mode from "./Mode";
 
 const LandLayout = () => {
   const scrollContainerRef = useRef(null);
@@ -78,6 +79,10 @@ const LandLayout = () => {
       {/* Page Content */}
       <div className="min-h-screen flex items-center">
         <Outlet />
+      </div>
+
+      <div className="absolute bottom-10 right-10">
+        <Mode />
       </div>
     </div>
   );

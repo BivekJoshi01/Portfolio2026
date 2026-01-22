@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // Main Component
 const MyAboutInfo = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full">
       {/* Heading */}
@@ -13,9 +16,9 @@ const MyAboutInfo = () => {
           mb-5 md:mb-6
         "
       >
-        About{" "}
+        {t("about")}{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          Me
+          {t("me")}
         </span>
       </h2>
 
@@ -28,19 +31,14 @@ const MyAboutInfo = () => {
           max-w-xl
         "
       >
-        Hi, I'm{" "}
-        <span className="font-semibold text-indigo-600">
-          Bivek Prasad Joshi
-        </span>
-        , a frontend developer who crafts modern, fast, and beautiful web
-        experiences. I specialize in turning complex ideas into elegant,
-        high-performance user interfaces.
+        {t("hi")}{" "}
+        <span className="font-semibold text-indigo-600">{t("myFullName")}</span>
+        , {t("aboutDesc")}
       </p>
 
       {/* Quote */}
       <p className="mb-6 md:mb-8 text-sm sm:text-base text-gray-700">
-        “I care deeply about clean code, smooth UX, and products people love
-        using.”
+        “{t("aboutObj")}”
       </p>
 
       {/* Skill Pills */}
@@ -92,11 +90,11 @@ const MyAboutInfo = () => {
           max-w-lg
         "
       >
-        <Stat value={3} suffix="+" label="Years Experience" />
+        <Stat value={3} suffix="+" label={t("yearExperience")} />
         <Divider />
-        <Stat value={10} suffix="+" label="Projects" />
+        <Stat value={10} suffix="+" label={t("project")} />
         <Divider />
-        <Stat value={10000} suffix="+" label="Users Impacted" isLarge />
+        <Stat value={10000} suffix="+" label={t("userImpacted")} isLarge />
       </div>
 
       {/* CTA Buttons */}
@@ -121,7 +119,7 @@ const MyAboutInfo = () => {
             text-center
           "
         >
-          View My Work →
+          {t("viewWork")} →
         </a>
 
         <a
@@ -138,7 +136,7 @@ const MyAboutInfo = () => {
             text-center
           "
         >
-          Contact Me
+          {t("contactMe")}
         </a>
       </div>
     </div>
@@ -181,8 +179,6 @@ const Stat = ({ value, suffix = "", label, isLarge = false }) => {
 };
 
 // Divider Component
-const Divider = () => (
-  <div className="hidden sm:block w-px bg-gray-300/50" />
-);
+const Divider = () => <div className="hidden sm:block w-px bg-gray-300/50" />;
 
 export default MyAboutInfo;

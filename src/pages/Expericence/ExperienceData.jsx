@@ -6,7 +6,6 @@ import LRLogo from "../../assets/Office/CompanyLogo/LRLogo.svg";
 import DGLogo from "../../assets/Office/CompanyLogo/DGLogo.png";
 import TU from "../../assets/education/TU.png";
 
-
 export const experiences = [
   {
     role: "Mid Level Frontend Developer",

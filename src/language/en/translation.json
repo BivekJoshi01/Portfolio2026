@@ -1,0 +1,20 @@
+{
+  "greeting": "Welcome to my showcase",
+  "hello": "Hello",
+  "viewCv": "View my CV",
+  "myName": "Bivek Joshi",
+  "myFullName": "Bivek Prasad Joshi",
+  "I": "I'm",
+  "motto": "Leading scalable UI development & shaping modern web experiences with clean, efficient code.",
+  "about": "About",
+  "me":"Me",
+  "hi": "Hi, I'm",
+  "aboutDesc": "a frontend developer who crafts modern, fast, and beautiful web experiences. I specialize in turning complex ideas into elegant, high-performance user interfaces.",
+  "aboutObj": "I care deeply about clean code, smooth UX, and products people love using.",
+  "yearExperience": "Years Experience",
+  "project": "Projects",
+  "userImpacted": "Users Impacted",
+  "viewWork": "View My Work",
+  "contactMe": "Contact Me",
+  "profile":"Profile"
+}

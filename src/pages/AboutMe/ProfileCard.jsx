@@ -1,8 +1,10 @@
 import React from "react";
 import AIMe from "../../assets/Me/AIMe.jpg";
 import RealMe from "../../assets/Me/RealMe.png";
+import { useTranslation } from "react-i18next";
 
 const ProfileCard = () => {
+  const { t } = useTranslation();
   return (
     <div
       className="
@@ -29,7 +31,7 @@ const ProfileCard = () => {
         {/* Header */}
         <div className="flex items-center gap-2 text-xs text-gray-600 mb-5 md:mb-6">
           <span className="w-2 h-2 rounded-full bg-gray-400" />
-          Profile
+          {t("profile")}
         </div>
 
         {/* Avatar */}
@@ -90,7 +92,7 @@ const ProfileCard = () => {
             tracking-wide
           "
         >
-          Bivek Prasad Joshi
+          {t("myFullName")}
         </h3>
 
         <p

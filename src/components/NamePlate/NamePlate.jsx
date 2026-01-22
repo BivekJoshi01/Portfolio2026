@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const NamePlate = () => {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
 
   const stars = useMemo(
@@ -146,7 +148,7 @@ const NamePlate = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Bivek Joshi
+              {t("myName")}
             </motion.h1>
 
             {/* Ghost Text */}
@@ -167,7 +169,7 @@ const NamePlate = () => {
                     blur-sm italic
                   "
                 >
-                  Bivek Joshi
+                  {t("myName")}
                 </motion.span>
               )}
             </AnimatePresence>

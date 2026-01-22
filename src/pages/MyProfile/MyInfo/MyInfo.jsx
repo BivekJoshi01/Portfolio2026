@@ -45,7 +45,7 @@ const MyInfo = () => {
         }}
         className="absolute right-0 md:right-20 top-20 z-20 bg-indigo-500/10 border border-indigo-500/40 text-indigo-500 px-6 py-2 rounded-full text-sm font-bold backdrop-blur-sm cursor-pointer shadow-lg"
       >
-        View my CV
+        {t("viewCv")}
       </motion.a>
 
       {/* LinkedIn - Floating Bottom Left */}
@@ -67,10 +67,10 @@ const MyInfo = () => {
 
       <div className="relative z-0 space-y-2">
         <h1 className="text-7xl md:text-8xl font-black tracking-tighte opacity-90">
-          Hello<span className="text-violet-600 italic">.</span>
+          {t("hello")}<span className="text-violet-600 italic">.</span>
         </h1>
         <h2 className="text-2xl font-extralight text-slate-500 tracking-[0.3em] uppercase ml-2">
-          I'm
+          {t("I")}
         </h2>
       </div>
 
@@ -100,8 +100,7 @@ const MyInfo = () => {
           Explorer
         </div>
         <p className="text-slate-500 leading-relaxed italic">
-          "Leading scalable UI development & shaping modern web experiences with
-          clean, efficient code."
+          "{t("motto")}"
         </p>
       </div>
     </div>
