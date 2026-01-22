@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { FiSun, FiMoon, FiGlobe } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../redux/Reducer/themeSlice";
+import { toggleLanguage } from "../redux/Reducer/languageSlice";
 
 const ModeLanguage = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [lang, setLang] = useState("en");
-
-  const toggleTheme = () => setDarkMode(!darkMode);
-  const toggleLang = () => setLang(lang === "en" ? "np" : "en");
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => {
+    return state.theme.mode;
+  });
+  const lang = useSelector((state) => {
+    return state.lang.lang;
+  });
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -23,7 +28,7 @@ const ModeLanguage = () => {
       >
         {/* Theme Button */}
         <button
-          onClick={toggleTheme}
+          onClick={() => dispatch(toggleTheme())}
           title="Toggle Theme"
           className="
             group relative
@@ -34,7 +39,7 @@ const ModeLanguage = () => {
             text-slate-700 dark:text-yellow-400
           "
         >
-          {darkMode ? (
+          {mode === "light" ? (
             <FiSun className="w-5 h-5 animate-[spin_3s_linear_infinite]" />
           ) : (
             <FiMoon className="w-5 h-5 transition-transform group-hover:-rotate-12" />
@@ -46,7 +51,7 @@ const ModeLanguage = () => {
 
         {/* Language Button */}
         <button
-          onClick={toggleLang}
+          onClick={() => dispatch(toggleLanguage())}
           title="Switch Language"
           className="
             group

@@ -10,7 +10,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
-    lng: "np",
+    lng: localStorage.getItem("i18nextLng") || "en",
     resources: {
       en: {
         translation: enTranslation,
@@ -25,18 +25,4 @@ i18n
     },
   });
 
-// import store from "./src/redux/store";
-
-// // Create a function to set the language based on Redux store
-// export const setLanguageFromStore = () => {
-//   const state = store.getState();
-//   const language = state.language.mode;
-//   i18n.changeLanguage(language);
-// };
-
-// i18n.use(initReactI18next).init({
-//   fallbackLng: "EN",
-//   lng: store.getState().language.mode,
-// });
-
-// export default i18n;
+export default i18n;
