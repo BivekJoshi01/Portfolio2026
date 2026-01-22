@@ -3,6 +3,7 @@ import "./App.css";
 import AppRoutes from "./routes/AppRoutes";
 import i18n from "./i18n";
 import { useSelector } from "react-redux";
+import GridAnimation from "./pages/GridAnimation";
 
 const App = () => {
   const mode = useSelector((state) => {
@@ -32,6 +33,7 @@ const App = () => {
       </div>
 
       {/* Grid overlay */}
+      <GridAnimation />
       <div className="grid-overlay"></div>
 
       {/* App content */}

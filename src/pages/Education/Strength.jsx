@@ -1,7 +1,9 @@
 import React from "react";
-import { strengthsList } from "./EducationData";
+import useEducationData from "./EducationData";
 
 const Strength = () => {
+  const { strengthsList } = useEducationData();
+
   return (
     <div
       className="

@@ -16,5 +16,21 @@
   "userImpacted": "प्रयोगकर्ता प्रभावित",
   "viewWork": "मेरो काम हेर्नुहोस्",
   "contactMe": "मलाई सम्पर्क गर्नुहोस्",
-  "profile":"व्यक्तिगत विवरण"
+  "profile": "व्यक्तिगत विवरण",
+  "education": "शैक्षिक",
+  "educationPre": "यात्रा",
+  "educationJourney": "मेरो analytical सोच र technical foundation बनाइरहेको institutions हरुमा गरेको chronological journey हो यो।",
+  "whatIStudiedUni": "ब्याचलर अफ इन्फर्मेशन म्यानेजमेन्ट",
+  "myUniversity": "त्रिभुवन विश्वविद्यालय, स्नातक तह",
+  "universityName": "शंकरदेव क्याम्पस, पुतलीसडक, काठमाडौं",
+  "whatIStudied12": "उच्च माध्यमिक (+२ विज्ञान)",
+  "collegeName": "मूनलाइट सेकेंडरी स्कूल",
+  "collegeLocation": "कुमारिपाटी, ललितपुर",
+  "whatIStudiedSEE": "माध्यमिक शिक्षा परीक्षा (एस. ई. ई.)",
+  "schoolName": "प्रगति आदर्श इङ्ग्लिश स्कूल",
+  "schoolLocation": "लगनखेल, ललितपुर",
+  "uniyear": "२०७७ — २०८१",
+  "higherYear": "२०७५ — २०७७",
+  "secondaryYear": "२०६२ — २०७५",
+  "latest": "भर्खरको"
 }

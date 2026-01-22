@@ -1,9 +1,14 @@
 import React from "react";
 import TechnologyUsed from "../TechnologyUsed/TechnologyUsed";
-import { EducationList } from "./EducationData";
 import Strength from "./Strength";
+import { useTranslation } from "react-i18next";
+import useEducationData from "./EducationData";
 
 const EducationPageLayout = () => {
+  const { t } = useTranslation();
+
+   const { EducationList } = useEducationData();
+
   const featured = EducationList?.find((e) => e.featured);
   const rest = EducationList?.filter((e) => !e.featured);
 
@@ -15,15 +20,14 @@ const EducationPageLayout = () => {
           {/* Header */}
           <header className="space-y-4">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-slate-900">
-              Academic{" "}
+              {t("education")}{" "}
               <span className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                Pedigree
+                {t("educationPre")}
               </span>
             </h2>
 
             <p className="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl leading-relaxed">
-              A chronological journey through the institutions that shaped my
-              analytical thinking and technical foundation.
+              {t("educationJourney")}
             </p>
           </header>
 
@@ -44,7 +48,7 @@ const EducationPageLayout = () => {
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="px-3 py-1 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
-                      Latest
+                      {t("latest")}
                     </span>
                     <span className="text-indigo-600 font-semibold tracking-wide text-sm">
                       {featured.year}

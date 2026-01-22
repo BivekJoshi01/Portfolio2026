@@ -1,35 +1,44 @@
 import TULogo from "../../assets/education/TU.png";
 import Moonlight from "../../assets/education/Moonlight.png";
 import PragatiLogo from "../../assets/education/PragatiLogo.svg";
+import { useTranslation } from "react-i18next";
 
-export const EducationList = [
-  {
-    degree: "Bachelor of Information Management",
-    school: "Tribhuvan University",
-    year: "2020 — 2024",
-    desc: "Shankerdev Campus, Putalisadak Kathmandu",
-    featured: true,
-    logo: TULogo,
-  },
-  {
-    degree: "Higher Secondary (+2 Science)",
-    school: "Moonlight Secondary School",
-    year: "2018 — 2020",
-    desc: "Kumaripati, Lalitpur.",
-    logo: Moonlight,
-  },
-  {
-    degree: "Secondary School (SEE)",
-    school: "Pragati Adarsha English School",
-    year: "2005 — 2018",
-    desc: "Lagankhel, Lalitpur.",
-    logo: PragatiLogo,
-  },
-];
+const useEducationData = () => {
+  const { t } = useTranslation();
 
-export const strengthsList = [
-  "Full-Stack Web Development",
-  "UI/UX Engineering",
-  "API & Database Design",
-  "Clean Code & Architecture",
-];
+  const EducationList = [
+    {
+      degree: t("whatIStudiedUni"),
+      school: t("myUniversity"),
+      year: t("uniyear"),
+      desc: t("universityName"),
+      featured: true,
+      logo: TULogo,
+    },
+    {
+      degree: t("whatIStudied12"),
+      school: t("collegeName"),
+      year: t("higherYear"),
+      desc: t("collegeLocation"),
+      logo: Moonlight,
+    },
+    {
+      degree: t("whatIStudiedSEE"),
+      school: t("schoolName"),
+      year: t("secondaryYear"),
+      desc: t("schoolLocation"),
+      logo: PragatiLogo,
+    },
+  ];
+
+  const strengthsList = [
+    t("Full-Stack Web Development"),
+    t("UI/UX Engineering"),
+    t("API & Database Design"),
+    t("Clean Code & Architecture"),
+  ];
+
+  return { EducationList, strengthsList };
+};
+
+export default useEducationData;
