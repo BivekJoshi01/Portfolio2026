@@ -9,6 +9,7 @@ const App = () => {
   const mode = useSelector((state) => {
     return state.theme.mode;
   });
+  // const mode = "light";
 
   const lang = useSelector((state) => state.lang.lang);
 
@@ -33,13 +34,13 @@ const App = () => {
       </div>
 
       {/* Grid overlay */}
-      <GridAnimation />
+      <GridAnimation mode={mode} />
       <div className="grid-overlay"></div>
 
       {/* App content */}
       <div className="content">
-        <AppRoutes />
-      </div>
+        <AppRoutes /> 
+        </div>
     </div>
   );
 };

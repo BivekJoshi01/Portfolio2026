@@ -18,7 +18,7 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  filter: blur(90px);
+  filter: blur(130px);
   pointer-events: none;
 }
 
@@ -138,11 +138,12 @@
   z-index: 2;
   pointer-events: none;
 
-  background-color: rgba(245, 245, 245, 0.5);
+  /* background-color: rgba(0, 24, 60, 0.1); */
   /* semi-transparent */
-  background-image:
+  /* background-image:
     linear-gradient(to right, #e0e0e0 1px, transparent 1px),
     linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+  */
   background-size: 20px 20px;
 }
 

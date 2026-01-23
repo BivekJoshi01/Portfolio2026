@@ -3,6 +3,30 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
+/* ===== DEFAULT (Light Theme) ===== */
+:root {
+    --bg: #ffffff;
+    --text: #0f172a;
+    --primary: #6366f1;
+    --card: #f8fafc;
+
+}
+
+/* ===== DARK THEME ===== */
+.dark {
+    --bg: #020617;
+    --text: #e5e7eb;
+    --primary: #818cf8;
+    --card: #020617;
+}
+
+.bg-theme {
+    background-color: var(--bg);
+}
+
+.text-theme {
+    color: var(--text);
+}
 
 /* global.css */
 .scrollbar-hide::-webkit-scrollbar {

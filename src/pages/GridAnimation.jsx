@@ -32,7 +32,7 @@ const GridAnimation = ({ mode }) => {
         this.y = Math.floor(Math.random() * (height / gridSize)) * gridSize;
         this.speed = 2.5; // Faster looks smoother for tails
         this.dir = Math.floor(Math.random() * 4);
-        this.color = Math.random() > 0.5 ? "#a855f7" : "#6366f1";
+        this.color = Math.random() > 0.5 ? "#c491f7" : "#b0b3fc";
         this.life = 0;
         this.maxLife = Math.random() * 300 + 150;
       }
@@ -40,11 +40,11 @@ const GridAnimation = ({ mode }) => {
       draw() {
         ctx.beginPath();
         ctx.strokeStyle = this.color;
-        ctx.lineWidth = 3; // Thicker lines
+        ctx.lineWidth = 1; // Thicker lines
         ctx.lineCap = "round";
 
         // Add a slight glow to the "head" of the tail
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 1;
         ctx.shadowColor = this.color;
 
         const oldX = this.x;
@@ -91,8 +91,8 @@ const GridAnimation = ({ mode }) => {
       // Decrease the alpha (0.05). Lower = Longer tails.
       const fadeColor =
         mode === "dark"
-          ? "rgba(10, 10, 12, 0.05)"
-          : "rgba(255, 255, 255, 0.07)";
+          ? "rgba(10, 10, 12, 0.03)"
+          : "rgba(255, 255, 255, 0.05)";
       ctx.fillStyle = fadeColor;
       ctx.fillRect(0, 0, width, height);
 
