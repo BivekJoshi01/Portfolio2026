@@ -17,7 +17,7 @@ const MyAboutInfo = () => {
         "
       >
         {t("about")}{" "}
-        <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+        <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           {t("me")}
         </span>
       </h2>
@@ -110,7 +110,7 @@ const MyAboutInfo = () => {
             px-7 sm:px-8
             py-3.5 sm:py-4
             text-sm sm:text-base
-            bg-gradient-to-r from-indigo-600 to-purple-600
+            bg-linear-to-r from-indigo-600 to-purple-600
             text-white
             rounded-xl
             shadow-lg
@@ -169,7 +169,7 @@ const Stat = ({ value, suffix = "", label, isLarge = false }) => {
   }, [count, value, isLarge]);
 
   return (
-    <div className="text-center min-w-[120px]">
+    <div className="text-center min-w-30">
       <motion.div className="text-xl sm:text-2xl font-bold text-indigo-600">
         {display} {suffix}
       </motion.div>

@@ -24,7 +24,9 @@ const App = () => {
   }, [lang]);
 
   return (
-    <div className="app-root">
+    <div
+      className={`app-root ${mode === "dark" ? "text-white" : "text-black"}`}
+    >
       {/* Floating spheres */}
       <div className="bg">
         <div className="sphere"></div>
@@ -39,8 +41,8 @@ const App = () => {
 
       {/* App content */}
       <div className="content">
-        <AppRoutes /> 
-        </div>
+        <AppRoutes />
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const GridAnimation = ({ mode }) => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       particles = [];
-      const particleCount = 25; // Increase count for a fuller look
+      const particleCount = 35;
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
@@ -30,71 +30,84 @@ const GridAnimation = ({ mode }) => {
       reset() {
         this.x = Math.floor(Math.random() * (width / gridSize)) * gridSize;
         this.y = Math.floor(Math.random() * (height / gridSize)) * gridSize;
-        this.speed = 2.5; // Faster looks smoother for tails
+        this.speed = 1.5;
         this.dir = Math.floor(Math.random() * 4);
         this.color = Math.random() > 0.5 ? "#c491f7" : "#b0b3fc";
-        this.life = 0;
-        this.maxLife = Math.random() * 300 + 150;
+        
+        // This array stores the path to create the "fading" tail
+        this.history = []; 
+        // 600 segments = ~10 seconds at 60fps
+        this.maxHistory = 600; 
       }
 
       draw() {
-        ctx.beginPath();
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = 1; // Thicker lines
-        ctx.lineCap = "round";
-
-        // Add a slight glow to the "head" of the tail
-        ctx.shadowBlur = 1;
-        ctx.shadowColor = this.color;
-
         const oldX = this.x;
         const oldY = this.y;
 
-        // Move
+        // --- Movement Logic ---
         if (this.dir === 0) this.y -= this.speed;
         else if (this.dir === 1) this.x += this.speed;
         else if (this.dir === 2) this.y += this.speed;
         else if (this.dir === 3) this.x -= this.speed;
 
-        ctx.moveTo(oldX, oldY);
-        ctx.lineTo(this.x, this.y);
-        ctx.stroke();
+        // Store this movement segment in history for the watermark
+        this.history.push({ x1: oldX, y1: oldY, x2: this.x, y2: this.y });
 
-        // Reset Shadow so it doesn't lag the browser
-        ctx.shadowBlur = 0;
+        // IMPORTANT: This removes the oldest data so it vanishes after 5 seconds
+        if (this.history.length > this.maxHistory) {
+          this.history.shift();
+        }
 
-        // Intersection Logic
-        if (
-          Math.abs(this.x % gridSize) < 1 &&
-          Math.abs(this.y % gridSize) < 1
-        ) {
+        // --- Grid Logic ---
+        if (Math.abs(this.x % gridSize) < 1 && Math.abs(this.y % gridSize) < 1) {
           this.x = Math.round(this.x / gridSize) * gridSize;
           this.y = Math.round(this.y / gridSize) * gridSize;
           if (Math.random() > 0.6) this.dir = Math.floor(Math.random() * 4);
         }
 
-        this.life++;
-        if (
-          this.life > this.maxLife ||
-          this.x < 0 ||
-          this.x > width ||
-          this.y < 0 ||
-          this.y > height
-        ) {
+        // --- 1. DRAW THE WATERMARK (Thin & Fading) ---
+        ctx.lineCap = "round";
+        ctx.lineWidth = 1; // Keep the tail thin
+
+        this.history.forEach((seg, i) => {
+          // Fade alpha from 0 to 0.4 based on age
+          const alpha = i / this.history.length;
+          ctx.globalAlpha = alpha * 0.4; 
+          ctx.strokeStyle = this.color;
+          
+          ctx.beginPath();
+          ctx.moveTo(seg.x1, seg.y1);
+          ctx.lineTo(seg.x2, seg.y2);
+          ctx.stroke();
+        });
+
+        // --- 2. DRAW THE "FAT HEAD" (Thick & Glowing) ---
+        ctx.globalAlpha = 1.0;
+        ctx.strokeStyle = this.color;
+        
+        // FAT HEAD SETTINGS
+        ctx.lineWidth = 1.5;   // Increased thickness for the head
+        ctx.shadowBlur = 2;     // More glow for the head
+        ctx.shadowColor = this.color;
+
+        ctx.beginPath();
+        ctx.moveTo(oldX, oldY);
+        ctx.lineTo(this.x, this.y);
+        ctx.stroke();
+        
+        // Clean up shadow for next frame performance
+        ctx.shadowBlur = 0;
+
+        // Reset if offscreen
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
           this.reset();
         }
       }
     }
 
     const animate = () => {
-      // THE SECRET TO LONG TAILS:
-      // Decrease the alpha (0.05). Lower = Longer tails.
-      const fadeColor =
-        mode === "dark"
-          ? "rgba(10, 10, 12, 0.03)"
-          : "rgba(255, 255, 255, 0.05)";
-      ctx.fillStyle = fadeColor;
-      ctx.fillRect(0, 0, width, height);
+      // clearRect ensures the 5-second old lines are physically deleted
+      ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p) => p.draw());
       animationFrameId = requestAnimationFrame(animate);
@@ -113,10 +126,12 @@ const GridAnimation = ({ mode }) => {
   return (
     <canvas
       ref={canvasRef}
+      className=""
       style={{
         position: "fixed",
         inset: 0,
         pointerEvents: "none",
+        background: mode === "dark" ? "#0a0a0c" : "#ffffff",
       }}
     />
   );
