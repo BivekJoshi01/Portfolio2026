@@ -4,17 +4,17 @@ import AppRoutes from "./routes/AppRoutes";
 import i18n from "./i18n";
 import { useSelector } from "react-redux";
 import GridAnimation from "./pages/GridAnimation";
+import { applyTheme } from "./applyTheme";
+import { themes } from "./theme";
 
 const App = () => {
-  const mode = useSelector((state) => {
-    return state.theme.mode;
-  });
-  // const mode = "light";
-
+  const mode = useSelector((state) => state.theme.mode);
   const lang = useSelector((state) => state.lang.lang);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
+    const themeObj = themes[mode] ?? themes.light;
+    applyTheme(themeObj);
   }, [mode]);
 
   useEffect(() => {

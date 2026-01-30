@@ -1,0 +1,49 @@
+/* MyInfo — theme-aware (uses CSS vars from theme.js) */
+
+.myinfo-greeting {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+}
+
+.myinfo-link {
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.myinfo-link:hover {
+  box-shadow: 0 0 24px var(--glow-color);
+  color: var(--primary);
+}
+
+.myinfo-heading {
+  color: var(--text);
+}
+
+.myinfo-heading-accent {
+  color: var(--primary);
+}
+
+.myinfo-muted {
+  color: var(--nav-text-muted);
+}
+
+.myinfo-typewriter-glow {
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  box-shadow: 0 0 30px var(--glow-color);
+}
+
+.myinfo-typewriter-inner {
+  background: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.myinfo-quote-border {
+  border-left: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.myinfo-tagline-accent {
+  color: var(--primary);
+}

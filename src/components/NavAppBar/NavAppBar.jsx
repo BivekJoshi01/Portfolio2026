@@ -1,129 +1,228 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { X, ChevronRight } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
 import BivekJoshi from "../../assets/BivekJoshi.svg";
 import CButton from "../Custom/CButton";
+import "./NavAppBar.css";
+
+const NAV_ITEMS = [
+  { name: "About Me", path: "/about-me" },
+  { name: "Projects", path: "/projects" },
+  { name: "Experience", path: "/experience" },
+  { name: "Contact", path: "/contact-me" },
+];
+
+const SIDEBAR_VARIANTS = {
+  open: {
+    x: 0,
+    transition: { type: "spring", damping: 28, stiffness: 300 },
+  },
+  closed: {
+    x: "100%",
+    transition: { type: "spring", damping: 28, stiffness: 300 },
+  },
+};
+
+const SIDEBAR_STAGGER = {
+  open: {
+    transition: { staggerChildren: 0.04, delayChildren: 0.08 },
+  },
+  closed: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+};
+
+const SIDEBAR_ITEM = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: 16 },
+};
 
 const NavAppBar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const theme = useSelector((state) => state.theme.mode);
+  const isDark = theme === "dark";
 
-  const navItems = [
-    { name: "About Me", path: "/about-me" },
-    { name: "Projects", path: "/projects" },
-    { name: "Experience", path: "/experience" },
-    { name: "Contact", path: "/contact-me" },
-  ];
+  const goTo = useCallback(
+    (path) => {
+      navigate(path);
+      setIsOpen(false);
+    },
+    [navigate]
+  );
+
+  const closeSidebar = useCallback(() => setIsOpen(false), []);
 
   return (
-    <nav className="relative w-full flex items-center justify-between z-40">
-      {/* Background Decorative Glow (Desktop Only) */}
-      <div className="hidden md:block absolute -left-20 -top-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+    <nav
+      className="relative z-40 flex w-full items-center justify-between"
+      role="navigation"
+      aria-label="Main"
+    >
+      {/* Decorative glow — desktop only */}
+      <div
+        className="nav-glow pointer-events-none absolute -left-20 -top-20 hidden h-64 w-64 rounded-full blur-[100px] md:block"
+        aria-hidden
+      />
 
       {/* Logo */}
-      <div
-        className="cursor-pointer transition-transform"
-        onClick={() => {
-          navigate(`/`);
-          setIsOpen(false);
-        }}
+      <button
+        type="button"
+        onClick={() => goTo("/")}
+        className="cursor-pointer select-none transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:ring-offset-2"
+        aria-label="Go to home"
       >
-        <img src={BivekJoshi} className="w-22 sm:w-24 h-20" alt="Logo" />
-      </div>
+        <img
+          src={BivekJoshi}
+          className="h-20 w-22 sm:w-24"
+          alt=""
+          width={96}
+          height={80}
+        />
+      </button>
 
-      {/* DESKTOP MENU: Modern Glassmorphism Pill */}
-      <ul className="hidden md:flex items-center bg-violet-300/40 backdrop-blur-sm border border-white/60 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-        {navItems.map(({ name, path }) => (
-          <li key={name}>
-            <NavLink to={path} onClick={() => setIsOpen(false)}>
+      {/* Desktop: pill nav */}
+      <ul
+        className="nav-pill hidden items-center gap-0.5 rounded-full border backdrop-blur-xl md:flex"
+        style={{ padding: "6px 6px" }}
+      >
+        {NAV_ITEMS.map(({ name, path }) => (
+          <li key={path}>
+            <NavLink to={path} onClick={closeSidebar}>
               {({ isActive }) => (
-                <CButton
-                  fullWidth
-                  variant={isActive ? "primary" : "ghost"}
-                  // className="justify-between text-lg px-5 py-4 rounded-2xl"
+                <span
+                  className={clsx(
+                    "nav-pill-link block rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:ring-offset-2",
+                    isActive && "nav-pill-link--active"
+                  )}
                 >
                   {name}
-                </CButton>
+                </span>
               )}
             </NavLink>
           </li>
         ))}
       </ul>
 
-      {/* DESKTOP HIRE BUTTON */}
+      {/* Desktop: CTA */}
       <div className="hidden md:block">
-        <CButton variant="primary" onClick={() => navigate("/contact-me")}>
+        <CButton variant="primary" onClick={() => goTo("/contact-me")}>
           HIRE ME
         </CButton>
       </div>
 
-      {/* MOBILE ONLY: Edge-Stuck Menu Handle */}
-      {/* md:hidden ensures this never shows on desktop */}
+      {/* Mobile: edge menu handle */}
       {!isOpen && (
-        <div
+        <button
+          type="button"
           onClick={() => setIsOpen(true)}
-          className="md:hidden fixed right-0 top-1/2 -translate-y-1/2 flex items-center group cursor-pointer"
+          className="nav-handle-dot group fixed right-0 top-1/2 z-30 flex -translate-y-1/2 cursor-pointer items-center rounded-l-full transition-all duration-300 hover:scale-105 md:hidden"
+          style={{ height: 80, width: 6 }}
+          aria-label="Open menu"
+          aria-expanded={false}
         >
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 -rotate-90 -mr-3 opacity-60 group-hover:opacity-100 transition-all duration-300">
+          <span
+            className="absolute right-4 text-[10px] font-bold uppercase tracking-[0.2em] -rotate-90 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ color: "var(--primary)" }}
+          >
             Menu
           </span>
-          {/* The Vertical Handle Bar */}
-          <div className="h-20 w-1.5 group-hover:w-3 bg-indigo-600 rounded-l-full transition-all duration-300 shadow-[-2px_0_10px_rgba(79,70,229,0.3)]" />
-        </div>
+        </button>
       )}
 
-      {/* MOBILE SIDEBAR OVERLAY */}
-      <div
-        className={`md:hidden fixed inset-0 bg-indigo-950/30 backdrop-blur-md transition-opacity duration-500 ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-        onClick={() => setIsOpen(false)}
-      />
+      {/* Mobile: overlay + sidebar */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              key="nav-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className={clsx(
+                "fixed inset-0 z-40 backdrop-blur-sm md:hidden",
+                isDark ? "nav-overlay-dark" : "nav-overlay-light"
+              )}
+              onClick={closeSidebar}
+              aria-hidden
+            />
 
-      {/* MOBILE SIDEBAR */}
-      <div
-        className={`md:hidden fixed top-0 right-0 h-full w-[80%] max-w-[320px] bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.1)] transform transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Sidebar Top Area */}
-          <div className="flex items-center justify-between p-8">
-            <div className="h-1.5 w-12 bg-indigo-600 rounded-full" />
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-3 bg-gray-100 rounded-full text-gray-900 active:scale-90 transition-transform"
+            <motion.aside
+              key="nav-sidebar"
+              variants={SIDEBAR_VARIANTS}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="nav-sidebar fixed top-0 right-0 z-50 flex h-full w-[88%] max-w-[320px] flex-col border-l shadow-2xl md:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
             >
-              <X size={20} />
-            </button>
-          </div>
+              <div className="flex h-full flex-col">
+                {/* Sidebar header */}
+                <header className="flex shrink-0 items-center justify-between border-b p-5 border-(--sidebar-border)">
+                  <div className="nav-sidebar-header-line h-1 w-12 rounded-full" />
+                  <button
+                    type="button"
+                    onClick={closeSidebar}
+                    className="nav-sidebar-close flex rounded-full p-2.5 transition-all duration-200 active:scale-95 focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:ring-offset-2"
+                    aria-label="Close menu"
+                  >
+                    <X size={22} strokeWidth={2} />
+                  </button>
+                </header>
 
-          {/* Navigation Links */}
-          <ul className="flex flex-col gap-3 px-6 mt-4">
-            {navItems.map(({ name, path }) => (
-              <li key={name}>
-                <NavLink
-                  to={path}
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    `flex items-center justify-between p-5 rounded-2xl text-xl font-bold transition-all ${
-                      isActive
-                        ? "bg-indigo-600 text-white shadow-xl shadow-indigo-100"
-                        : "text-gray-800 active:bg-gray-50"
-                    }`
-                  }
+                {/* Nav links with stagger */}
+                <motion.ul
+                  variants={SIDEBAR_STAGGER}
+                  className="flex flex-1 flex-col gap-1 overflow-auto p-4"
                 >
-                  <span>{name}</span>
-                  <ChevronRight size={20} className="opacity-30" />
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+                  {NAV_ITEMS.map(({ name, path }) => (
+                    <motion.li key={path} variants={SIDEBAR_ITEM}>
+                      <NavLink
+                        to={path}
+                        onClick={closeSidebar}
+                        className={({ isActive }) =>
+                          clsx(
+                            "nav-sidebar-link flex items-center justify-between rounded-xl px-4 py-4 text-base font-semibold transition-all duration-200",
+                            isActive
+                              ? "nav-sidebar-link--active"
+                              : "hover:bg-black/5 dark:hover:bg-white/10"
+                          )
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            <span>{name}</span>
+                            <ChevronRight
+                              size={20}
+                              className={isActive ? "opacity-90" : "opacity-40"}
+                              strokeWidth={2}
+                            />
+                          </>
+                        )}
+                      </NavLink>
+                    </motion.li>
+                  ))}
+                </motion.ul>
 
-          {/* Bottom Call to Action */}
-          <CButton variant="primary">Secondary</CButton>
-        </div>
-      </div>
+                {/* Bottom CTA */}
+                <div className="shrink-0 border-t p-4 pt-3 border-(--sidebar-border)">
+                  <CButton
+                    variant="primary"
+                    className="w-full rounded-xl py-3.5 text-base font-semibold"
+                    onClick={() => goTo("/contact-me")}
+                  >
+                    HIRE ME
+                  </CButton>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

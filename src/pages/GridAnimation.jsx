@@ -131,7 +131,7 @@ const GridAnimation = ({ mode }) => {
         position: "fixed",
         inset: 0,
         pointerEvents: "none",
-        background: mode === "dark" ? "#0a0a0c" : "#ffffff",
+        background: mode === "dark" ? "#0a0a0c" : "#f9f1d6",
       }}
     />
   );

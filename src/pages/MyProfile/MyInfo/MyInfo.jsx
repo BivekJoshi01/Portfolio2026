@@ -1,75 +1,87 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import TypeWriter from "../../../components/TypeWriter/TypeWriter";
 import NamePlate from "../../../components/NamePlate/NamePlate";
 import { useTranslation } from "react-i18next";
+import "./MyInfo.css";
+
+const FLOAT_CONFIG = [
+  { x: [0, 15], y: [0, 10], duration: 3 },
+  { x: [0, -20], y: [0, 40], duration: 4 },
+  { x: [0, 30], y: [0, -25], duration: 5 },
+];
+
+const TYPEWRITER_TEXTS = [
+  "Frontend Developer",
+  "Mern Stack Developer",
+  "Modern Web Design",
+];
 
 const MyInfo = () => {
   const { t } = useTranslation();
-  // Variations for unique floating patterns
-  const floatVariant = (xRange, yRange, duration) => ({
-    animate: {
-      x: xRange,
-      y: yRange,
-      transition: {
-        duration: duration,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
+
+  const floatVariant = useMemo(
+    () => (xRange, yRange, duration) => ({
+      animate: {
+        x: xRange,
+        y: yRange,
+        transition: {
+          duration,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        },
       },
-    },
-  });
+    }),
+    []
+  );
 
   return (
-    <div className="relative flex flex-col gap-8 py-16 px-4 min-h-[600px] justify-center overflow-visible">
-      {/* --- FLOATING ELEMENTS (SATELLITES) --- */}
-
-      {/* Welcome Tag - Floating Top Left */}
+    <div className="relative flex flex-col justify-center gap-8 overflow-visible px-4 py-16">
+      {/* Floating: greeting tag */}
       <motion.div
-        variants={floatVariant([0, 15], [0, 10], 3)}
+        variants={floatVariant(FLOAT_CONFIG[0].x, FLOAT_CONFIG[0].y, FLOAT_CONFIG[0].duration)}
         animate="animate"
-        className="absolute top-0 left-10 z-10 bg-amber-200 backdrop-blur-md border border-violet-900/6 px-4 py-1.5 rounded-full text-xs tracking-widest uppercase"
+        className="myinfo-greeting absolute left-10 top-0 z-10 rounded-full border px-4 py-1.5 text-xs uppercase tracking-widest backdrop-blur-md"
       >
         {t("greeting")}
       </motion.div>
 
-      {/* CV Button - Floating Randomly Middle Right */}
+      {/* Floating: CV link */}
       <motion.a
         href="/#/cv.pdf"
         target="_blank"
-        variants={floatVariant([0, -20], [0, 40], 4)}
+        rel="noopener noreferrer"
+        variants={floatVariant(FLOAT_CONFIG[1].x, FLOAT_CONFIG[1].y, FLOAT_CONFIG[1].duration)}
         animate="animate"
-        whileHover={{
-          scale: 1.1,
-          boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)",
-        }}
-        className="absolute right-0 md:right-20 top-20 z-20 bg-indigo-500/10 border border-indigo-500/40 text-indigo-500 px-6 py-2 rounded-full text-sm font-bold backdrop-blur-sm cursor-pointer shadow-lg"
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.98 }}
+        className="myinfo-link absolute right-0 top-20 z-20 cursor-pointer rounded-full px-6 py-2.5 text-sm font-semibold shadow-md backdrop-blur-sm transition-shadow duration-300 md:right-20"
       >
         {t("viewCv")}
       </motion.a>
 
-      {/* LinkedIn - Floating Bottom Left */}
+      {/* Floating: LinkedIn link */}
       <motion.a
         href="https://www.linkedin.com/in/bivek-joshi-68b02b239/"
         target="_blank"
-        variants={floatVariant([0, 30], [0, -25], 5)}
+        rel="noopener noreferrer"
+        variants={floatVariant(FLOAT_CONFIG[2].x, FLOAT_CONFIG[2].y, FLOAT_CONFIG[2].duration)}
         animate="animate"
-        whileHover={{
-          scale: 1.1,
-          boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)",
-        }}
-        className="absolute left-0 md:left-70 bottom-50 z-20 bg-blue-500/10 border border-blue-500/40 text-blue-500 px-6 py-2 rounded-full text-sm font-bold backdrop-blur-sm cursor-pointer shadow-lg"
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.98 }}
+        className="myinfo-link absolute bottom-51 left-10 z-20 cursor-pointer rounded-full px-6 py-2.5 text-sm font-semibold shadow-md backdrop-blur-sm transition-shadow duration-300 md:left-60"
       >
         LinkedIn Profile
       </motion.a>
 
-      {/* --- STATIC CONTENT --- */}
-
+      {/* Main heading */}
       <div className="relative z-0 space-y-2">
-        <h1 className="text-7xl md:text-8xl font-black tracking-tighte opacity-90">
-          {t("hello")}<span className="text-violet-600 italic">.</span>
+        <h1 className="myinfo-heading text-7xl font-black tracking-tight opacity-95 md:text-8xl">
+          {t("hello")}
+          <span className="myinfo-heading-accent italic">.</span>
         </h1>
-        <h2 className="text-2xl font-extralight text-slate-500 tracking-[0.3em] uppercase ml-2">
+        <h2 className="myinfo-muted ml-2 text-2xl font-extralight uppercase tracking-[0.3em]">
           {t("I")}
         </h2>
       </div>
@@ -78,15 +90,11 @@ const MyInfo = () => {
         <NamePlate />
       </div>
 
-      <div className="relative group max-w-fit mt-4">
-        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur-lg opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-        <div className="relative bg-violet-600 border border-white/5  px-4 py-1 rounded-xl text-l md:text-xl font-semibold tracking-tight">
+      {/* TypeWriter block */}
+      <div className="group relative mt-4 max-w-fit">
+        <div className="myinfo-typewriter-inner relative rounded-xl px-4 py-2 text-lg font-semibold tracking-tight md:text-xl">
           <TypeWriter
-            text={[
-              "Frontend Developer",
-              "Mern Stack Developer",
-              "Modern Web Design",
-            ]}
+            text={TYPEWRITER_TEXTS}
             typingSpeed={75}
             pauseDuration={1500}
             showCursor={true}
@@ -94,12 +102,12 @@ const MyInfo = () => {
         </div>
       </div>
 
-      <div className="mt-6 space-y-4 border-l-2 border-indigo-500/20">
-        <div className="text-lg font-medium text-slate-500">
-          React Enthusiast <span className="text-indigo-400">⚛️</span> | Next.js
-          Explorer
-        </div>
-        <p className="text-slate-500 leading-relaxed italic">
+      {/* Tagline & quote */}
+      <div className="myinfo-quote-border mt-6 space-y-4 pl-4">
+        <p className="myinfo-muted text-lg font-medium">
+          React Enthusiast <span className="myinfo-tagline-accent">⚛️</span> | Next.js Explorer
+        </p>
+        <p className="myinfo-muted leading-relaxed italic">
           "{t("motto")}"
         </p>
       </div>
