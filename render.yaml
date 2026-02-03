@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: portfolio-2026
+    env: static
+    buildCommand: npm run build
+    publishDir: dist
