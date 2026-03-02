@@ -4,12 +4,13 @@ import styled from "styled-components";
 import LandEarth from "./LandEarth";
 import ContactCard from "./ContactCard";
 import "./ContactMeMap.css";
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background: white;
+  background: var(--glow-color);
   border-radius: 16px;
   overflow: hidden;
 `;
@@ -30,17 +31,27 @@ const Right = styled.div`
 `;
 
 const ContactMe = () => {
+  const { t } = useTranslation();
+
   const [openMap, setOpenMap] = useState(false);
+
   return (
     <div>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4 sm:mb-6">
+      <h2
+        className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+          mb-3 md:mb-4
+        "
+      >
         Contact{" "}
-        <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          Me
+        <span className="bg-(--secondary) bg-clip-text text-transparent">
+          {t("me")}
         </span>
       </h2>
-      <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-xl">
-       Idea Into Product 
+
+      <p className="text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed mb-2">
+        Idea Into Product
       </p>
 
       <Wrapper>

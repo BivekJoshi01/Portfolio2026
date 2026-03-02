@@ -81,6 +81,10 @@ const LandLayout = () => {
       <div className="min-h-screen flex items-center max-w-7xl mx-auto">
         <Outlet />
       </div>
+
+      <div className="flex justify-center">
+        📧 bvekjoshi03@gmail.com | 📍 Tangal Lalitpur-19, Nepal
+      </div>
     </div>
   );
 };

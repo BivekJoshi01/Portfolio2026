@@ -5,7 +5,7 @@ const ContactCard = () => {
   return (
     <div className="w-full overflow-hidden flex flex-col md:flex-row">
       {/* Left Side: Visual/Branding Section */}
-      <div className="md:w-1/3 bg-indigo-600 p-8 text-white flex flex-col justify-between items-center text-center">
+      <div className="md:w-1/3 bg-(--primary) p-8 text-white flex flex-col justify-between items-center text-center">
         <div>
           <h3 className="text-3xl font-bold mb-2">Let's Talk</h3>
           <p className="text-indigo-100 text-sm">
@@ -34,57 +34,57 @@ const ContactCard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Name */}
             <div className="space-y-1">
-              <label className="text-sm font-semibold text-gray-600 ml-1">
+              <label className="text-sm font-semibold ml-1">
                 Full Name
               </label>
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-(--card) border border-(--card-border) rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
               />
             </div>
 
             {/* Email */}
             <div className="space-y-1">
-              <label className="text-sm font-semibold text-gray-600 ml-1">
+              <label className="text-sm font-semibold ml-1">
                 Email Address
               </label>
               <input
                 type="email"
                 placeholder="email@gmail.com"
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
+                className="w-full px-4 py-3 bg-(--card) border border-(--card-border) rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
               />
             </div>
           </div>
 
           {/* Subject (Optional addition for standard UI) */}
           <div className="space-y-1">
-            <label className="text-sm font-semibold text-gray-600 ml-1">
+            <label className="text-sm font-semibold ml-1">
               Subject
             </label>
             <input
               type="text"
               placeholder="How can I help?"
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
+              className="w-full px-4 py-3 bg-(--card) border border-(--card-border) rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all"
             />
           </div>
 
           {/* Message */}
           <div className="space-y-1">
-            <label className="text-sm font-semibold text-gray-600 ml-1">
+            <label className="text-sm font-semibold ml-1">
               Message
             </label>
             <textarea
               rows="4"
               placeholder="Tell me about your project..."
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all resize-none"
+              className="w-full px-4 py-3 bg-(--card) border border-(--card-border) rounded-xl focus:ring-2 focus:ring-indigo-400 focus:bg-white focus:outline-none transition-all resize-none"
             ></textarea>
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-indigo-200 transform hover:-translate-y-0.5 transition-all active:scale-95"
+            className="w-full bg-(--primary) hover:bg-(--primary-hover) font-bold py-4 rounded-xl shadow-lg hover:shadow-indigo-200 transform hover:-translate-y-0.5 transition-all active:scale-95"
           >
             Send Message
           </button>
