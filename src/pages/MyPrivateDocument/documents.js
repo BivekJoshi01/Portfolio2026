@@ -50,13 +50,5 @@
       color: "bg-red-100",
       images: ["/api/placeholder/400/600"],
       msg: "Mastering the domain.",
-    },
-        {
-      id: "others",
-      title: "Others",
-      icon: "🧠",
-      color: "bg-red-100",
-      images: ["/api/placeholder/400/600"],
-      msg: "Mastering the domain.",
-    },
+    }
   ];

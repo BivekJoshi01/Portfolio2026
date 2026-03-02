@@ -28,7 +28,7 @@ const InitalDocLoad = () => {
         </h1>
 
         <p className="text-slate-300 text-lg">
-          Select a document from the left panel to preview.
+          Select a document from the below to preview.
         </p>
 
         <div className="mt-8">
