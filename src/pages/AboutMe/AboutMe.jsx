@@ -105,9 +105,6 @@ const SocialIcons = () => {
 const AboutMe = () => {
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
-      {/* Background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000010_1px,transparent_1px),linear-gradient(to_bottom,#00000010_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
-
       <div
         className="
           relative max-w-7xl mx-auto
@@ -119,9 +116,9 @@ const AboutMe = () => {
       >
         {/* LEFT — PROFILE CARD */}
         <div className="relative flex justify-center">
-          <div className="relative z-20 p-0.5 rounded-4xl bg-linear-to-tr from-indigo-400 via-amber-100 to-purple-800/50">
-            <ProfileCard />
-          </div>
+          {/* <div className="relative z-20 p-0.5 rounded-4xl bg-linear-to-tr from-indigo-400 via-amber-100 to-purple-800/50"> */}
+          <ProfileCard />
+          {/* </div> */}
 
           {/* Social Icons */}
           <SocialIcons />

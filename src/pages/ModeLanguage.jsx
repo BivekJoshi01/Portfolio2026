@@ -36,7 +36,7 @@ const ModeLanguage = () => {
         {mode === "light" ? (
           <FiSun className="w-5 h-5 animate-[spin_3s_linear_infinite]" />
         ) : (
-          <FiMoon className="w-5 h-5 transition-transform group-hover:-rotate-12" />
+          <FiMoon className="w-5 h-5 animate-[spin_3s_linear_infinite] transition-transform group-hover:-rotate-12 " />
         )}
       </button>
 
@@ -51,9 +51,13 @@ const ModeLanguage = () => {
             transition-all duration-300 active:scale-90
           "
       >
-        <FiGlobe className="w-4 h-4 group-hover:text-blue-500 transition-colors" />
+        {lang === "en" ? (
+          <img src={`https://flagcdn.com/w20/np.png`} alt="np" />
+        ) : (
+          <img src={`https://flagcdn.com/w40/gb.png`} alt="en" />
+        )}
         <span className="text-[10px] font-bold tracking-tighter uppercase">
-          {lang === "en" ? "EN" : "ने"}
+          {lang === "en" ? "ने" : "EN"}
         </span>
       </button>
     </div>

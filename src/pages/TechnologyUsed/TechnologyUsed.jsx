@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Text, Image, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { techItems } from "./TechItemList";
+import { useSelector } from "react-redux";
 
 const TechnologyUsed = () => {
   return (
@@ -24,6 +25,9 @@ const Sphere = () => {
   const currentPositions = useRef([]);
   const targetPositions = useRef([]);
   const rotationSpeed = useRef({ x: 0.002, y: 0.005 });
+  const theme = useSelector((state) => state.theme.mode);
+  const isDark = theme === "dark";
+  console.log("🚀 ~ Sphere ~ isDark:", isDark);
 
   const positions = useMemo(() => {
     const pos = [];
@@ -78,8 +82,8 @@ const Sphere = () => {
         hoveredItem === idx
           ? new THREE.Vector3(0, 0, 0)
           : hoveredItem === null
-          ? positions[idx]
-          : positions[idx].clone().multiplyScalar(1.5);
+            ? positions[idx]
+            : positions[idx].clone().multiplyScalar(1.5);
 
       pos.lerp(target, 0.1);
     });
@@ -115,7 +119,7 @@ const Sphere = () => {
           <Line
             key={index}
             points={points}
-            color="#3f0101"
+            color={isDark ? "orange" : "black"}
             transparent
             opacity={0.4}
             depthTest={true}

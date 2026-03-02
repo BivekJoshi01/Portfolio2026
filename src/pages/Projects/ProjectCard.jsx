@@ -10,7 +10,7 @@ const ProjectCard = ({ project, onHover, onLeave }) => {
 
   return (
     <div
-      className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+      className="group bg-(--primary-subtle) rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
@@ -49,10 +49,10 @@ const ProjectCard = ({ project, onHover, onLeave }) => {
 
       {/* Content */}
       <div className="p-4 sm:p-5">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+        <h3 className="text-lg sm:text-xl font-semibold">
           {project?.title}
         </h3>
-        <p className="text-gray-600 mt-1 sm:mt-2 text-xs sm:text-sm">
+        <p className="mt-1 sm:mt-2 text-xs sm:text-sm">
           {project?.info}
         </p>
       </div>

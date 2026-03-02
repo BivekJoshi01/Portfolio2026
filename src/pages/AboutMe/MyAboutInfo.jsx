@@ -17,7 +17,7 @@ const MyAboutInfo = () => {
         "
       >
         {t("about")}{" "}
-        <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+        <span className="bg-(--secondary) bg-clip-text text-transparent">
           {t("me")}
         </span>
       </h2>
@@ -26,18 +26,20 @@ const MyAboutInfo = () => {
       <p
         className="
           text-base sm:text-lg
-          text-gray-600 leading-relaxed
+          leading-relaxed
           mb-6 md:mb-8
           max-w-xl
         "
       >
         {t("hi")}{" "}
-        <span className="font-semibold text-indigo-600">{t("myFullName")}</span>
+        <span className="font-semibold text-(--secondary)">
+          {t("myFullName")}
+        </span>
         , {t("aboutDesc")}
       </p>
 
       {/* Quote */}
-      <p className="mb-6 md:mb-8 text-sm sm:text-base text-gray-700">
+      <p className="mb-1 md:mb-2 text-sm sm:text-base text-(--secondary)">
         “{t("aboutObj")}”
       </p>
 
@@ -66,7 +68,7 @@ const MyAboutInfo = () => {
               bg-white/80 backdrop-blur
               shadow border
               text-xs sm:text-sm
-              font-medium text-indigo-600
+              font-medium text-(--secondary)
               hover:scale-105 transition
             "
           >
@@ -82,9 +84,9 @@ const MyAboutInfo = () => {
           items-center sm:items-stretch
           gap-4 sm:gap-6 md:gap-8
           mb-10 md:mb-12
-          bg-white/60 backdrop-blur
+          bg-(--primary-subtle) backdrop-blur
           rounded-2xl
-          px-6 sm:px-8
+          px-10 sm:px-8
           py-5
           shadow
           max-w-lg
@@ -110,8 +112,7 @@ const MyAboutInfo = () => {
             px-7 sm:px-8
             py-3.5 sm:py-4
             text-sm sm:text-base
-            bg-linear-to-r from-indigo-600 to-purple-600
-            text-white
+            bg-(--primary)
             rounded-xl
             shadow-lg
             hover:scale-105
@@ -128,10 +129,9 @@ const MyAboutInfo = () => {
             px-7 sm:px-8
             py-3.5 sm:py-4
             text-sm sm:text-base
-            border-2 border-indigo-600
-            text-indigo-600
+            border-2 border-(--secondary)
             rounded-xl
-            hover:bg-indigo-600 hover:text-white
+            hover:scale-105
             transition
             text-center
           "
@@ -170,10 +170,10 @@ const Stat = ({ value, suffix = "", label, isLarge = false }) => {
 
   return (
     <div className="text-center min-w-30">
-      <motion.div className="text-xl sm:text-2xl font-bold text-indigo-600">
+      <motion.div className="text-xl sm:text-2xl font-bold text-(--secondary)">
         {display} {suffix}
       </motion.div>
-      <div className="text-xs sm:text-sm text-gray-600">{label}</div>
+      <div className="text-xs sm:text-sm">{label}</div>
     </div>
   );
 };

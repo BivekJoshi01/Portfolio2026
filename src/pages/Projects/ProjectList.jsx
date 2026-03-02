@@ -6,6 +6,7 @@ import CafeBizarre from "../../assets/projects/CafeBizarre.png";
 import EvolvePharmaLand from "../../assets/projects/EvolvePharmaLand.png";
 import KYCLand from "../../assets/projects/KYCLand.png";
 import HRMSLand from "../../assets/projects/HRMSLand.png";
+import UniversalLand from "../../assets/projects/UniversalLand.png"
 /*----------------------------LOGO---------------------------------------*/
 import LRLogo from "../../assets/Office/CompanyLogo/LRLogo.svg";
 import BizarreLogo from "../../assets/Office/CompanyLogo/BizarreLogo.png";
@@ -14,6 +15,7 @@ import EvolveLogo from "../../assets/Office/CompanyLogo/EvolveLogo.png";
 import RenderLogo from "../../assets/Office/CompanyLogo/RenderLogo.png";
 import DGTrade from "../../assets/Office/CompanyLogo/DGTrade.svg";
 import YejusPawLogo from "../../assets/Office/CompanyLogo/YejusPawLogo.png";
+import UniversalLogo from "../../assets/Office/CompanyLogo/UniversalLogo.jpeg"
 
 export const ProjectList = [
   {
@@ -79,5 +81,13 @@ export const ProjectList = [
     img: YejusPawLand,
     redirect_url: "https://yejus-paw.onrender.com/",
     companyLogo: YejusPawLogo,
+  },
+    {
+    title: "Universal Stationery Suppliers",
+    info: "",
+    description: "Inventery and Accounting",
+    img: UniversalLand,
+    redirect_url: "https://universalstationery.com.np/",
+    companyLogo: UniversalLogo,
   },
 ];

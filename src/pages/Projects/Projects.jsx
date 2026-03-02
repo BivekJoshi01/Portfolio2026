@@ -21,15 +21,21 @@ const Projects = () => {
 
   return (
     <div className="w-full flex justify-center px-4 sm:px-6">
-      <div className="w-full max-w-7xl relative">
+      <div className="w-full relative">
         {/* Header */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4 sm:mb-6">
+        <h2
+          className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+          mb-3 md:mb-4
+        "
+        >
           My{" "}
-          <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="bg-(--secondary) bg-clip-text text-transparent">
             Projects
           </span>
         </h2>
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-xl">
+        <p className="text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed mb-4">
           Each Project is a unique piece of development.
         </p>
 
@@ -37,13 +43,13 @@ const Projects = () => {
         <div className="flex gap-2 sm:gap-3 mb-3">
           <button
             onClick={() => swiperRef.current.swiper.slidePrev()}
-            className="bg-indigo-300 rounded-full p-1 sm:p-2 font-bold"
+            className="bg-(--primary) rounded-full p-1 sm:p-2 font-bold"
           >
             <ChevronLeft size={16} sm={20} />
           </button>
           <button
             onClick={() => swiperRef.current.swiper.slideNext()}
-            className="bg-indigo-300 rounded-full p-1 sm:p-2 font-bold"
+            className="bg-(--primary) 0 rounded-full p-1 sm:p-2 font-bold"
           >
             <ChevronRight size={16} sm={20} />
           </button>
@@ -79,10 +85,7 @@ const Projects = () => {
         {/* Hover/Description */}
         <AnimatePresence>
           {hoveredProject && (
-            <div
-              className="absolute top-0 right-0"
-              key={hoveredProject.title}
-            >
+            <div className="absolute top-0 right-0" key={hoveredProject.title}>
               <motion.div
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}

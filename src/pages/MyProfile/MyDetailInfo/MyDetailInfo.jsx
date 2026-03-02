@@ -163,7 +163,7 @@ const MyDetailInfo = () => {
         <div className="text-gray-400">+</div>
       </div>
 
-      <div ref={terminalRef} className="flex-1 p-2 overflow-y-auto">
+      <div ref={terminalRef} className="flex-1 p-2 overflow-y-scroll scrollbar-hide">
         {lines.map((line, i) => (
           <div key={i} className="whitespace-pre-wrap">
             {line}
