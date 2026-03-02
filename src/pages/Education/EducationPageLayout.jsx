@@ -7,7 +7,7 @@ import useEducationData from "./EducationData";
 const EducationPageLayout = () => {
   const { t } = useTranslation();
 
-   const { EducationList } = useEducationData();
+  const { EducationList } = useEducationData();
 
   const featured = EducationList?.find((e) => e.featured);
   const rest = EducationList?.filter((e) => !e.featured);
@@ -18,18 +18,22 @@ const EducationPageLayout = () => {
         {/* LEFT SIDE */}
         <div className="lg:col-span-8 space-y-10 lg:space-y-12">
           {/* Header */}
-          <header className="space-y-4">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-slate-900">
-              {t("education")}{" "}
-              <span className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                {t("educationPre")}
-              </span>
-            </h2>
+          <h2
+            className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+          mb-5 md:mb-6
+        "
+          >
+            {t("education")}{" "}
+            <span className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              {t("educationPre")}
+            </span>
+          </h2>
 
-            <p className="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl leading-relaxed">
-              {t("educationJourney")}
-            </p>
-          </header>
+          <p className="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl leading-relaxed">
+            {t("educationJourney")}
+          </p>
 
           {/* Featured Card */}
           <div className="relative group overflow-hidden rounded-[2rem] lg:rounded-[2.5rem] bg-white border border-slate-100 p-1 bg-gradient-to-br from-slate-50 to-white shadow-2xl shadow-slate-200/60">

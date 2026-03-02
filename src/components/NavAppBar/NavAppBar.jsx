@@ -7,6 +7,7 @@ import clsx from "clsx";
 import BivekJoshi from "../../assets/BivekJoshi.svg";
 import CButton from "../Custom/CButton";
 import "./NavAppBar.css";
+import ModeLanguage from "../../pages/ModeLanguage";
 
 const NAV_ITEMS = [
   { name: "About Me", path: "/about-me" },
@@ -49,7 +50,7 @@ const NavAppBar = () => {
       navigate(path);
       setIsOpen(false);
     },
-    [navigate]
+    [navigate],
   );
 
   const closeSidebar = useCallback(() => setIsOpen(false), []);
@@ -94,7 +95,7 @@ const NavAppBar = () => {
                 <span
                   className={clsx(
                     "nav-pill-link block rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:ring-offset-2",
-                    isActive && "nav-pill-link--active"
+                    isActive && "nav-pill-link--active",
                   )}
                 >
                   {name}
@@ -106,7 +107,8 @@ const NavAppBar = () => {
       </ul>
 
       {/* Desktop: CTA */}
-      <div className="hidden md:block">
+      <div className="hidden md:flex gap-3.5 items-center">
+        <ModeLanguage />
         <CButton variant="primary" onClick={() => goTo("/contact-me")}>
           HIRE ME
         </CButton>
@@ -143,7 +145,7 @@ const NavAppBar = () => {
               transition={{ duration: 0.2 }}
               className={clsx(
                 "fixed inset-0 z-40 backdrop-blur-sm md:hidden",
-                isDark ? "nav-overlay-dark" : "nav-overlay-light"
+                isDark ? "nav-overlay-dark" : "nav-overlay-light",
               )}
               onClick={closeSidebar}
               aria-hidden
@@ -189,7 +191,7 @@ const NavAppBar = () => {
                             "nav-sidebar-link flex items-center justify-between rounded-xl px-4 py-4 text-base font-semibold transition-all duration-200",
                             isActive
                               ? "nav-sidebar-link--active"
-                              : "hover:bg-black/5 dark:hover:bg-white/10"
+                              : "hover:bg-black/5 dark:hover:bg-white/10",
                           )
                         }
                       >

@@ -25,8 +25,6 @@ const AppRoutes = () => {
     <HashRouter>
       <Routes>
         <Route path="cv.pdf" element={<MyCV />} />
-        <Route path="accessDoc" element={<AccessDocument />} />
-        <Route path="documents" element={<MyPrivateDocument />} />
 
         <Route path="/" element={<LandLayout />}>
           <Route index element={<Home />} />
@@ -34,6 +32,10 @@ const AppRoutes = () => {
           <Route path="projects" element={<Projects />} />
           <Route path="experience" element={<Experience />} />
           <Route path="contact-me" element={<ContactMe />} />
+          
+          <Route path="accessDoc" element={<AccessDocument />} />
+          <Route path="documents" element={<MyPrivateDocument />} />
+
           {/* <Route path="education" element={<Education />} /> */}
         </Route>
 

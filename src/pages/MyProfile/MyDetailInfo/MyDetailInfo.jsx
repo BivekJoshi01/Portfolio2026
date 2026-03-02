@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 const MyDetailInfo = () => {
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
+  const [mode, setMode] = useState("bash");
   const inputRef = useRef(null);
   const didMount = useRef(false);
+  const terminalRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -100,7 +102,12 @@ const MyDetailInfo = () => {
       e.preventDefault();
       if (!input.trim()) return;
 
-      const userLine = `frontendDeveloper@BivekJoshiPC:~/portfolio2026$ ${input}`;
+      const getPrompt = () => {
+        if (mode === "npm") return `npm > ${input}`;
+        return `bivek@portfolio:~$ ${input}`;
+      };
+
+      const userLine = getPrompt();
       setLines((prev) => [...prev, userLine]);
       const output = handleCommand(input.trim());
       setInput("");
@@ -111,9 +118,17 @@ const MyDetailInfo = () => {
     }
   };
 
+  useEffect(() => {
+    terminalRef.current?.scrollTo(0, terminalRef.current.scrollHeight);
+  }, [lines]);
+
   return (
     <div
-      className="bg-[#1e1e1e] text-gray-200 font-mono text-sm rounded-md overflow-hidden h-104 flex flex-col cursor-text"
+      className={`font-mono text-sm rounded-md overflow-hidden h-104 flex flex-col cursor-text ${
+        mode === "bash"
+          ? "bg-black text-green-400"
+          : "bg-[#1e1e1e] text-gray-200"
+      }`}
       onClick={() => inputRef.current?.focus()}
     >
       <div className="flex items-center justify-between bg-[#2d2d2d] px-3 py-1 border-b border-gray-700">
@@ -123,15 +138,32 @@ const MyDetailInfo = () => {
           <span className="w-3 h-3 rounded-full bg-green-500"></span>
         </div>
         <div className="flex space-x-4 text-xs text-gray-400">
-          <button className="px-2 py-0.5 hover:bg-gray-700 rounded">npm</button>
-          <button className="px-2 py-0.5 hover:bg-gray-700 rounded bg-gray-700 text-white">
-            bash
+          <button
+            onClick={() => setMode("npm")}
+            className={`px-2 py-0.5 rounded transition ${
+              mode === "npm"
+                ? "bg-[#cb3837] text-white"
+                : "hover:bg-gray-700 text-gray-400"
+            }`}
+          >
+            🚀 npm
+          </button>
+
+          <button
+            onClick={() => setMode("bash")}
+            className={`px-2 py-0.5 rounded transition ${
+              mode === "bash"
+                ? "bg-orange-400 text-white"
+                : "hover:bg-gray-700 text-gray-400"
+            }`}
+          >
+            🐧 bash
           </button>
         </div>
         <div className="text-gray-400">+</div>
       </div>
 
-      <div className="flex-1 p-2 overflow-y-auto">
+      <div ref={terminalRef} className="flex-1 p-2 overflow-y-auto">
         {lines.map((line, i) => (
           <div key={i} className="whitespace-pre-wrap">
             {line}
@@ -139,16 +171,21 @@ const MyDetailInfo = () => {
         ))}
 
         <div className="flex items-center">
-          <span className="text-green-400">
-            frontendDeveloper@BivekJoshiPC:~/portfolio2026$
+          <span
+            className={mode === "bash" ? "text-orange-400" : "text-[#cb3837]"}
+          >
+            {mode === "bash" ? "bivek@portfolio:~$" : "frontendDeveloper@BivekJoshiPC:~/portfolio2026$ >"}
           </span>
+
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="bg-transparent outline-none text-gray-200 ml-2 flex-1"
+            className={`bg-transparent outline-none ml-2 flex-1 ${
+              mode === "bash" ? "text-green-400" : "text-gray-200"
+            }`}
             autoFocus
           />
         </div>

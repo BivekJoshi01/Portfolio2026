@@ -19,7 +19,7 @@ export const themes = {
   dark: {
     "--bg": "#020617",
     "--text": "#e5e7eb",
-    "--primary": "#818cf8",
+    "--primary": "#324f6d",
     "--primary-hover": "#6366f1",
     "--card": "#0f172a",
     "--nav-pill-bg": "rgba(15, 23, 42, 0.92)",

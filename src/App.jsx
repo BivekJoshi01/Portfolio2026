@@ -37,7 +37,6 @@ const App = () => {
 
       {/* Grid overlay */}
       <GridAnimation mode={mode} />
-      <div className="grid-overlay"></div>
 
       {/* App content */}
       <div className="content">

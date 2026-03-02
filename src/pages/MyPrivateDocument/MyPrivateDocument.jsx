@@ -1,94 +1,165 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { documents } from "./documents";
+import InitalDocLoad from "./MyPrivateHelper/InitalDocLoad";
 
 const MyPrivateDocument = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-
-
   const activeDoc = documents?.find((d) => d.id === selectedCategory);
 
   return (
-    <div className="max-h-screen w-full bg-slate-50 p-6 md:p-12 font-sans text-slate-800 overflow-y-scroll">
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight">Document Vault</h1>
-        <p className="text-slate-500 mt-2">
-          Secure access to my academic and personal milestones.
-        </p>
-      </header>
-
-      <div className="flex flex-col lg:flex-row gap-8 transition-all duration-500 ease-in-out">
-        {/* LEFT SIDE: The Grid/List */}
-        <div
-          className={`grid gap-4 transition-all duration-500 ${selectedCategory ? "lg:w-1/3 grid-cols-1" : "w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}
-        >
-          {documents.map((doc) => (
-            <div
-              key={doc.id}
-              onClick={() => setSelectedCategory(doc.id)}
-              className={`cursor-pointer p-6 rounded-2xl border-2 transition-all duration-300 transform hover:-translate-y-1 
-                ${
-                  selectedCategory === doc.id
-                    ? "border-blue-500 bg-white shadow-lg"
-                    : "border-transparent bg-white shadow-sm hover:shadow-md"
-                }`}
-            >
-              <div
-                className={`w-12 h-12 ${doc.color} rounded-xl flex items-center justify-center text-2xl mb-4`}
-              >
-                {doc.icon}
-              </div>
-              <h3 className="font-bold text-lg">{doc.title}</h3>
-              <p className="text-sm text-slate-50">
-                {doc.images.length} Files Attached
-              </p>
-            </div>
-          ))}
+    <div className="w-full">
+      {/* Header - Stays at top */}
+      {!selectedCategory && (
+        <div className="">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
+              Document Vault
+            </h1>
+          </motion.div>
         </div>
+      )}
 
-        {/* RIGHT SIDE: The Big Preview */}
-        {selectedCategory ? (
-          <div className="lg:w-2/3 bg-white rounded-3xl shadow-xl p-8 border border-slate-100 animate-in fade-in slide-in-from-right-8 duration-500">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h2 className="text-2xl font-bold">{activeDoc.title}</h2>
-                <p className="text-blue-600 italic mt-1">"{activeDoc.msg}"</p>
-              </div>
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
-              >
-                ✕ Close
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {activeDoc.images.map((img, idx) => (
-                <div
-                  key={idx}
-                  className="group relative overflow-hidden rounded-xl border border-slate-200"
+      {/* Main Container - Fixed Height at 80vh */}
+      <div className=" max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-start">
+        {/* LEFT SIDE: Sidebar - Stays Centered */}
+        <motion.div
+          layout
+          className={`flex items-center justify-center transition-all duration-500 ${
+            selectedCategory ? "lg:w-[30%] w-full" : "w-full"
+          }`}
+        >
+          <div
+            className={`grid gap-3 w-full transition-all duration-500 ${
+              selectedCategory
+                ? "grid-cols-1 max-h-full overflow-y-auto pr-2 custom-scrollbar"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {documents.map((doc, index) => {
+              const isActive = selectedCategory === doc.id;
+              return (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.03 }}
+                  key={doc.id}
+                  onClick={() => setSelectedCategory(doc.id)}
+                  className={`group cursor-pointer rounded-2xl border transition-all duration-300 overflow-hidden
+                    ${
+                      isActive
+                        ? "border-blue-500 bg-white shadow-lg p-3 ring-2 ring-blue-500/10"
+                        : "border-slate-200 bg-white/60 backdrop-blur-md hover:border-blue-300 p-6"
+                    }`}
                 >
-                  <img
-                    src={img}
-                    alt={`${activeDoc.title} ${idx}`}
-                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                    <span className="text-white text-sm font-medium">
-                      View Full Size
-                    </span>
+                  <div
+                    className={`flex items-center ${isActive ? "flex-col items-start gap-4" : "gap-4"}`}
+                  >
+                    <div
+                      className={`${isActive ? "w-14 h-14 text-2xl" : "w-10 h-10 text-lg"} 
+                      ${doc.color} rounded-xl flex items-center justify-center shadow-inner shrink-0 transition-all duration-300`}
+                    >
+                      {doc.icon}
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3
+                        className={`font-bold text-slate-900 truncate transition-all duration-300 ${isActive ? "text-xl" : "text-sm"}`}
+                      >
+                        {doc.title}
+                      </h3>
+                      {!isActive && (
+                        <span className="text-xs font-semibold px-2 py-1 bg-slate-100 rounded-md text-slate-500 uppercase mt-2 inline-block">
+                          {doc.images.length} Files
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* RIGHT SIDE: Scrolable Preview Container */}
+        <div
+          className={`transition-all duration-500 flex items-center justify-center ${
+            selectedCategory
+              ? "lg:w-[70%] w-full h-full"
+              : "w-0 h-0 overflow-hidden"
+          }`}
+        >
+          <AnimatePresence mode="wait">
+            {selectedCategory ? (
+              <motion.div
+                key={selectedCategory}
+                initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 20, scale: 0.95 }}
+                className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 w-full h-full flex flex-col overflow-hidden"
+              >
+                {/* Fixed Preview Header */}
+                <div className="flex justify-between items-center p-8 border-b border-slate-50 shrink-0">
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-900 leading-tight">
+                      {activeDoc.title}
+                    </h2>
+                    <p className="text-blue-600 font-medium text-sm italic mt-1 italic">
+                      {activeDoc.msg}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedCategory(null)}
+                    className="p-3 bg-slate-100 hover:bg-red-50 hover:text-red-500 text-slate-500 rounded-2xl transition-all"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.5"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* SCROLLABLE CONTENT AREA */}
+                <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {activeDoc.images.map((img, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{ y: -5 }}
+                        className="group relative overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
+                      >
+                        <img
+                          src={img}
+                          alt="Doc preview"
+                          className="w-full h-auto object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors pointer-events-none" />
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="hidden lg:flex lg:w-2/3 items-center justify-center border-2 border-dashed border-slate-200 rounded-3xl">
-            <p className="text-slate-400">
-              Select a category to view documents
-            </p>
-          </div>
-        )}
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </div>
+
+        {/* Empty State View */}
+        {!selectedCategory && <InitalDocLoad />}
       </div>
     </div>
   );

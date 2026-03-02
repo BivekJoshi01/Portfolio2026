@@ -119,7 +119,7 @@ const AboutMe = () => {
       >
         {/* LEFT — PROFILE CARD */}
         <div className="relative flex justify-center">
-          <div className="relative z-20 p-[2px] rounded-[32px] bg-gradient-to-tr from-indigo-400 via-amber-100 to-purple-800/50">
+          <div className="relative z-20 p-0.5 rounded-4xl bg-linear-to-tr from-indigo-400 via-amber-100 to-purple-800/50">
             <ProfileCard />
           </div>
 

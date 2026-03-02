@@ -32,12 +32,15 @@ const GridAnimation = ({ mode }) => {
         this.y = Math.floor(Math.random() * (height / gridSize)) * gridSize;
         this.speed = 1.5;
         this.dir = Math.floor(Math.random() * 4);
-        this.color = Math.random() > 0.5 ? "#c491f7" : "#b0b3fc";
-        
+        this.color =
+          Math.random() > 0.5
+            ? "rgba(196, 145, 247, 0.8)"
+            : "rgba(176, 179, 252, 0.8)";
+
         // This array stores the path to create the "fading" tail
-        this.history = []; 
+        this.history = [];
         // 600 segments = ~10 seconds at 60fps
-        this.maxHistory = 600; 
+        this.maxHistory = 600;
       }
 
       draw() {
@@ -59,7 +62,10 @@ const GridAnimation = ({ mode }) => {
         }
 
         // --- Grid Logic ---
-        if (Math.abs(this.x % gridSize) < 1 && Math.abs(this.y % gridSize) < 1) {
+        if (
+          Math.abs(this.x % gridSize) < 1 &&
+          Math.abs(this.y % gridSize) < 1
+        ) {
           this.x = Math.round(this.x / gridSize) * gridSize;
           this.y = Math.round(this.y / gridSize) * gridSize;
           if (Math.random() > 0.6) this.dir = Math.floor(Math.random() * 4);
@@ -72,9 +78,9 @@ const GridAnimation = ({ mode }) => {
         this.history.forEach((seg, i) => {
           // Fade alpha from 0 to 0.4 based on age
           const alpha = i / this.history.length;
-          ctx.globalAlpha = alpha * 0.4; 
+          ctx.globalAlpha = alpha * 0.4;
           ctx.strokeStyle = this.color;
-          
+
           ctx.beginPath();
           ctx.moveTo(seg.x1, seg.y1);
           ctx.lineTo(seg.x2, seg.y2);
@@ -84,17 +90,17 @@ const GridAnimation = ({ mode }) => {
         // --- 2. DRAW THE "FAT HEAD" (Thick & Glowing) ---
         ctx.globalAlpha = 1.0;
         ctx.strokeStyle = this.color;
-        
+
         // FAT HEAD SETTINGS
-        ctx.lineWidth = 1.5;   // Increased thickness for the head
-        ctx.shadowBlur = 2;     // More glow for the head
+        ctx.lineWidth = 1.5; // Increased thickness for the head
+        ctx.shadowBlur = 2; // More glow for the head
         ctx.shadowColor = this.color;
 
         ctx.beginPath();
         ctx.moveTo(oldX, oldY);
         ctx.lineTo(this.x, this.y);
         ctx.stroke();
-        
+
         // Clean up shadow for next frame performance
         ctx.shadowBlur = 0;
 

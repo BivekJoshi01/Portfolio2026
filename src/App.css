@@ -18,7 +18,7 @@
   position: fixed;
   inset: 0;
   z-index: 1;
-  filter: blur(130px);
+  filter: blur(190px);
   pointer-events: none;
 }
 
@@ -130,23 +130,6 @@
     background: radial-gradient(circle at 30% 30%, var(--c1), var(--c2));
   }
 }
-
-/* ------------------------- Grid Overlay ------------------------- */
-.grid-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-
-  /* background-color: rgba(0, 24, 60, 0.1); */
-  /* semi-transparent */
-  /* background-image:
-    linear-gradient(to right, #e0e0e0 1px, transparent 1px),
-    linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
-  */
-  background-size: 20px 20px;
-}
-
 
 /* ------------------------- App Content ------------------------- */
 .content {

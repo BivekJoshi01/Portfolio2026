@@ -5,15 +5,12 @@ import VsNavContent from "./VsNavbar/VsNavContent";
 import VsSideMenuBar from "./VSSideBar/VsSideMenuBar";
 import VsTerminal from "./VsFooter/VsTerminal";
 import VsFooter from "./VsFooter/VsFooter";
-import VSBodyHelper from "./VSBody/VSBodyHelper";
-import MyInfo from "../MyProfile/MyInfo/MyInfo";
-import MyInfoVs from "./VSBody/VsFolder/MyInfoVs";
 import { Outlet } from "react-router-dom";
 import "./VSLayout.css";
 
 const VSLayout = ({ children }) => {
   return (
-    <div className="w-full h-screen text-white">
+    <div className="w-full h-screen text-white bg-[#1E1E1E]">
       <div
         style={{ height: "3%" }}
         className="border-b border-gray-800 bg-[#252526]"

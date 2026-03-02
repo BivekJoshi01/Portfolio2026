@@ -55,12 +55,12 @@ const NamePlate = () => {
             relative
             px-4 sm:pl-2 sm:pr-16
             py-2
-            bg-[#050505]
+            bg-black
             rounded-xl
             overflow-hidden
             border border-white/10
             shadow-2xl
-            min-w-[260px] sm:min-w-[320px]
+            min-w-65 sm:min-w-[320px]
             flex justify-center items-center
             w-fit
           "
@@ -180,7 +180,7 @@ const NamePlate = () => {
             animate={
               isHovered ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }
             }
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-linear-to-r from-transparent via-blue-400 to-transparent"
           />
         </div>
       </motion.div>
