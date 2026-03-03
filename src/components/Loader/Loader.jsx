@@ -45,16 +45,26 @@ const Loader = ({ onComplete }) => {
     };
   }, []);
 
+  //   useEffect(() => {
+  //     if (progress === 100) {
+  //       setQuoteIndex(quotes.length - 1);
+  //       const timeout = setTimeout(() => {
+  //         setIsFinished(true);
+  //         setTimeout(() => {
+  //           if (onComplete) onComplete();
+  //         }, 800);
+  //       }, 1000);
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   }, [progress, onComplete]);
+
   useEffect(() => {
     if (progress === 100) {
       setQuoteIndex(quotes.length - 1);
-      const timeout = setTimeout(() => {
-        setIsFinished(true);
-        setTimeout(() => {
-          if (onComplete) onComplete();
-        }, 800);
-      }, 1000);
-      return () => clearTimeout(timeout);
+      setIsFinished(true); // Immediately finish once progress hits 100
+      if (onComplete) {
+        onComplete(); // Call onComplete without additional delay
+      }
     }
   }, [progress, onComplete]);
 
