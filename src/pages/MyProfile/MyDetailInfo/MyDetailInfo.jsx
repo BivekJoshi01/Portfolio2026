@@ -127,7 +127,7 @@ const MyDetailInfo = () => {
       className={`font-mono text-sm rounded-md overflow-hidden h-104 flex flex-col cursor-text ${
         mode === "bash"
           ? "bg-black text-green-400"
-          : "bg-[#1e1e1e] text-gray-200"
+          : "bg-[#300A24] text-gray-200"
       }`}
       onClick={() => inputRef.current?.focus()}
     >
