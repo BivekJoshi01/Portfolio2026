@@ -39,7 +39,7 @@ const Experience = () => {
       },
       {
         threshold: 0.7,
-      }
+      },
     );
 
     itemRefs.current.forEach((el) => el && observer.observe(el));
@@ -56,9 +56,18 @@ const Experience = () => {
     >
       <section className="experience-section" ref={sectionRef} id="experience">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div style={{ fontSize: "32px", fontWeight: "bold" }}>
-            My Journey as a Frontend Developer
-          </div>
+          <h2
+            className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+          mb-5 md:mb-6
+        "
+          >
+            My Journey as a{" "}
+            <span className="bg-(--secondary) bg-clip-text text-transparent">
+              Frontend Developer
+            </span>
+          </h2>
           <div>
             I started my journey at Fintech Industry and spent 1 years building
             strong skills in designing scalable applications, handling complex

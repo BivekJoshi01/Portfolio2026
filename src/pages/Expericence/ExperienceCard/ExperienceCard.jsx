@@ -4,7 +4,7 @@ const ExperienceCard = ({ exp }) => {
   return (
     <div>
       <h3>
-        {exp.role} <span className="text-blue-500">@ {exp.company}</span>
+        {exp.role} <span className="text-(--secondary)">@ {exp.company}</span>
       </h3>
       <div className="timeline-dot">
         <span className="text-xs">{exp.icon}</span>
@@ -52,11 +52,30 @@ const ExperienceCard = ({ exp }) => {
       </div>
       <div className="timeline-content">
         <div className="timeline-text">
-          <div className="text-blue-500">{exp?.location}</div>
+          <div className="text-(--secondary)">{exp?.location}</div>
           <p>{exp.description}</p>
-          <div className="timeline-skills">
-            {exp.skills.map((skill, i) => (
-              <span key={i}>{skill}</span>
+          <div
+            className="
+          flex flex-wrap
+          gap-2 sm:gap-3 mt-3
+        "
+          >
+            {exp?.skills?.map((skill) => (
+              <span
+                key={skill}
+                className="
+              px-4 sm:px-5
+              py-1 sm:py-0.8
+              rounded-full
+              bg-white/80 backdrop-blur
+              shadow border
+              text-xs sm:text-sm
+              font-medium text-(--secondary)
+              hover:scale-105 transition
+            "
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>
