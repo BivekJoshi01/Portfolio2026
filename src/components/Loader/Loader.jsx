@@ -91,7 +91,7 @@ const Loader = ({ onComplete }) => {
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full border-2 border-transparent border-t-purple-500 border-l-blue-500 blur-[1px]"
               />
-              <div className="absolute inset-2 rounded-full border border-slate-800 animate-[ping_2s_linear_infinite]" />
+              <div className="absolute inset-2 rounded-full border border-(--primary) animate-[ping_2s_linear_infinite]" />
               <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-purple-600/20 to-blue-600/30 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-inner">
                 <motion.div
                   animate={{ scale: [1, 1.5, 1] }}
