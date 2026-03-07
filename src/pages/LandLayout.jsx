@@ -82,7 +82,7 @@ const LandLayout = () => {
         <Outlet />
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center text-center">
         📧 bvekjoshi03@gmail.com | 📍 Tangal Lalitpur-19, Nepal
       </div>
     </div>

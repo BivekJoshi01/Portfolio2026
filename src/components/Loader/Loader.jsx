@@ -15,7 +15,7 @@ const Loader = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-
+  
   useEffect(() => {
     const totalDuration = 5000;
     const intervalTime = 50;
@@ -26,6 +26,7 @@ const Loader = ({ onComplete }) => {
         const nextProgress = oldProgress + increment;
         if (nextProgress >= 100) {
           clearInterval(timer);
+          clearInterval(quoteTimer); // stop quotes
           return 100;
         }
         return nextProgress;
@@ -61,10 +62,12 @@ const Loader = ({ onComplete }) => {
   useEffect(() => {
     if (progress === 100) {
       setQuoteIndex(quotes.length - 1);
-      setIsFinished(true); // Immediately finish once progress hits 100
-      if (onComplete) {
-        onComplete(); // Call onComplete without additional delay
-      }
+
+      if (onComplete) onComplete();
+
+      setTimeout(() => {
+        setIsFinished(true);
+      }, 300);
     }
   }, [progress, onComplete]);
 
@@ -74,7 +77,7 @@ const Loader = ({ onComplete }) => {
         <motion.div
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 bg-[#030712] flex flex-col items-center justify-center p-6 z-[9999] overflow-hidden"
+          className="fixed inset-0 bg-(--bg) flex flex-col items-center justify-center p-6 z-[9999] overflow-hidden"
         >
           {/* Background Ambient Glows */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" />
@@ -115,7 +118,7 @@ const Loader = ({ onComplete }) => {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -15, filter: "blur(10px)" }}
                   transition={{ duration: 0.6, ease: "circOut" }}
-                  className="text-lg md:text-xl font-light tracking-wide text-slate-200 text-center"
+                  className="text-lg md:text-xl font-light tracking-wide text-(--text) text-center"
                 >
                   {quotes[quoteIndex]}
                 </motion.p>
