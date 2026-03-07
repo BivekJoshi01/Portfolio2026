@@ -12,9 +12,14 @@ const DocumentHeader = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+      <h2
+        className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-extrabold leading-tight
+        "
+      >
         Document{" "}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-500">
+        <span className="bg-(--secondary) bg-clip-text text-transparent">
           Vault
         </span>
       </h2>
@@ -160,10 +165,10 @@ const MyPrivateDocument = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-4">
-      {!selectedCategory && <DocumentHeader />}
+      <DocumentHeader />
       {!selectedCategory && <InitalDocLoad />}
 
-      <div className="flex flex-col lg:flex-row gap-8 overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-8 overflow-hidden max-h-[70vh] w-full">
         <DocumentSidebar
           documents={documents}
           selectedCategory={selectedCategory}
@@ -172,10 +177,12 @@ const MyPrivateDocument = () => {
 
         <AnimatePresence mode="wait">
           {selectedCategory && (
-            <DocumentPreview
-              activeDoc={activeDoc}
-              onClose={() => setSelectedCategory(null)}
-            />
+            <div className="w-[90%]">
+              <DocumentPreview
+                activeDoc={activeDoc}
+                onClose={() => setSelectedCategory(null)}
+              />
+            </div>
           )}
         </AnimatePresence>
       </div>
