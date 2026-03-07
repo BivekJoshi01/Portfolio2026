@@ -5,6 +5,7 @@ import LandEarth from "./LandEarth";
 import ContactCard from "./ContactCard";
 import "./ContactMeMap.css";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,6 +35,9 @@ const ContactMe = () => {
   const { t } = useTranslation();
 
   const [openMap, setOpenMap] = useState(false);
+
+  const theme = useSelector((state) => state.theme.mode);
+  const isDark = theme === "dark";
 
   return (
     <div>
@@ -66,13 +70,13 @@ const ContactMe = () => {
             <div className="w-full h-full">
               <iframe
                 title="Google Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.124394665182!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1909f76f4e51%3A0xf14b6f4b2e2d2d7!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7066.988841507452!2d85.32366919999996!3d27.6711098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19daaaad1fb9%3A0xce05a6a8240aca9d!2sTangal%20Tole%2C%20Lalitpur%2044600!5e0!3m2!1sen!2snp!4v1709290723897!5m2!1sen!2snp"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ filter: isDark ? "invert(100%)" : "none" }}
                 allowFullScreen=""
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                // referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           ) : (
