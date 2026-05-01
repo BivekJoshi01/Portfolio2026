@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, useInView } from "framer-motion";
 import { Code2, Briefcase, FolderGit2, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const STATS = [
-  { label: "Years of Experience", value: 4, suffix: "+", icon: Briefcase },
-  { label: "Projects Shipped", value: 25, suffix: "+", icon: FolderGit2 },
-  { label: "Happy Clients", value: 18, suffix: "+", icon: Users },
-  { label: "Technologies", value: 20, suffix: "+", icon: Code2 },
+  { key: "stats_years_experience", value: 4, suffix: "+", icon: Briefcase },
+  { key: "stats_projects_shipped", value: 25, suffix: "+", icon: FolderGit2 },
+  { key: "stats_happy_clients", value: 18, suffix: "+", icon: Users },
+  { key: "stats_technologies", value: 20, suffix: "+", icon: Code2 },
 ];
 
 const Counter = ({ to, suffix = "", duration = 1600, run }) => {
@@ -42,19 +43,21 @@ const Counter = ({ to, suffix = "", duration = 1600, run }) => {
 const StatsSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+  const { t } = useTranslation();
 
   return (
     <section
       ref={ref}
       className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-10"
-      aria-label="Stats"
+      aria-label={t("stats_title")}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
         {STATS.map((s, i) => {
           const Icon = s.icon;
+          const label = t(s.key);
           return (
             <motion.div
-              key={s.label}
+              key={s.key}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
@@ -72,7 +75,7 @@ const StatsSection = () => {
               <div className="flex items-center gap-2 mb-2 opacity-80">
                 <Icon size={16} />
                 <span className="text-[11px] sm:text-xs uppercase tracking-wider">
-                  {s.label}
+                  {label}
                 </span>
               </div>
               <div

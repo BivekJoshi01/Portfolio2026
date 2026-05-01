@@ -2,11 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import NavAppBar from "../components/NavAppBar/NavAppBar";
 import { Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const LandLayout = () => {
   const scrollContainerRef = useRef(null);
   const [showNav, setShowNav] = useState(true);
   const lastScrollY = useRef(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const el = scrollContainerRef.current;
@@ -83,7 +85,7 @@ const LandLayout = () => {
       </div>
 
       <div className="flex justify-center text-center">
-        📧 bvekjoshi03@gmail.com | 📍 Tangal Lalitpur-19, Nepal
+        {t("footer_email")} | {t("footer_location")}
       </div>
     </div>
   );

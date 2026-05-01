@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
   const [scroller, setScroller] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const findScroller = () => {
@@ -100,8 +102,8 @@ const ScrollProgress = () => {
               color: "#fff",
               boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
             }}
-            aria-label="Scroll to top"
-            title="Scroll to top"
+            aria-label={t("scroll_back_to_top")}
+            title={t("scroll_back_to_top")}
           >
             <ArrowUp size={18} />
           </motion.button>

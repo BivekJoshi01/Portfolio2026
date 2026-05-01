@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { setTheme } from "../../redux/Reducer/themeSlice";
 import { setLanguage } from "../../redux/Reducer/languageSlice";
+import { useTranslation } from "react-i18next";
 
 const CommandPalette = () => {
   const [open, setOpen] = useState(false);
@@ -30,92 +31,98 @@ const CommandPalette = () => {
   const dispatch = useDispatch();
   const mode = useSelector((s) => s.theme.mode);
   const lang = useSelector((s) => s.lang.lang);
+  const { t } = useTranslation();
 
   const commands = useMemo(
     () => [
       {
         id: "nav-home",
-        label: "Go to Home",
-        hint: "Landing page",
-        group: "Navigation",
+        label: t("cmdk_go_home"),
+        hint: t("cmdk_go_home_hint"),
+        group: t("cmdk_group_navigation"),
         icon: HomeIcon,
         run: () => navigate("/"),
       },
       {
         id: "nav-about",
-        label: "Go to About Me",
-        hint: "Bio & background",
-        group: "Navigation",
+        label: t("cmdk_go_about"),
+        hint: t("cmdk_go_about_hint"),
+        group: t("cmdk_group_navigation"),
         icon: User,
         run: () => navigate("/about-me"),
       },
       {
         id: "nav-projects",
-        label: "Go to Projects",
-        hint: "Selected work",
-        group: "Navigation",
+        label: t("cmdk_go_projects"),
+        hint: t("cmdk_go_projects_hint"),
+        group: t("cmdk_group_navigation"),
         icon: FolderGit2,
         run: () => navigate("/projects"),
       },
       {
         id: "nav-experience",
-        label: "Go to Experience",
-        hint: "Work history",
-        group: "Navigation",
+        label: t("cmdk_go_experience"),
+        hint: t("cmdk_go_experience_hint"),
+        group: t("cmdk_group_navigation"),
         icon: Briefcase,
         run: () => navigate("/experience"),
       },
       {
         id: "nav-contact",
-        label: "Go to Contact",
-        hint: "Get in touch",
-        group: "Navigation",
+        label: t("cmdk_go_contact"),
+        hint: t("cmdk_go_contact_hint"),
+        group: t("cmdk_group_navigation"),
         icon: Mail,
         run: () => navigate("/contact-me"),
       },
       {
         id: "nav-vs",
-        label: "Open VS Code Profile View",
-        hint: "Developer-style profile",
-        group: "Navigation",
+        label: t("cmdk_open_vs"),
+        hint: t("cmdk_open_vs_hint"),
+        group: t("cmdk_group_navigation"),
         icon: Code2,
         run: () => navigate("/vs-profile"),
       },
       {
         id: "action-cv",
-        label: "Download CV",
-        hint: "PDF resume",
-        group: "Actions",
+        label: t("cmdk_download_cv"),
+        hint: t("cmdk_download_cv_hint"),
+        group: t("cmdk_group_actions"),
         icon: FileText,
         run: () => window.open("#/cv.pdf", "_blank"),
       },
       {
         id: "action-theme",
-        label: mode === "dark" ? "Switch to Light theme" : "Switch to Dark theme",
-        hint: "Toggle appearance",
-        group: "Preferences",
+        label:
+          mode === "dark"
+            ? t("cmdk_switch_to_light")
+            : t("cmdk_switch_to_dark"),
+        hint: t("cmdk_toggle_appearance"),
+        group: t("cmdk_group_preferences"),
         icon: mode === "dark" ? Sun : Moon,
         run: () => dispatch(setTheme(mode === "dark" ? "light" : "dark")),
       },
       {
         id: "action-lang",
-        label: lang === "en" ? "Switch language to Nepali" : "Switch language to English",
-        hint: "Toggle language",
-        group: "Preferences",
+        label:
+          lang === "en"
+            ? t("cmdk_switch_to_nepali")
+            : t("cmdk_switch_to_english"),
+        hint: t("cmdk_toggle_language"),
+        group: t("cmdk_group_preferences"),
         icon: Languages,
-        run: () =>
-          dispatch(setLanguage(lang === "en" ? "np" : "en")),
+        run: () => dispatch(setLanguage(lang === "en" ? "np" : "en")),
       },
       {
         id: "action-email",
-        label: "Email Bivek",
+        label: t("cmdk_email_bivek"),
         hint: "bvekjoshi03@gmail.com",
-        group: "Actions",
+        group: t("cmdk_group_actions"),
         icon: Mail,
         run: () => (window.location.href = "mailto:bvekjoshi03@gmail.com"),
       },
     ],
-    [navigate, dispatch, mode, lang]
+    [navigate, dispatch, mode, lang, t]
   );
 
   const filtered = useMemo(() => {
@@ -231,9 +238,9 @@ const CommandPalette = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command or search… (try 'projects', 'theme')"
+                placeholder={t("cmdk_placeholder")}
                 className="w-full bg-transparent outline-none text-sm placeholder:opacity-50"
-                aria-label="Search commands"
+                aria-label={t("cmdk_placeholder")}
               />
               <kbd
                 className="hidden sm:inline-block text-[10px] px-1.5 py-0.5 rounded border opacity-70"
@@ -250,7 +257,7 @@ const CommandPalette = () => {
             >
               {filtered.length === 0 && (
                 <div className="px-4 py-6 text-center text-sm opacity-60">
-                  No matches for &quot;{query}&quot;
+                  {t("cmdk_no_matches")} &quot;{query}&quot;
                 </div>
               )}
               {grouped.map(([group, items]) => (
@@ -301,7 +308,7 @@ const CommandPalette = () => {
               className="flex items-center justify-between px-4 py-2 border-t text-[11px] opacity-60"
               style={{ borderColor: "rgba(255,255,255,0.06)" }}
             >
-              <span>↑↓ navigate · ↵ select</span>
+              <span>↑↓ {t("cmdk_navigate")} · ↵ {t("cmdk_select")}</span>
               <span>
                 <kbd className="px-1">Ctrl</kbd>+<kbd className="px-1">K</kbd>
               </span>

@@ -1,18 +1,20 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, ArrowLeft, Compass } from "lucide-react";
-
-const QUICK_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/about-me", label: "About Me" },
-  { to: "/projects", label: "Projects" },
-  { to: "/experience", label: "Experience" },
-  { to: "/contact-me", label: "Contact" },
-  { to: "/vs-profile", label: "VS Code Profile" },
-];
+import { useTranslation } from "react-i18next";
 
 const NotFound = () => {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
+
+  const QUICK_LINKS = [
+    { to: "/", label: t("notfound_quick_home") },
+    { to: "/about-me", label: t("notfound_quick_about") },
+    { to: "/projects", label: t("notfound_quick_projects") },
+    { to: "/experience", label: t("notfound_quick_experience") },
+    { to: "/contact-me", label: t("notfound_quick_contact") },
+    { to: "/vs-profile", label: t("notfound_quick_vs") },
+  ];
 
   return (
     <div className="w-full min-h-[80vh] flex items-center justify-center px-6">
@@ -43,11 +45,11 @@ const NotFound = () => {
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-bold mt-3">
-          This page wandered off.
+          {t("notfound_title")}
         </h1>
         <p className="opacity-70 mt-2 break-all">
-          Nothing lives at <code>{pathname}</code> — but here are some places
-          you can go.
+          {t("notfound_subtitle")} <code>{pathname}</code> —{" "}
+          {t("notfound_subtitle_tail")}
         </p>
 
         <div className="flex flex-wrap gap-2 justify-center mt-6">
@@ -71,7 +73,7 @@ const NotFound = () => {
             style={{ borderColor: "rgba(125,125,125,0.35)" }}
           >
             <ArrowLeft size={16} />
-            Go back
+            {t("notfound_go_back")}
           </button>
           <Link
             to="/"
@@ -79,7 +81,7 @@ const NotFound = () => {
             style={{ background: "var(--primary, #7c3aed)" }}
           >
             <Home size={16} />
-            Take me home
+            {t("notfound_home")}
           </Link>
         </div>
       </div>

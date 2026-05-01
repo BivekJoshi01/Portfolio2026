@@ -1,26 +1,31 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 import BivekJoshi from "../../assets/BivekJoshi.svg";
 import CButton from "../Custom/CButton";
 import "./NavAppBar.css";
 import ModeLanguage from "../../pages/ModeLanguage";
 import MobileMenuOption from "./MobileMenuOption";
 
-const NAV_ITEMS = [
-  { name: "About Me", path: "/about-me" },
-  { name: "Projects", path: "/projects" },
-  { name: "Experience", path: "/experience" },
-  { name: "Contact", path: "/contact-me" },
-];
-
 const NavAppBar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const theme = useSelector((state) => state.theme.mode);
   const isDark = theme === "dark";
+  const { t } = useTranslation();
+
+  const NAV_ITEMS = useMemo(
+    () => [
+      { name: t("nav_aboutMe"), path: "/about-me" },
+      { name: t("nav_projects"), path: "/projects" },
+      { name: t("nav_experience"), path: "/experience" },
+      { name: t("nav_contact"), path: "/contact-me" },
+    ],
+    [t]
+  );
 
   const goTo = useCallback(
     (path) => {
@@ -102,14 +107,14 @@ const NavAppBar = () => {
           aria-label="Open command palette"
           title="Quick search (Ctrl+K)"
         >
-          <span>Search</span>
+          <span>{t("nav_search")}</span>
           <kbd className="px-1 py-0.5 rounded border text-[10px]" style={{ borderColor: "rgba(125,125,125,0.35)" }}>
             ⌘K
           </kbd>
         </button>
         <ModeLanguage />
         <CButton variant="primary" onClick={() => goTo("/contact-me")}>
-          HIRE ME
+          {t("nav_hireMe")}
         </CButton>
       </div>
 
@@ -127,7 +132,7 @@ const NavAppBar = () => {
             className="absolute right-4 text-[10px] font-bold uppercase tracking-[0.2em] -rotate-90 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
             style={{ color: "var(--primary)" }}
           >
-            Menu
+            {t("nav_menu")}
           </span>
         </button>
       )}

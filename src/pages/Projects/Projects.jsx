@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Mousewheel } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,10 +12,19 @@ import ProjectCard from "./ProjectCard";
 import { AnimatePresence, motion } from "framer-motion";
 import TypeWriter from "../../components/TypeWriter/TypeWriter";
 
+const CATEGORY_KEYS = {
+  All: "projects_filter_all",
+  Fintech: "projects_filter_fintech",
+  Enterprise: "projects_filter_enterprise",
+  Web: "projects_filter_web",
+  "E-commerce": "projects_filter_ecommerce",
+};
+
 const Projects = () => {
   const swiperRef = useRef(null);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
+  const { t } = useTranslation();
 
   const categories = useMemo(() => {
     const set = new Set(["All"]);
@@ -49,13 +59,13 @@ const Projects = () => {
           mb-3 md:mb-4
         "
         >
-          My{" "}
+          {t("projects_title_my")}{" "}
           <span className="bg-(--secondary) bg-clip-text text-transparent">
-            Projects
+            {t("projects_title_projects")}
           </span>
         </h2>
         <p className="text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed mb-4">
-          Each Project is a unique piece of development.
+          {t("projects_subtitle")}
         </p>
 
         {/* Filters + Navigation */}
@@ -67,6 +77,7 @@ const Projects = () => {
           >
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
+              const label = CATEGORY_KEYS[cat] ? t(CATEGORY_KEYS[cat]) : cat;
               return (
                 <button
                   key={cat}
@@ -87,7 +98,7 @@ const Projects = () => {
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10">{cat}</span>
+                  <span className="relative z-10">{label}</span>
                 </button>
               );
             })}
@@ -97,14 +108,14 @@ const Projects = () => {
             <button
               onClick={() => swiperRef.current?.swiper?.slidePrev()}
               className="bg-(--primary) rounded-full p-1 sm:p-2 font-bold"
-              aria-label="Previous project"
+              aria-label={t("projects_prev")}
             >
               <ChevronLeft size={16} sm={20} />
             </button>
             <button
               onClick={() => swiperRef.current?.swiper?.slideNext()}
               className="bg-(--primary) 0 rounded-full p-1 sm:p-2 font-bold"
-              aria-label="Next project"
+              aria-label={t("projects_next")}
             >
               <ChevronRight size={16} sm={20} />
             </button>

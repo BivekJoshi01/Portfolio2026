@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Experience.scss";
 import { experiences } from "./ExperienceData";
 import ExperienceCard from "./ExperienceCard/ExperienceCard";
+import { useTranslation } from "react-i18next";
 
 const Experience = () => {
   const sectionRef = useRef(null);
   const progressRef = useRef(null);
   const itemRefs = useRef([]);
   const [activeIndices, setActiveIndices] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,17 +65,12 @@ const Experience = () => {
           mb-5 md:mb-6
         "
           >
-            My Journey as a{" "}
+            {t("experience_title_journey")}{" "}
             <span className="bg-(--secondary) bg-clip-text text-transparent">
-              Frontend Developer
+              {t("experience_title_role")}
             </span>
           </h2>
-          <div>
-            I started my journey at Fintech Industry and spent 1 years building
-            strong skills in designing scalable applications, handling complex
-            business logic, and delivering secure, user-centric solutions.
-            Here's a timeline of my journey.
-          </div>
+          <div>{t("experience_intro")}</div>
 
           <div className="relative pl-8 md:pl-12 mt-20">
             <div className="timeline-line">
