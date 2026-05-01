@@ -3,64 +3,75 @@ import {
   Files,
   Search,
   GitBranch,
-  PlayCircle,
-  // Extensions,
   Bug,
-  // SourceControl,
-  GitPullRequest,
-  Settings,
+  PackageOpen,
   User,
+  Settings,
 } from "lucide-react";
+import { useVs } from "../useVs";
+
+const ITEMS_TOP = [
+  { id: "explorer", label: "Explorer", icon: Files },
+  { id: "search", label: "Search", icon: Search },
+  { id: "scm", label: "Source Control", icon: GitBranch, badge: 2 },
+  { id: "debug", label: "Run and Debug", icon: Bug },
+  { id: "extensions", label: "Extensions", icon: PackageOpen, badge: 1 },
+];
+
+const ITEMS_BOTTOM = [
+  { id: "account", label: "Accounts", icon: User },
+  { id: "settings", label: "Settings", icon: Settings },
+];
+
+const ActivityButton = ({ item, active, onClick }) => {
+  const Icon = item.icon;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={item.label}
+      aria-label={item.label}
+      className={`relative w-full h-12 flex items-center justify-center transition-colors ${
+        active ? "text-white" : "text-[#858585] hover:text-white"
+      }`}
+    >
+      {active && (
+        <span className="absolute left-0 top-0 h-full w-0.5 bg-white" />
+      )}
+      <Icon size={22} strokeWidth={1.5} />
+      {item.badge ? (
+        <span className="absolute right-1.5 bottom-1.5 min-w-4 h-4 px-1 rounded-full bg-[#007acc] text-[10px] font-bold flex items-center justify-center">
+          {item.badge}
+        </span>
+      ) : null}
+    </button>
+  );
+};
 
 const VsSideShowBar = () => {
-  return (
-    <div className="flex flex-col justify-between items-center h-full w-full bg-[#252526] text-gray-400 py-2">
-      {/* Top section */}
-      <div className="flex flex-col items-center gap-4">
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <Files size={20} />
-        </button>
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <Search size={20} />
-        </button>
-        <button className="relative p-2 hover:text-white hover:bg-gray-700 rounded">
-          <GitBranch size={20} />
-          {/* Notification badge */}
-          <span className="absolute top-1 right-1 bg-blue-500 text-white text-[10px] rounded-full px-1">
-            2
-          </span>
-        </button>
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <PlayCircle size={20} />
-        </button>
-        <button className="relative p-2 hover:text-white hover:bg-gray-700 rounded">
-          {/* <Extensions size={20} /> */}
-          <span className="absolute top-1 right-1 bg-blue-500 text-white text-[10px] rounded-full px-1">
-            1
-          </span>
-        </button>
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <Bug size={20} />
-        </button>
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          {/* <SourceControl size={20} /> */}
-        </button>
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <GitPullRequest size={20} />
-        </button>
-      </div>
+  const { activityPanel, setActivityPanel } = useVs();
 
-      {/* Bottom section */}
-      <div className="flex flex-col items-center gap-4">
-        <button className="p-2 hover:text-white hover:bg-gray-700 rounded">
-          <User size={20} />
-        </button>
-        <button className="relative p-2 hover:text-white hover:bg-gray-700 rounded">
-          <Settings size={20} />
-          <span className="absolute top-1 right-1 bg-blue-500 text-white text-[10px] rounded-full px-1">
-            1
-          </span>
-        </button>
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex-1">
+        {ITEMS_TOP.map((it) => (
+          <ActivityButton
+            key={it.id}
+            item={it}
+            active={activityPanel === it.id}
+            onClick={() => setActivityPanel(it.id)}
+          />
+        ))}
+      </div>
+      <div>
+        {ITEMS_BOTTOM.map((it) => (
+          <ActivityButton
+            key={it.id}
+            item={it}
+            active={activityPanel === it.id}
+            onClick={() => setActivityPanel(it.id)}
+          />
+        ))}
       </div>
     </div>
   );

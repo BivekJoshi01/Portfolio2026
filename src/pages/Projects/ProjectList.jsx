@@ -25,6 +25,8 @@ export const ProjectList = [
     img: LegalLand,
     redirect_url: "https://legalremit.com/",
     companyLogo: LRLogo,
+    category: "Fintech",
+    tags: ["React", "Node.js", "Payments"],
   },
   {
     title: "HRMS",
@@ -33,6 +35,8 @@ export const ProjectList = [
     img: HRMSLand,
     redirect_url: "https://dghub.io/",
     companyLogo: DGLogo,
+    category: "Enterprise",
+    tags: ["React", "Dashboard"],
   },
   {
     title: "Clients Portal",
@@ -41,6 +45,8 @@ export const ProjectList = [
     img: PMSLand,
     redirect_url: "",
     companyLogo: DGTrade,
+    category: "Fintech",
+    tags: ["React", "Dashboard"],
   },
   {
     title: "KYC System",
@@ -49,6 +55,8 @@ export const ProjectList = [
     img: KYCLand,
     redirect_url: "",
     companyLogo: DGTrade,
+    category: "Fintech",
+    tags: ["React", "Compliance"],
   },
   {
     title: "Bizarre Cafe",
@@ -57,6 +65,8 @@ export const ProjectList = [
     img: CafeBizarre,
     redirect_url: "https://cafebizarre.com.np/",
     companyLogo: BizarreLogo,
+    category: "Web",
+    tags: ["React", "Marketing"],
   },
   {
     title: "Render Education Consultancy",
@@ -65,6 +75,8 @@ export const ProjectList = [
     img: RenderLand,
     redirect_url: "https://render.edu.np/?i=1",
     companyLogo: RenderLogo,
+    category: "Web",
+    tags: ["React", "CMS"],
   },
   {
     title: "Evolve Pharma",
@@ -73,6 +85,8 @@ export const ProjectList = [
     img: EvolvePharmaLand,
     redirect_url: "https://evolvepharmanepal.com/",
     companyLogo: EvolveLogo,
+    category: "E-commerce",
+    tags: ["React", "Storefront"],
   },
   {
     title: "Yejus Paw",
@@ -81,13 +95,17 @@ export const ProjectList = [
     img: YejusPawLand,
     redirect_url: "https://yejus-paw.onrender.com/",
     companyLogo: YejusPawLogo,
+    category: "E-commerce",
+    tags: ["React", "Storefront"],
   },
-    {
+  {
     title: "Universal Stationery Suppliers",
     info: "",
     description: "Inventery and Accounting",
     img: UniversalLand,
     redirect_url: "https://universalstationery.com.np/",
     companyLogo: UniversalLogo,
+    category: "Enterprise",
+    tags: ["React", "ERP"],
   },
 ];

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Mousewheel } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,6 +14,25 @@ import TypeWriter from "../../components/TypeWriter/TypeWriter";
 const Projects = () => {
   const swiperRef = useRef(null);
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const categories = useMemo(() => {
+    const set = new Set(["All"]);
+    ProjectList.forEach((p) => p.category && set.add(p.category));
+    return Array.from(set);
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === "All") return ProjectList;
+    return ProjectList.filter((p) => p.category === activeCategory);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.update();
+      swiperRef.current.swiper.slideTo(0, 0);
+    }
+  }, [activeCategory]);
 
   useEffect(() => {
     if (swiperRef.current) swiperRef.current.swiper.update();
@@ -39,20 +58,57 @@ const Projects = () => {
           Each Project is a unique piece of development.
         </p>
 
-        {/* Navigation */}
-        <div className="flex gap-2 sm:gap-3 mb-3">
-          <button
-            onClick={() => swiperRef.current.swiper.slidePrev()}
-            className="bg-(--primary) rounded-full p-1 sm:p-2 font-bold"
+        {/* Filters + Navigation */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div
+            className="flex flex-wrap gap-2"
+            role="tablist"
+            aria-label="Project categories"
           >
-            <ChevronLeft size={16} sm={20} />
-          </button>
-          <button
-            onClick={() => swiperRef.current.swiper.slideNext()}
-            className="bg-(--primary) 0 rounded-full p-1 sm:p-2 font-bold"
-          >
-            <ChevronRight size={16} sm={20} />
-          </button>
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  role="tab"
+                  aria-selected={isActive}
+                  className="relative rounded-full px-3 py-1 text-xs sm:text-sm font-semibold transition-colors"
+                  style={{
+                    color: isActive ? "#fff" : "var(--nav-text, currentColor)",
+                  }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="project-filter-pill"
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: "var(--primary)" }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex gap-2 sm:gap-3">
+            <button
+              onClick={() => swiperRef.current?.swiper?.slidePrev()}
+              className="bg-(--primary) rounded-full p-1 sm:p-2 font-bold"
+              aria-label="Previous project"
+            >
+              <ChevronLeft size={16} sm={20} />
+            </button>
+            <button
+              onClick={() => swiperRef.current?.swiper?.slideNext()}
+              className="bg-(--primary) 0 rounded-full p-1 sm:p-2 font-bold"
+              aria-label="Next project"
+            >
+              <ChevronRight size={16} sm={20} />
+            </button>
+          </div>
         </div>
 
         {/* Swiper */}
@@ -71,13 +127,23 @@ const Projects = () => {
           grabCursor={true}
           className="pb-10"
         >
-          {ProjectList?.map((project, index) => (
-            <SwiperSlide key={index}>
-              <ProjectCard
-                project={project}
-                onHover={() => setHoveredProject(project)}
-                onLeave={() => setHoveredProject(null)}
-              />
+          {filteredProjects?.map((project, index) => (
+            <SwiperSlide key={`${activeCategory}-${project.title}-${index}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: Math.min(index * 0.05, 0.3),
+                  ease: "easeOut",
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  onHover={() => setHoveredProject(project)}
+                  onLeave={() => setHoveredProject(null)}
+                />
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

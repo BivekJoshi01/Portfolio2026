@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import GridAnimation from "./pages/GridAnimation";
 import { applyTheme } from "./applyTheme";
 import { themes } from "./theme";
+import ScrollProgress from "./components/ScrollUtils/ScrollProgress";
 
 const App = () => {
   const mode = useSelector((state) => state.theme.mode);
@@ -64,6 +65,9 @@ const App = () => {
 
       {/* Grid overlay */}
       <GridAnimation mode={mode} />
+
+      {/* Reading progress + back-to-top */}
+      <ScrollProgress />
 
       {/* App content */}
       <div className="content">

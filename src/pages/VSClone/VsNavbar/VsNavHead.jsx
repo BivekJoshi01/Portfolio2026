@@ -1,63 +1,89 @@
-import React from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Search,
-  Users,
-  RefreshCcw,
-  Bell,
-  Clock,
-  EllipsisVertical,
-} from "lucide-react";
+import React, { useState } from "react";
+import { Search, Minus, Square, X } from "lucide-react";
+import { useVs } from "../useVs";
+
+const MENUS = [
+  "File",
+  "Edit",
+  "Selection",
+  "View",
+  "Go",
+  "Run",
+  "Terminal",
+  "Help",
+];
 
 const VsNavHead = () => {
+  const { activeFile } = useVs();
+  const [menuOpen, setMenuOpen] = useState(null);
+
+  const triggerCommandPalette = () => {
+    const ev = new KeyboardEvent("keydown", {
+      key: "k",
+      ctrlKey: true,
+      bubbles: true,
+    });
+    window.dispatchEvent(ev);
+  };
+
   return (
-    <div className="flex items-center justify-between px-2 bg-[#252526] text-gray-300 text-sm h-full">
-      {/* Left section */}
-      <div className="w-5 h-5 bg-blue-500 flex items-center justify-center text-white text-xs font-bold rounded-sm">
-        V
-      </div>
-      <div className="flex items-center gap-2">
-        {/* VS logo placeholder (can replace with actual logo) */}
-
-        {/* Navigation arrows */}
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <ChevronLeft size={16} />
-        </button>
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <ChevronRight size={16} />
-        </button>
-
-        {/* Search / path input */}
-        <div className="flex items-center bg-[#1E1E1E] border border-gray-700 rounded px-2 py-0.5 w-64">
-          <Search size={14} className="mr-1 text-gray-400" />
-          <input
-            type="text"
-            value="Bivek Prasad Joshi"
-            // readOnly
-            className="bg-transparent text-gray-300 text-xs outline-none flex-1"
-          />
+    <div className="flex items-center h-full text-[#cccccc] text-[12px]">
+      {/* Logo */}
+      <div className="flex items-center px-2">
+        <div className="w-5 h-5 rounded-sm flex items-center justify-center text-white text-[10px] font-bold"
+          style={{ background: "linear-gradient(135deg,#0078d4,#005a9e)" }}>
+          VS
         </div>
       </div>
 
-      {/* Right section */}
-      <div className="flex items-center gap-2">
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <Users size={16} />
-        </button>
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <RefreshCcw size={16} />
-        </button>
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <Bell size={16} />
-        </button>
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <Clock size={16} />
-        </button>
-        <button className="p-1 hover:bg-gray-700 rounded">
-          <EllipsisVertical size={16} />
+      {/* Menu bar */}
+      <div className="flex items-center h-full">
+        {MENUS.map((m) => (
+          <button
+            key={m}
+            type="button"
+            onMouseEnter={() => menuOpen && setMenuOpen(m)}
+            onClick={() => setMenuOpen(menuOpen === m ? null : m)}
+            className={`px-2 h-full hover:bg-[rgba(255,255,255,0.1)] ${
+              menuOpen === m ? "bg-[rgba(255,255,255,0.15)]" : ""
+            }`}
+          >
+            {m}
+          </button>
+        ))}
+      </div>
+
+      {/* Center search box */}
+      <div className="flex-1 flex justify-center px-4">
+        <button
+          type="button"
+          onClick={triggerCommandPalette}
+          className="flex items-center gap-2 bg-[#3c3c3c] hover:bg-[#4c4c4c] border border-[#3c3c3c] rounded px-2 py-0.5 text-[12px] text-[#cccccc] w-full max-w-md"
+          title="Open command palette (Ctrl+K)"
+        >
+          <Search size={12} className="text-[#9ca3af]" />
+          <span className="text-[#9ca3af] truncate">
+            {activeFile ? activeFile.name : "portfolio2026"}
+          </span>
+          <kbd className="ml-auto text-[10px] bg-[#252526] px-1 rounded">
+            Ctrl+K
+          </kbd>
         </button>
       </div>
+
+      {/* Window controls (visual only) */}
+      <div className="flex items-center h-full">
+        <button className="px-3 h-full hover:bg-[rgba(255,255,255,0.1)]">
+          <Minus size={12} />
+        </button>
+        <button className="px-3 h-full hover:bg-[rgba(255,255,255,0.1)]">
+          <Square size={10} />
+        </button>
+        <button className="px-3 h-full hover:bg-[#e81123]">
+          <X size={12} />
+        </button>
+      </div>
+
     </div>
   );
 };

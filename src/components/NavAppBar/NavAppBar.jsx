@@ -85,6 +85,28 @@ const NavAppBar = () => {
 
       {/* Desktop: CTA */}
       <div className="hidden md:flex gap-3.5 items-center">
+        <button
+          type="button"
+          onClick={() => {
+            const isMac = /mac/i.test(navigator.userAgent);
+            const ev = new KeyboardEvent("keydown", {
+              key: "k",
+              ctrlKey: !isMac,
+              metaKey: isMac,
+              bubbles: true,
+            });
+            window.dispatchEvent(ev);
+          }}
+          className="flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs opacity-80 hover:opacity-100 transition-opacity"
+          style={{ borderColor: "rgba(125,125,125,0.35)" }}
+          aria-label="Open command palette"
+          title="Quick search (Ctrl+K)"
+        >
+          <span>Search</span>
+          <kbd className="px-1 py-0.5 rounded border text-[10px]" style={{ borderColor: "rgba(125,125,125,0.35)" }}>
+            ⌘K
+          </kbd>
+        </button>
         <ModeLanguage />
         <CButton variant="primary" onClick={() => goTo("/contact-me")}>
           HIRE ME

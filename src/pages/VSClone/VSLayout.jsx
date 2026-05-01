@@ -1,71 +1,84 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import VsSideShowBar from "./VSSideBar/VsSideShowBar";
 import VsNavHead from "./VsNavbar/VsNavHead";
 import VsNavContent from "./VsNavbar/VsNavContent";
-import VsSideMenuBar from "./VSSideBar/VsSideMenuBar";
+import VsSidePanel from "./VSSideBar/VsSidePanel";
 import VsTerminal from "./VsFooter/VsTerminal";
 import VsFooter from "./VsFooter/VsFooter";
-import { Outlet } from "react-router-dom";
+import VsBreadcrumb from "./VsNavbar/VsBreadcrumb";
+import VsOutlinePanel from "./VSSideBar/VsOutlinePanel";
+import { VsProvider } from "./vsContext";
+import { useVs } from "./useVs";
 import "./VSLayout.css";
 
-const VSLayout = ({ children }) => {
+const VSLayoutInner = () => {
+  const { terminalOpen, rightPanelOpen } = useVs();
+
   return (
-    <div className="w-full h-screen text-white bg-[#1E1E1E]">
-      <div
-        style={{ height: "3%" }}
-        className="border-b border-gray-800 bg-[#252526]"
-      >
+    <div className="w-full h-screen text-white bg-[#1E1E1E] flex flex-col overflow-hidden">
+      {/* Title bar */}
+      <div className="h-9 shrink-0 border-b border-[#1c1c1c] bg-[#3c3c3c]">
         <VsNavHead />
       </div>
-      <div className="w-full flex" style={{ height: "94%" }}>
-        {/* Left Sidebar */}
-        <div className="w-14 border-r border-gray-800 h-full bg-[#252526]">
+
+      {/* Body */}
+      <div className="flex flex-1 min-h-0">
+        {/* Activity bar */}
+        <div className="w-12 shrink-0 border-r border-[#1c1c1c] bg-[#333333]">
           <VsSideShowBar />
         </div>
 
-        {/* Secondary Menu / File Explorer */}
-        <div className="w-80 border-r border-gray-800 h-full p-2 ">
-          <VsSideMenuBar />
+        {/* Side panel (Explorer / Search / etc) */}
+        <div className="w-64 shrink-0 border-r border-[#1c1c1c] bg-[#252526]">
+          <VsSidePanel />
         </div>
 
-        {/* Main Area */}
-        <div className="flex-1 flex flex-col h-full">
-          {/* Navbar / Top header */}
-          <div className="h-12 border-b border-gray-800 px-4 flex items-center bg-[#252526]">
+        {/* Editor stack */}
+        <div className="flex-1 flex flex-col min-w-0 min-h-0">
+          {/* Tabs */}
+          <div className="h-9 shrink-0 border-b border-[#1c1c1c] bg-[#2d2d2d]">
             <VsNavContent />
           </div>
 
-          {/* Content + Right Sidebar */}
-          <div className="flex flex-1 overflow-hidden">
-            {/* Editor / Main content */}
-            <div className="flex-1 overflow-auto">
-              {children || (
-                <div className="flex flex-col h-full text-gray-400">
-                  <Outlet />
-                </div>
-              )}
-            </div>
+          {/* Breadcrumb */}
+          <VsBreadcrumb />
 
-            {/* Right Sidebar / Info panel */}
-            <div
-              className="border-l border-gray-800 compact-panel"
-              style={{ width: "260px" }} // like VSCode side panel
-            >
+          <div className="flex flex-1 min-h-0">
+            {/* Editor content (Outlet) */}
+            <div className="flex-1 overflow-auto bg-[#1E1E1E] min-w-0">
               <Outlet />
             </div>
+
+            {/* Outline / right panel */}
+            {rightPanelOpen && (
+              <div className="w-60 shrink-0 border-l border-[#1c1c1c] bg-[#252526] hidden lg:block">
+                <VsOutlinePanel />
+              </div>
+            )}
           </div>
 
-          {/* Footer / Terminal */}
-          <div className="h-67 border-t border-gray-800 overflow-auto bg-[#252526]">
-            <VsTerminal />
-          </div>
+          {/* Terminal */}
+          {terminalOpen && (
+            <div className="h-56 shrink-0 border-t border-[#1c1c1c] bg-[#1E1E1E]">
+              <VsTerminal />
+            </div>
+          )}
         </div>
       </div>
-      <div style={{ height: "3%" }} className="border-t border-gray-800">
+
+      {/* Status bar */}
+      <div className="h-6 shrink-0 border-t border-[#1c1c1c] bg-[#007acc] text-white">
         <VsFooter />
       </div>
     </div>
   );
 };
+
+const VSLayout = () => (
+  <VsProvider>
+    <VSLayoutInner />
+  </VsProvider>
+);
 
 export default VSLayout;

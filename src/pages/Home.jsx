@@ -3,6 +3,7 @@ import MyProfile from "./MyProfile/MyProfile";
 import AboutMe from "./AboutMe/AboutMe";
 import Projects from "./Projects/Projects";
 import EducationPageLayout from "./Education/EducationPageLayout";
+import StatsSection from "../components/Stats/StatsSection";
 
 const Home = () => {
   return (
@@ -35,6 +36,18 @@ const Home = () => {
         }}
       >
         <AboutMe />
+      </section>
+
+      <section
+        style={{
+          minHeight: "99vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <StatsSection />
       </section>
 
       <section
