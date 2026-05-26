@@ -4,6 +4,7 @@ import AboutMe from "./AboutMe/AboutMe";
 import Projects from "./Projects/Projects";
 import EducationPageLayout from "./Education/EducationPageLayout";
 import StatsSection from "../components/Stats/StatsSection";
+import MusicPlayer from "../components/MusicPlayer/MusicPlayer";
 
 const Home = () => {
   return (
@@ -72,6 +73,18 @@ const Home = () => {
         }}
       >
         <Projects />
+      </section>
+
+      <section
+        style={{
+          minHeight: "99vh",
+          scrollSnapAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <MusicPlayer />
       </section>
     </div>
   );
