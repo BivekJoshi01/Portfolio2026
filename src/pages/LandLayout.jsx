@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import NavAppBar from "../components/NavAppBar/NavAppBar";
+import InnerLoader from "../components/Loader/InnerLoader";
 import { Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -79,9 +80,11 @@ const LandLayout = () => {
         </div>
       </div>
 
-      {/* Page Content */}
+      {/* Page Content — local boundary keeps the navbar up while a page chunk loads */}
       <div className="min-h-screen flex items-center max-w-7xl mx-auto">
-        <Outlet />
+        <Suspense fallback={<InnerLoader />}>
+          <Outlet />
+        </Suspense>
       </div>
 
       <div className="flex justify-center text-center">

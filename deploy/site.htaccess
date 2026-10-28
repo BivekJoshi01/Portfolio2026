@@ -1,0 +1,46 @@
+# Apache config for the portfolio's document root (~/bivekjoshi03.com.np).
+# Copied to dist/.htaccess by the deploy workflow — do not edit on the server,
+# it is overwritten on every deploy.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Let AutoSSL validate over plain HTTP. Renewal runs unattended every ~90
+  # days and a redirect here fails it silently, expiring the certificate.
+  RewriteRule ^\.well-known/ - [L]
+
+  # Force HTTPS. Behind Cloudflare the origin sees plain HTTP even when the
+  # visitor used HTTPS, so trust Cloudflare's X-Forwarded-Proto too.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Force the bare domain — pick one canonical host so SEO is not split.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# The app uses HashRouter, so every page is /#/something and Apache only ever
+# serves index.html. A mistyped path still gets the app, with a real 404 status.
+ErrorDocument 404 /index.html
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # HTML must revalidate or a deploy is invisible until the cache expires.
+  # Long-lived caching for the fingerprinted files is in assets/.htaccess.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript application/json image/svg+xml
+</IfModule>
