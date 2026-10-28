@@ -1,4 +1,4 @@
-# Copied to dist/assets/.htaccess by the deploy workflow.
+# Copied to dist/assets/.htaccess by deploy/deploy-local.sh.
 # Vite fingerprints every file it writes under assets/ (index-xTl5zb8Z.js), so
 # a changed file always gets a new name and these can be cached forever.
 # Files from public/ land in the root instead and are not covered by this.

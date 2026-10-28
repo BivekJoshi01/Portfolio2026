@@ -1,7 +1,7 @@
 #!/bin/bash
 # Installs an uploaded build tarball into the portfolio's document root.
 #
-# Runs ON THE SERVER, uploaded next to the tarball by the deploy workflow.
+# Runs ON THE SERVER, uploaded next to the tarball by deploy/deploy-local.sh.
 # Adapted from InvestCareFront's deploy/remote-sync.sh: the host has no rsync,
 # so this reproduces `rsync --delete` using tar and a manifest, so stale hashed
 # files under assets/ are removed instead of accumulating forever.

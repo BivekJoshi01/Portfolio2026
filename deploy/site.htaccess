@@ -1,5 +1,5 @@
 # Apache config for the portfolio's document root (~/bivekjoshi03.com.np).
-# Copied to dist/.htaccess by the deploy workflow — do not edit on the server,
+# Copied to dist/.htaccess by deploy/deploy-local.sh — do not edit on the server,
 # it is overwritten on every deploy.
 
 Options -Indexes
